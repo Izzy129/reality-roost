@@ -1,10 +1,14 @@
 import sounddevice as sd
 import numpy as np
 
-# all audio devices
-print("available audio devices:")
-print(sd.query_devices())
-print("\n")
+
+#print("available audio devices:")
+#print(sd.query_devices())
+#print("\n")
+
+# mock intensity array for OSC output
+MOCK_INTENSITY_ARRAY = np.array([1.0, 0.5, 0.3, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0], dtype = np.float32)
+
 
 # finding vb cable
 device_index = None
@@ -16,7 +20,7 @@ for i, device in enumerate(devices):
         break
 
 if device_index is None:
-    print("vb-cable not found. set device_index manually.")
+    print("vb-cable not found.")
     exit()
 audio_received = False
 # called when audio received
@@ -24,17 +28,32 @@ def audio_callback(indata, frames, time, status):
     global audio_received
     if status:
         print(status)
-   
-    # volume
-    volume = np.linalg.norm(indata) * 10
-    print(f"Volume: {volume:.2f}")
+        
+    # turn stereo audio into mono audio, since each tile only has one audio output
+    # tentatively doing this by averaging the 2 channels
+    # shape should now be (frames, 1)
+    mono_audio = np.mean(indata, axis = 1, keepdims = True)
     
-    if volume > 1.0:
+    # numpy should allow easy intensity modulation, (frames, 1) * (16,) => (freames, 16)
+    # each channel is amplified by the mono signal
+    # trying it on dummy intensity array for now
+    processed_audio = mono_audio * MOCK_INTENSITY_ARRAY
+    
+    # volume of processed_audio
+    volume = np.linalg.norm(processed_audio)
+    # print(f"Volume: {volume:.2f}")
+    
+    # lowered the value from 1.0 to 0.1, since it looks like we have a lot of 0's
+    if volume > 0.1: 
         audio_received = True 
-        print(f"AUDIO DETECTED")
-   
-    # TODO: what to do with audio?
-    # indata has audio as a numpy array
+        print(f"AUDIO DETECTED/PROCESSED")
+    
+    # test print statements to see if the first few values are as expected
+  # print(f"  Max levels: [Ch 0: {np.max(np.abs(processed_audio[:, 0])):.2f}] "
+            # f"[Ch 1: {np.max(np.abs(processed_audio[:, 1])):.2f}] "
+            # f"[Ch 2: {np.max(np.abs(processed_audio[:, 2])):.2f}] "
+            # f"[Ch 3: {np.max(np.abs(processed_audio[:, 3])):.2f}]")
+    
 
 # testing for listening
 
