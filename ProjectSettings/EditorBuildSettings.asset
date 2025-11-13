@@ -5,12 +5,15 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 1394aae0248047f43a644e21c762f218
-  - enabled: 1
+  - enabled: 0
     path: Assets/MRTabletopAssets/Games/Chess/Scenes/SlicesChess.unity
     guid: 7b10018d527adf74a93f47002beec580
+  - enabled: 1
+    path: Assets/Scenes/TEST.unity
+    guid: dbb7b8e8e55fe3f499b2b6f4b4fbfef5
   m_configObjects:
     Unity.XR.PICO.LivePreview.Settings: {fileID: 11400000, guid: a48c2b45230a3734289e444145b76f9f,
       type: 2}
