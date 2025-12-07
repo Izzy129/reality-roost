@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.iam1337.extosc": "1.21.0",
     "com.unity.burst": "1.8.25",
     "com.unity.feature.development": "1.0.2",
     "com.unity.inputsystem": "1.14.2",
@@ -55,5 +56,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "package.openupm.com",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.iam1337.extosc"
+      ]
+    }
+  ]
 }

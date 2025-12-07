@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.iam1337.extosc": {
+      "version": "1.21.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "url": "https://package.openupm.com"
+    },
     "com.unity.burst": {
       "version": "1.8.25",
       "depth": 0,
