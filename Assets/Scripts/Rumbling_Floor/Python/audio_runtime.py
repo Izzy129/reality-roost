@@ -17,8 +17,8 @@ def handle_tile_intensities(address, *args):
     tile_intensities = floats
     print("[Python] Tile intensities updated:", tile_intensities)
 
-def handle_tile_intensities(address, *args):
-    print("Received intensities:", list(args))
+# def handle_tile_intensities(address, *args):
+#     print("Received intensities:", list(args))
 
 dispatcher = Dispatcher()
 dispatcher.map("/tile/intensities", handle_tile_intensities)
