@@ -387,7 +387,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1047464050}
   - component: {fileID: 1047464049}
-  - component: {fileID: 1047464053}
   - component: {fileID: 1047464052}
   - component: {fileID: 1047464051}
   m_Layer: 0
@@ -563,20 +562,6 @@ MonoBehaviour:
   _remoteHost: 127.0.0.1
   _remotePort: 9000
   _useBundle: 0
---- !u!114 &1047464053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1047464048}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ceefb070c0f80b4489dfd5419e1e2fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ip: 127.0.0.1
-  port: 9000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
