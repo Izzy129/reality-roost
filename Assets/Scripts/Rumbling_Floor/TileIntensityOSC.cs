@@ -4,7 +4,7 @@ using extOSC;
 public class TileIntensityOSC : MonoBehaviour
 {
 
-    private float oscSendInterval = 1f / 60f; // send at 60hz
+    private float oscSendInterval = 1f / 60f; // send at 60hz 
     private float lastSendTime = 0f;
 
     // Called once per frame
@@ -17,11 +17,10 @@ public class TileIntensityOSC : MonoBehaviour
         {
             Debug.Log(Time.time - lastSendTime);
             lastSendTime = Time.time;
-            TestSendIntensities();
+            SendIntensities(tileIntensities);
         }
-        
-        //TestSendIntensities();
     }
+
     [Header("OSC")]
     public OSCTransmitter transmitter;
 
@@ -68,7 +67,7 @@ public class TileIntensityOSC : MonoBehaviour
         }
 
         // ✅ extOSC uses Send(message)
-        Debug.Log(message);
+        //Debug.Log(message);
         transmitter.Send(message);
 
         Debug.Log("Sent intensity array via OSC.");
