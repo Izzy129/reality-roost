@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Name: DisplayRefreshRateFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: OpenXR Display Refresh Rate
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.refreshrate
@@ -122,6 +123,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
 --- !u!114 &-7308501897332428306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f6bfdbcb316ed242b30a8798c9eb853, type: 3}
   m_Name: KHRSimpleControllerProfile Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Khronos Simple Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.khrsimpleprofile
@@ -255,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f647cc0545697264a9878224faada6d5, type: 3}
   m_Name: MetaQuestFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Meta Quest Support
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.metaquest
@@ -340,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5019471fb2174e5c852ecd4047163007, type: 3}
   m_Name: HandInteractionProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Hand Interaction Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handinteraction
@@ -453,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b862ee14fb479fbfe5fffe655d3ed3, type: 3}
   m_Name: MetaQuestTouchProControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Meta Quest Touch Pro Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metaquestpro
@@ -836,7 +839,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d6ccd3d0ef0f1d458e69421dccbdae1, type: 3}
   m_Name: ValveIndexControllerProfile Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Valve Index Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.valveindex
@@ -878,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feeef8d85de8db242bdda70cc7ff5acd, type: 3}
   m_Name: OculusTouchControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Oculus Touch Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.oculustouch
@@ -918,7 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a24be4b5ebfe5f4d8ed1de9b25cb7aa, type: 3}
   m_Name: HandCommonPosesInteraction Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Hand Interaction Poses
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handinteractionposes
@@ -1022,6 +1025,7 @@ MonoBehaviour:
   m_Name: PICO4UltraControllerProfile Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO4 Ultra Touch Controller Profile
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.input.PICO4Ultratouch
@@ -1042,6 +1046,7 @@ MonoBehaviour:
   m_Name: PICONeo3ControllerProfile Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Neo3 Touch Controller Profile
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.input.PICONeo3touch
@@ -1102,6 +1107,7 @@ MonoBehaviour:
   m_Name: FoveationFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: OpenXR Foveation
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.foveation
@@ -1110,6 +1116,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
 --- !u!114 &-10737779604946943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,7 +1189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b5403262c64d5888bf5672e1e1f3bb, type: 3}
   m_Name: PICOSceneCapture Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Scene Capture
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.scenecapture
@@ -1242,7 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1248416ce414cd0a788c5240bec5766, type: 3}
   m_Name: PICOSpatialMesh Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Spatial Mesh
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.spatialmesh
@@ -1308,6 +1318,7 @@ MonoBehaviour:
   m_Name: PICOG3ControllerProfile Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: PICOG3 Touch Controller Profile
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.input.PICOG3touch
@@ -1449,7 +1460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a7d8f73c864e74eb753124087176f4, type: 3}
   m_Name: PICO4ControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO4 Touch Controller Profile
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.input.PICO4touch
@@ -1469,7 +1481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446315a043ab4b998f5a055737c6122b, type: 3}
   m_Name: BodyTrackingFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Body Tracking
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.PICO_BodyTracking
@@ -1477,6 +1490,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
   isBodyTracking: 0
 --- !u!114 &2999744781197054897
 MonoBehaviour:
@@ -1491,6 +1506,7 @@ MonoBehaviour:
   m_Name: PassthroughFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: OpenXR Passthrough
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.passthrough
@@ -1498,6 +1514,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
   isCameraSubsystem: 0
 --- !u!114 &3365362970573898964
 MonoBehaviour:
@@ -1552,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7365b139f7aec43b23d26b7a48b5a6, type: 3}
   m_Name: MetaQuestTouchPlusControllerProfile Android
   m_EditorClassIdentifier: 
-  m_enabled: 1
+  m_enabled: 0
   nameUi: Meta Quest Touch Plus Controller Profile
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metaquestplus
@@ -1572,7 +1590,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077bca9897b444788c83491c066a79b1, type: 3}
   m_Name: OpenXRExtensions Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO OpenXR Features
   version: 1.0.0
   featureIdInternal: com.unity.openxr.pico.features
@@ -1761,7 +1780,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baa5b568c4324bd4faad2da2e7ee7e84, type: 3}
   m_Name: PICOFeature Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Support
   version: 1.4.1
   featureIdInternal: com.unity.openxr.feature.pico
@@ -1967,6 +1987,7 @@ MonoBehaviour:
   m_Name: PerformanceSettingsFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: OpenXR Performance Settings
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.performancesettings
@@ -1974,6 +1995,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
 --- !u!114 &6199882772402747456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2030,7 +2053,7 @@ MonoBehaviour:
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
     m_List: 00000000
-  m_depthSubmissionMode: 2
+  m_depthSubmissionMode: 0
   m_spacewarpMotionVectorTextureFormat: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -2048,6 +2071,7 @@ MonoBehaviour:
   m_Name: LayerSecureContentFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 0
+  <failedInitialization>k__BackingField: 0
   nameUi: OpenXR Composition Layer Secure Content
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.LayerSecureContent
@@ -2055,6 +2079,8 @@ MonoBehaviour:
   company: PICO
   priority: 0
   required: 0
+  extensionUrl: 
+  _isExtensionEnable: 0
 --- !u!114 &6360567451069700747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,7 +2093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e314dfef9af0904e80129bcc0a79361, type: 3}
   m_Name: HandTracking Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Hand Tracking Subsystem
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.handtracking
@@ -2281,7 +2307,7 @@ MonoBehaviour:
   - {fileID: -6361315471394174081}
   - {fileID: -2716482047576097912}
   m_renderMode: 1
-  m_latencyOptimization: 1
+  m_latencyOptimization: 0
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
     m_List: 00000000
@@ -2438,7 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3aced3429e5911458f4da2dac9d0f29, type: 3}
   m_Name: MetaHandTrackingAim Standalone
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Meta Hand Tracking Aim
   version: 0.0.1
   featureIdInternal: com.unity.openxr.feature.input.metahandtrackingaim
@@ -2478,7 +2504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8b7731b990240c0b289e41fb880787b, type: 3}
   m_Name: PICOSpatialAnchor Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
+  <failedInitialization>k__BackingField: 0
   nameUi: PICO Spatial Anchor
   version: 1.0.0
   featureIdInternal: com.pico.openxr.feature.spatialanchor
