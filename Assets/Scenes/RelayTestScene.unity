@@ -1060,7 +1060,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119887120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d91f53893ac42d4a9b7d428049c055b, type: 3}
+  m_Script: {fileID: 11500000, guid: 0905dbd440f6959458f7ab4097d0817b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   relayManager: {fileID: 1773716313}
@@ -1659,7 +1659,6 @@ GameObject:
   - component: {fileID: 1773716315}
   - component: {fileID: 1773716314}
   - component: {fileID: 1773716313}
-  - component: {fileID: 1773716317}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1676,7 +1675,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1773716312}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13541f49a29735c408f60b4e31357702, type: 3}
+  m_Script: {fileID: 11500000, guid: 88b5bc36c4e857640846230c87d131b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxPlayers: 4
@@ -1694,7 +1693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProtocolType: 1
   m_UseWebSockets: 0
-  m_UseEncryption: 1
+  m_UseEncryption: 0
   m_MaxPacketQueueSize: 128
   m_MaxPayloadSize: 6144
   m_HeartbeatTimeoutMS: 500
@@ -1768,19 +1767,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1773716317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773716312}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab2f81cf67b9594aa377245936425d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayers: 4
 --- !u!1 &1899939127
 GameObject:
   m_ObjectHideFlags: 0
