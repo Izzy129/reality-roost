@@ -15,7 +15,7 @@ public class TileIntensityOSC : MonoBehaviour
         // only send OSC at 60hz
         if (Time.time - lastSendTime >= oscSendInterval)
         {
-            Debug.Log(Time.time - lastSendTime);
+            //Debug.Log(Time.time - lastSendTime);
             lastSendTime = Time.time;
             SendIntensities(tileIntensities);
         }
@@ -66,10 +66,14 @@ public class TileIntensityOSC : MonoBehaviour
             message.AddValue(OSCValue.Float(intensities[i]));
         }
 
-        // ✅ extOSC uses Send(message)
-        //Debug.Log(message);
-        transmitter.Send(message);
-
-        Debug.Log("Sent intensity array via OSC.");
+        // Send with error handling
+        try
+        {
+            transmitter.Send(message);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Failed to send OSC message: {ex.Message}");
+        }
     }
 }
