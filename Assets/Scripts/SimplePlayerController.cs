@@ -21,9 +21,9 @@ public class SimplePlayerController : NetworkBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!IsOwner) return;
 
-        float speed = 5f;
+
+        float speed = 20f;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
