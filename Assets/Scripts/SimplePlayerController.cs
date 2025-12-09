@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class SimplePlayerController : NetworkBehaviour
 {
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -29,5 +30,7 @@ public class SimplePlayerController : NetworkBehaviour
 
         transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime);
         
+
+
     }
 }
