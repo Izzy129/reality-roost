@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/testgrab.unity
     guid: 22ef939f42d52534382cb63e92e26612
+  - enabled: 1
+    path: Assets/Samples/Ready Player Me Netcode Support/0.2.3/Avatar Control/Scenes/AvatarControl.unity
+    guid: 88c84a52fa63c63498c94fa29045a6be
   m_configObjects:
     Unity.XR.PICO.LivePreview.Settings: {fileID: 11400000, guid: a48c2b45230a3734289e444145b76f9f,
       type: 2}
