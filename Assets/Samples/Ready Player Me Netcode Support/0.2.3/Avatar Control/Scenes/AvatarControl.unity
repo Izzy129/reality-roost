@@ -2023,10 +2023,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1970887939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0905dbd440f6959458f7ab4097d0817b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3da796c6fbdecfa4db8a6da65f059a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relayManager: {fileID: 0}
+  relayManager: {fileID: 1754146321}
   hostButton: {fileID: 358973240}
   joinButton: {fileID: 2097514218}
   joinCodeInput: {fileID: 1453830685}
