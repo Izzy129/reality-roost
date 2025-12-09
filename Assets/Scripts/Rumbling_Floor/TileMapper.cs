@@ -2,6 +2,7 @@
 
 public class TileMapper : MonoBehaviour
 {
+    // This singleton is responsible for providing an API for GameObjects to use to rumble a tile based on their position
     #region Singleton
     private static TileMapper _instance;
     public static TileMapper Instance

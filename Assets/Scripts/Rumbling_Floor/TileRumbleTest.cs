@@ -3,6 +3,7 @@ using System.Collections;
 
 public class TileRumbleTest : MonoBehaviour
 {
+    // This script demonstrates using the TileMapper API to rumble a tile based on the GameObject transform that this script is attached 
     [Header("Rumble Settings")]
     [SerializeField][Range(0f, 1f)] private float intensity = 0.8f;
     [SerializeField] private float duration = 5f;
