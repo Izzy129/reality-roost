@@ -21,14 +21,16 @@ public class SimplePlayerController : NetworkBehaviour
 
     // Update is called once per frame
     private void Update()
-    {
-
+    { 
 
         float speed = 20f;
         float h = Input.GetAxis("Horizontal");
+        Debug.Log(h);
         float v = Input.GetAxis("Vertical");
-
-        transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime);
+        Debug.Log(v);
+        NetworkObject localPlayerObject = NetworkManager.LocalClient.PlayerObject;
+        localPlayerObject.transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime);
+        //transform.Translate(new Vector3(h, 0, v) * speed * Time.deltaTime);
         
 
 
