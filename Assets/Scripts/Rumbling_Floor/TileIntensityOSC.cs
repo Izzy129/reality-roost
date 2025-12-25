@@ -21,7 +21,7 @@ public class TileIntensityOSC : MonoBehaviour
         }
     }
 
-    [Header("OSC")]
+    [Header("OSC Transmitter")]
     public OSCTransmitter transmitter;
 
     [Header("Manual test values")]
