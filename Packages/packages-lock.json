@@ -156,15 +156,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-    "com.unity.pico.livepreview": {
-      "version": "file:com.unity.pico.livepreview",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.xr.management": "4.0.0",
-        "com.unity.xr.interaction.toolkit": "2.0.0"
-      }
-    },
     "com.unity.profiling.core": {
       "version": "1.0.2",
       "depth": 1,
@@ -493,15 +484,6 @@
         "com.unity.xr.legacyinputhelpers": "2.1.2"
       },
       "url": "https://packages.unity.com"
-    },
-    "com.unity.xr.openxr.picoxr": {
-      "version": "file:com.unity.xr.openxr.picoxr",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {
-        "com.unity.xr.core-utils": "2.2.0",
-        "com.unity.xr.openxr": "1.8.2"
-      }
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
