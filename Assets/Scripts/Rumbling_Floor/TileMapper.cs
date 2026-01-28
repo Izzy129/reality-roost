@@ -38,7 +38,7 @@ public class TileMapper : MonoBehaviour
 
     #region Inspector Fields
     [Header("OSC Sender Reference")]
-    [SerializeField] private TileIntensityOSC tileIntensityOSC;
+    [SerializeField] private TileOSCSender tileOSCSender;
 
     [Header("Tile GameObjects")]
     [SerializeField] public GameObject[] tileGOs;
@@ -75,9 +75,9 @@ public class TileMapper : MonoBehaviour
             return;
         }
 
-        if (tileIntensityOSC == null)
+        if (tileOSCSender == null)
         {
-            Debug.LogError("[TileMapper] TileIntensityOSC reference is not assigned in Inspector!");
+            Debug.LogError("[TileMapper] TileOSCSender reference is not assigned in Inspector!");
             return;
         }
         
@@ -120,7 +120,7 @@ public class TileMapper : MonoBehaviour
         SetTileColor(arrayIndex, Color.red);
 
         // Send to OSC
-        tileIntensityOSC.SendIntensities(intensities);
+        tileOSCSender.SendIntensities(intensities);
 
         if (showDebugLogs)
         {

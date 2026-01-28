@@ -1,7 +1,7 @@
 using UnityEngine;
 using extOSC;
 
-public class TileIntensityOSC : MonoBehaviour
+public class TileOSCSender : MonoBehaviour
 {
 
     private float oscSendInterval = 1f / 60f; // send at 60hz 
