@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intensity: 0.5
   duration: 5
-  isRumbling: 0
+  isRumbling: 1
 --- !u!136 &1645203437
 CapsuleCollider:
   m_ObjectHideFlags: 0
