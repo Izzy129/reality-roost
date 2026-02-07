@@ -139,7 +139,7 @@ namespace UnityEngine.XR.Interaction.Toolkit.Samples.Hands
             return true;
         }
 
-        public void OnJointsUpdated(XRHandJointsUpdatedEventArgs args)
+        void OnJointsUpdated(XRHandJointsUpdatedEventArgs args)
         {
             if (!TryGetPinchPosition(args, out var targetPos))
                 return;
