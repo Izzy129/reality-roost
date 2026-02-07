@@ -882,8 +882,8 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: reality_roost
-  metroPackageVersion: 
+  metroPackageName: realityroost
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -891,7 +891,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: reality_roost
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: reality_roost
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
@@ -964,7 +964,7 @@ PlayerSettings:
   cloudProjectId: 4414156a-967e-4418-9c77-b1c2f05784da
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: reality_roost 2026-02-07_13-26-25
+  projectName: Reality Roost
   organizationId: unity_b732f3b311abff120bd3
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
