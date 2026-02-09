@@ -122,40 +122,78 @@ def handle_tile_intensities(address: str, *args: float) -> None:
     print(f"[OSC] Updated intensities: {state.get_intensities()}")
 
 
-# ===== AUDIO CALLBACK AND PROCESSING =====
-def audio_callback(indata, outdata, frames, time_info, status):
-    """Audio callback for multi-channel Dante ASIO output.
+# ===== SHARED AUDIO BUFFER =====
+class AudioBuffer:
+    """Thread-safe buffer to pass audio between the WDM input stream and the ASIO output stream.
 
-    Converts stereo Unity input to mono, then outputs to 12 channels (6 devices × 2 channels)
-    with each channel scaled by its corresponding intensity value.
+    Since VB-Cable (WDM) and Dante (ASIO) use different host APIs, they cannot share a single
+    sd.Stream. Instead, we use separate InputStream and OutputStream connected by this buffer.
+    """
+
+    def __init__(self, blocksize):
+        self._buffer = np.zeros(blocksize, dtype=np.float32)
+        self._lock = threading.Lock()
+
+    def write(self, mono_audio):
+        """Store a block of mono audio from the input callback."""
+        with self._lock:
+            self._buffer = mono_audio.copy()
+
+    def read(self):
+        """Retrieve the latest block of mono audio for the output callback."""
+        with self._lock:
+            return self._buffer.copy()
+
+
+# create global audio buffer
+audio_buffer = AudioBuffer(AudioConfig.BLOCKSIZE)
+
+
+# ===== AUDIO CALLBACKS =====
+def input_callback(indata, frames, time_info, status):
+    """Input stream callback: captures audio from VB-Cable (WDM) and stores mono mix in shared buffer.
 
     Args:
         indata (numpy.ndarray): Input audio buffer, shape (frames, 2). Stereo audio from Unity.
+        frames (int): Number of audio frames in the current block.
+        time_info (dict): Timing information from sounddevice.
+        status (CallbackFlags): Status flags indicating potential issues.
+    """
+    if status:
+        print(f"[Input] Status: {status}")
+
+    # convert stereo to mono (average L+R channels)
+    mono_audio = np.mean(indata[:, :AudioConfig.INPUT_CHANNELS], axis=1).astype(np.float32)
+    audio_buffer.write(mono_audio)
+
+
+def output_callback(outdata, frames, time_info, status):
+    """Output stream callback: reads mono audio from shared buffer, applies per-channel intensity
+    scaling, and outputs to Dante ASIO channels.
+
+    Args:
         outdata (numpy.ndarray): Output audio buffer to fill, shape (frames, 16). 16 ASIO channels.
         frames (int): Number of audio frames in the current block.
         time_info (dict): Timing information from sounddevice.
         status (CallbackFlags): Status flags indicating potential issues.
-    Returns:
-        None: Function modifies outdata in place.
     """
     if status:
-        print(f"[Audio] Status: {status}")
+        print(f"[Output] Status: {status}")
 
     # dont process until we get at least one OSC message
     if not state.has_received_osc():
-        outdata.fill(0)  # output silence to all channels
+        outdata.fill(0)
         return
 
-    # convert stereo to mono (average L+R channels)
-    mono_audio = np.mean(indata, axis=1)
+    # read latest mono audio from shared buffer
+    mono_audio = audio_buffer.read()
 
     # get current intensities (thread-safe)
     current_intensities = state.get_intensities()
 
     # output to 12 channels, each scaled by its intensity
     for channel in range(AudioConfig.USED_OUTPUT_CHANNELS):
-        intensity = current_intensities[channel]
-        outdata[:, channel] = mono_audio * intensity
+        outdata[:, channel] = mono_audio[:frames] * current_intensities[channel]
 
     # fill unused channels (12-15) with silence
     for channel in range(AudioConfig.USED_OUTPUT_CHANNELS, AudioConfig.OUTPUT_CHANNELS):
@@ -355,26 +393,39 @@ def monitor_osc_timeout():
 
 
 def run_audio_stream(unity_device_index, dante_device_index, osc_server):
-    """Run the main audio processing loop with ASIO multi-channel output.
+    """Run the main audio processing loop with separate WDM input and ASIO output streams.
+
+    Because VB-Cable (WDM) and Dante (ASIO) use different PortAudio host APIs, they cannot
+    be combined in a single sd.Stream. Instead we open an InputStream for VB-Cable and an
+    OutputStream for Dante, connected through the shared AudioBuffer.
 
     Args:
-        unity_device_index (int): Index of Unity input device.
+        unity_device_index (int): Index of Unity input device (WDM).
         dante_device_index (int): Index of Dante ASIO output device.
         osc_server (ThreadingOSCUDPServer): Running OSC server instance.
     """
     try:
-        with sd.Stream(
-            device=(unity_device_index, dante_device_index),
+        with sd.InputStream(
+            device=unity_device_index,
             samplerate=AudioConfig.SAMPLE_RATE,
             blocksize=AudioConfig.BLOCKSIZE,
-            channels=(AudioConfig.INPUT_CHANNELS, AudioConfig.OUTPUT_CHANNELS),
-            callback=audio_callback,
+            channels=AudioConfig.INPUT_CHANNELS,
+            callback=input_callback,
+        ), sd.OutputStream(
+            device=dante_device_index,
+            samplerate=AudioConfig.SAMPLE_RATE,
+            blocksize=AudioConfig.BLOCKSIZE,
+            channels=AudioConfig.OUTPUT_CHANNELS,
+            callback=output_callback,
         ):
 
             print("=" * 70)
             print("[Status] ✓ Audio processing ACTIVE")
             print(
-                f"[Status] Routing to {AudioConfig.USED_OUTPUT_CHANNELS} channels (6 devices × 2 channels)"
+                f"[Status] Input: {DeviceConfig.UNITY_INPUT} (WDM)"
+            )
+            print(
+                f"[Status] Output: {DeviceConfig.DANTE_ASIO} (ASIO, {AudioConfig.USED_OUTPUT_CHANNELS} channels)"
             )
             print("[Status] Press Ctrl+C to stop")
             print("=" * 70)
