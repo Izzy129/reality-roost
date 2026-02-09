@@ -1,4 +1,4 @@
-﻿import sounddevice as sd
+import sounddevice as sd
 import numpy as np
 from pythonosc.dispatcher import Dispatcher
 from pythonosc.osc_server import ThreadingOSCUDPServer
