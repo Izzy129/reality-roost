@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BasicScene_Colocated.unity
     guid: fe0a01e28fdf501479a07f8c5dddb99a
+  - enabled: 1
+    path: Assets/Scenes/AlexTestScene.unity
+    guid: 25fa8a4b5dc706e41b85085dd6b2cf80
+  - enabled: 1
+    path: Assets/Scenes/EvelynTestScene.unity
+    guid: 1392af021fc53fd46a47aa62372a902d
+  - enabled: 1
+    path: Assets/Scenes/BasicScene_HandTracking.unity
+    guid: bebbd9e485250a6469ab06f7cb1d2faf
   m_configObjects:
     com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 33491290b38a6094fbf61d3c24a308a5,
       type: 2}
