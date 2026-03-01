@@ -186,7 +186,8 @@ PrefabInstance:
       value: rrscene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 1c4dd760a18e59b44890c45c3be760fb, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c4dd760a18e59b44890c45c3be760fb, type: 3}
