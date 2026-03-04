@@ -28,7 +28,9 @@ public class WhacAMoleController : MonoBehaviour
 
     IEnumerator MoleCoroutine()
     {
-        float endTime = Time.time + 60f;
+        score = 0;
+        scoreText.text = "score: " + score.ToString();
+        float endTime = Time.time + 65f;
         ToggleObjects(true);
         audioSource.PlayOneShot(music);
 
@@ -70,8 +72,8 @@ public class WhacAMoleController : MonoBehaviour
         }
         score += amount;
 
-        if (scoreText != null)
-            scoreText.text = "score: " + score.ToString();
+        scoreText.text = "score: " + score.ToString();
+
     }
 
     private void OnCollisionEnter(Collision collision)

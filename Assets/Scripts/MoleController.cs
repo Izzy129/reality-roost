@@ -6,7 +6,7 @@ public class MoleController : MonoBehaviour
     public GameObject moleHead;
     WhacAMoleController controller;
 
-    public GameObject bombModel, moleModel;
+    public GameObject bombModel, moleModel, stars;
     public GameObject explosionPrefab;
     public bool isStunned;
 
@@ -40,7 +40,12 @@ public class MoleController : MonoBehaviour
         float elapsed = 0f;
 
         if (up)
-            SetUpState(true);
+        {
+            if (transform.position.y <= controller.startingY + 0.01f)
+            {
+                SetUpState(true);
+            }
+        }
 
         while (elapsed < duration)
         {
@@ -52,7 +57,9 @@ public class MoleController : MonoBehaviour
         transform.position = endPos;
 
         if (!up)
+        {
             SetUpState(false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -67,20 +74,22 @@ public class MoleController : MonoBehaviour
 
         if (isBomb)
         {
-            controller.ChangeScore(-5);
+            controller.ChangeScore(-3);
             bombModel.SetActive(false);
-            GameObject explosion = Instantiate(explosionPrefab);
+            GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             Destroy(explosion, 1f);
         }
         else
         {
             controller.ChangeScore(1);
             moleHead.transform.localRotation = Quaternion.Euler(0f, 0f, -50f);
+            stars.SetActive(true);
         }
 
         yield return new WaitForSeconds(1f);
 
         controller.PopMole(this, false);
+        stars.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 
