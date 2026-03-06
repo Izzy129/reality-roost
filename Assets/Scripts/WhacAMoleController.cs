@@ -5,15 +5,14 @@ using TMPro;
 public class WhacAMoleController : MonoBehaviour
 {
     public MoleController[] moles;
-    public float yDif;
-    public float startingY;
+    public float yDif, startingY;
     public int score;
     public TextMeshPro scoreText;
 
     public GameObject flower, startText;
     AudioSource audioSource;
     BoxCollider boxCollider;
-    public AudioClip scoreSound, music;
+    public AudioClip scoreSound, explodeSound, music;
 
     private void Start()
     {
@@ -23,14 +22,15 @@ public class WhacAMoleController : MonoBehaviour
 
     public void PopMole(MoleController mole, bool up)
     {
-        Vector3 newPos = mole.transform.position;
-        newPos.y = up ? startingY + yDif : startingY;
-        mole.transform.position = newPos;
+        float targetY = up ? startingY + yDif : startingY;
+        StartCoroutine(mole.MoveMole(up, targetY));
     }
 
     IEnumerator MoleCoroutine()
     {
-        float endTime = Time.time + 60f;
+        score = 0;
+        scoreText.text = "score: " + score.ToString();
+        float endTime = Time.time + 65f;
         ToggleObjects(true);
         audioSource.PlayOneShot(music);
 
@@ -60,12 +60,20 @@ public class WhacAMoleController : MonoBehaviour
         startText.SetActive(!gameStarting);
     }
 
-    public void IncreaseScore()
+    public void ChangeScore(int amount)
     {
-        audioSource.PlayOneShot(scoreSound);
-        score++;
-        if (scoreText != null)
-            scoreText.text = "score: " + score.ToString();
+        if (amount > 0)
+        {
+            audioSource.PlayOneShot(scoreSound);
+        }
+        else
+        {
+            audioSource.PlayOneShot(explodeSound);
+        }
+        score += amount;
+
+        scoreText.text = "score: " + score.ToString();
+
     }
 
     private void OnCollisionEnter(Collision collision)

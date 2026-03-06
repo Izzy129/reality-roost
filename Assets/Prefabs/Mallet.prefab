@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7495707258859257542}
   - component: {fileID: 1470586341610883966}
   - component: {fileID: 3408241739447055276}
+  - component: {fileID: 2554934293063976573}
   m_Layer: 0
   m_Name: Mallet
   m_TagString: Destroyer
@@ -212,7 +213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1391884589
+  GlobalObjectIdHash: 1907819826
   InScenePlacedSourceGlobalObjectIdHash: 3915349826
   DeferredDespawnTick: 0
   Ownership: 3
@@ -346,6 +347,20 @@ LODGroup:
     renderers:
     - renderer: {fileID: 4776073442067868156}
   m_Enabled: 1
+--- !u!114 &2554934293063976573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245730066395097484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b51d3f08a3fa5244583213def5dff9c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDistance: 5
+  startPos: {x: 2, y: 0, z: 0}
 --- !u!1 &2069811135193710885
 GameObject:
   m_ObjectHideFlags: 0
