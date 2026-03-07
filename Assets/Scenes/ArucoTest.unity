@@ -615,7 +615,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnDictionaryIdDropdownValueChanged
         m_Mode: 0
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnityExample
         m_MethodName: OnPauseButtonClick
         m_Mode: 1
@@ -2298,8 +2298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _arCamera: {fileID: 239211814}
-  _arGameObjects:
-  - {fileID: -2465525654990473672, guid: ce345ae3d37ab934796d0a120434fb33, type: 3}
+  _arGameObjects: []
   _updateTarget: 0
   _calculateARMatrixInLateUpdate: 1
   _updateTransformInLateUpdate: 1
@@ -2746,7 +2745,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnityExample
         m_MethodName: OnDebugDrawFrameAxesToggleValueChanged
         m_Mode: 1
@@ -2759,6 +2758,107 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_IsOn: 1
+--- !u!1001 &991813986
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 64354745187630817, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8089225307499218797, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      propertyPath: m_Name
+      value: Cube
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8089225307499218797, guid: de33d42d35d2bb541a6c8ca129c6969f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 991813988}
+  m_SourcePrefab: {fileID: 100100000, guid: de33d42d35d2bb541a6c8ca129c6969f, type: 3}
+--- !u!1 &991813987 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8089225307499218797, guid: de33d42d35d2bb541a6c8ca129c6969f,
+    type: 3}
+  m_PrefabInstance: {fileID: 991813986}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &991813988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991813987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92bfaeff13a63f34b8d90e1d10a67ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkerType: 0
+  DictionaryId: 0
+  MarkerId: 0
+  ArUcoExampleScript: {fileID: 1709852090}
+  ARCamera: {fileID: 239211812}
+  DistanceFromCamera: 2
+  UseSmoothing: 1
+  SmoothingFactor: 0.3
+  DebugMode: 0
+  PositionOffset: {x: 0, y: 0, z: 0}
+  RotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1037250637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,7 +3379,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnBackButtonClick
         m_Mode: 1
@@ -3512,7 +3612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnityExample
         m_MethodName: OnStopButtonClick
         m_Mode: 1
@@ -3678,7 +3778,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnMarkerTypeDropdownValueChanged
         m_Mode: 0
@@ -4435,7 +4535,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnityExample
         m_MethodName: OnShowDetectedMarkersToggleValueChanged
         m_Mode: 1
@@ -4682,7 +4782,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnRefineMarkerDetectionToggleValueChanged
         m_Mode: 1
@@ -4760,7 +4860,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnUseStoredCameraParametersToggleValueChanged
         m_Mode: 1
@@ -4993,7 +5093,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnChangeCameraButtonClick
         m_Mode: 1
@@ -5440,7 +5540,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample, EnoxSoftware.OpenCVForUnityExample
         m_MethodName: OnPlayButtonClick
         m_Mode: 1
@@ -5522,9 +5622,9 @@ GameObject:
   - component: {fileID: 1709852084}
   - component: {fileID: 1709852083}
   - component: {fileID: 1709852082}
+  - component: {fileID: 1709852090}
   - component: {fileID: 1709852092}
   - component: {fileID: 1709852091}
-  - component: {fileID: 1709852094}
   m_Layer: 0
   m_Name: ArUcoExample
   m_TagString: Untagged
@@ -5622,6 +5722,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1709852090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1709852081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466efadab0bb7a6498e6244810ad6afd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkerTypeDropdown: {fileID: 1229642121}
+  SelectedMarkerType: 0
+  DictionaryIdDropdown: {fileID: 229363025}
+  DictionaryId: 0
+  UseStoredCameraParametersToggle: {fileID: 1460161207}
+  UseStoredCameraParameters: 0
+  ShowDetectedMarkersToggle: {fileID: 1419142592}
+  ShowDetectedMarkers: 1
+  ShowRejectedCornersToggle: {fileID: 2065870811}
+  ShowRejectedCorners: 0
+  RefineMarkerDetectionToggle: {fileID: 1441725870}
+  RefineMarkerDetection: 1
+  EnableLowPassFilterToggle: {fileID: 2029186286}
+  EnableLowPassFilter: 0
+  DebugDrawFrameAxesToggle: {fileID: 930804104}
+  IsDebugDrawFrameAxes: 0
+  ApplyEstimationPose: 1
+  MarkerLength: 0.1
+  ArHelper: {fileID: 706625329}
+  ArCubePrefab: {fileID: 8367001764547137474, guid: 18fab7b3295ede84f97c63ff4cbdd9cc,
+    type: 3}
 --- !u!114 &1709852091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5675,13 +5808,13 @@ MonoBehaviour:
   _onInitialized:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1709852094}
-        m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoBoxTest, Assembly-CSharp
+      - m_Target: {fileID: 1709852090}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnSourceToMatHelperInitialized
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5690,13 +5823,13 @@ MonoBehaviour:
   _onDisposed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1709852094}
-        m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoBoxTest, Assembly-CSharp
+      - m_Target: {fileID: 1709852090}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnSourceToMatHelperDisposed
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5705,34 +5838,18 @@ MonoBehaviour:
   _onErrorOccurred:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1709852094}
-        m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoBoxTest, Assembly-CSharp
+      - m_Target: {fileID: 1709852090}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnSourceToMatHelperErrorOccurred
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1709852094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1709852081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f06239dc52899ea4890b7b3b862639e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MarkerLength: 0.1
-  ArHelper: {fileID: 706625329}
-  ArCubePrefab: {fileID: 8367001764547137474, guid: ce345ae3d37ab934796d0a120434fb33,
-    type: 3}
 --- !u!1 &1793984378
 GameObject:
   m_ObjectHideFlags: 0
@@ -6397,7 +6514,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnEnableLowPassFilterToggleValueChanged
         m_Mode: 1
@@ -6592,7 +6709,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1709852090}
         m_TargetAssemblyTypeName: OpenCVForUnityExample.ArUcoExample2, EnoxSoftware.OpenCVForUnity
         m_MethodName: OnShowRejectedCornersToggleValueChanged
         m_Mode: 1
@@ -6615,3 +6732,4 @@ SceneRoots:
   - {fileID: 1045041049}
   - {fileID: 107788453}
   - {fileID: 706625328}
+  - {fileID: 991813986}
