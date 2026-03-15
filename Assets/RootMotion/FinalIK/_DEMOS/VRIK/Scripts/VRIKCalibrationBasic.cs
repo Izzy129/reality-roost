@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using RootMotion.FinalIK;
 
 namespace RootMotion.Demos
@@ -30,20 +31,29 @@ namespace RootMotion.Demos
 
         private void LateUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            var keyboard = Keyboard.current;
+            if (keyboard == null)
             {
+                Debug.LogError("NO keyboard detected");
+                return;
+            }
+
+            if (keyboard.cKey.wasPressedThisFrame)
+            {
+                Debug.Log("Calibration C");
                 // Calibrate the character, store data of the calibration
                 data = VRIKCalibrator.Calibrate(ik, centerEyeAnchor, leftHandAnchor, rightHandAnchor, headAnchorPositionOffset, headAnchorRotationOffset, handAnchorPositionOffset, handAnchorRotationOffset, scaleMlp);
             }
 
             /*
-            * calling Calibrate with settings will return a VRIKCalibrator.CalibrationData, which can be used to calibrate that same character again exactly the same in another scene (just pass data instead of settings), 
+            * calling Calibrate with settings will return a VRIKCalibrator.CalibrationData, which can be used to calibrate that same character again exactly the same in another scene (just pass data instead of settings),
             * without being dependent on the pose of the player at calibration time.
             * Calibration data still depends on bone orientations though, so the data is valid only for the character that it was calibrated to or characters with identical bone structures.
             * If you wish to use more than one character, it would be best to calibrate them all at once and store the CalibrationData for each one.
             * */
-            if (Input.GetKeyDown(KeyCode.D))
+            if (keyboard.dKey.wasPressedThisFrame)
             {
+                Debug.Log("Calibration D");
                 if (data.scale == 0f)
                 {
                     Debug.LogError("No Calibration Data to calibrate to, please calibrate with 'C' first.");
@@ -55,8 +65,9 @@ namespace RootMotion.Demos
             }
 
             // Recalibrates avatar scale only. Can be called only if the avatar has been calibrated already.
-            if (Input.GetKeyDown(KeyCode.S))
+            if (keyboard.sKey.wasPressedThisFrame)
             {
+                Debug.Log("Calibration S");
                 if (data.scale == 0f)
                 {
                     Debug.LogError("Avatar needs to be calibrated before RecalibrateScale is called.");
