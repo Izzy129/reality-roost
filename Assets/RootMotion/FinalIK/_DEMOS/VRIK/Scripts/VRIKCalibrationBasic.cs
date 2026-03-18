@@ -75,5 +75,11 @@ namespace RootMotion.Demos
                 VRIKCalibrator.RecalibrateScale(ik, data, scaleMlp);
             }
         }
+        public void CalibrateLol()
+        {
+            Debug.Log("Test calibrate from canvas button");
+            data = VRIKCalibrator.Calibrate(ik, centerEyeAnchor, leftHandAnchor, rightHandAnchor, headAnchorPositionOffset, headAnchorRotationOffset, handAnchorPositionOffset, handAnchorRotationOffset, scaleMlp);
+        }
     }
+    
 }
