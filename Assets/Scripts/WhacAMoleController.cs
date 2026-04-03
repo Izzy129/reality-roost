@@ -14,6 +14,7 @@ public class WhacAMoleController : MonoBehaviour
     BoxCollider boxCollider;
     public AudioClip scoreSound, explodeSound, music;
 
+    public CameraShake cameraShake;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -69,6 +70,8 @@ public class WhacAMoleController : MonoBehaviour
         else
         {
             audioSource.PlayOneShot(explodeSound);
+            cameraShake.Shake(0.15f, 0.05f);
+
         }
         score += amount;
 

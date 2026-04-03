@@ -56811,6 +56811,31 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1985805558}
   m_Mesh: {fileID: 4300012, guid: 9fae9f7a7664c4c47a4fd4e9eedf6d6c, type: 3}
+--- !u!1 &1988124089 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1009104384333351451, guid: b5c15182b3dd4124ba0943289868bbb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 999443079261448814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1988124090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988124089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0455e20ce20277b4fb13d62c5edc4094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 1988124091}
+--- !u!4 &1988124091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1009104384333351450, guid: b5c15182b3dd4124ba0943289868bbb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 999443079261448814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1990727902
 GameObject:
   m_ObjectHideFlags: 0
@@ -65139,7 +65164,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1009104384333351451, guid: b5c15182b3dd4124ba0943289868bbb2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1988124090}
   m_SourcePrefab: {fileID: 100100000, guid: b5c15182b3dd4124ba0943289868bbb2, type: 3}
 --- !u!23 &999913306310922036
 MeshRenderer:
@@ -85255,6 +85284,7 @@ MonoBehaviour:
   scoreSound: {fileID: 8300000, guid: 94670fea61acb24409dadfdc85ebb05f, type: 3}
   explodeSound: {fileID: 8300000, guid: d490c846e538de941aced8202148cb60, type: 3}
   music: {fileID: 8300000, guid: 4414eb22862295f4fa5f911a6661614e, type: 3}
+  cameraShake: {fileID: 1988124090}
 --- !u!33 &6221930627569864747
 MeshFilter:
   m_ObjectHideFlags: 0
