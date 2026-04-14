@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DinoRoomController : MonoBehaviour
 {
+    public Animator dinoAnimator, labAnimator;
 
-    public List<Transform> walls; 
     public float lowerDistance = 5f;
     public float lowerDuration = 2f;
 
@@ -13,11 +13,13 @@ public class DinoRoomController : MonoBehaviour
     public float shakeDuration = 1f;
     public float shakeStrength = 0.2f;
 
+    public Rigidbody wallsAndRoof;
+
     void Start()
     {
-        StartCoroutine(LowerWallsAfterDelay(3f));
+        StartCoroutine(DinoAttack());
     }
-
+    /*
     IEnumerator LowerWallsAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -49,6 +51,15 @@ public class DinoRoomController : MonoBehaviour
 
             yield return null;
         }
+    }*/
+
+    IEnumerator DinoAttack()
+    {
+        yield return new WaitForSeconds(3f);
+        dinoAnimator.SetTrigger("tackle");
+        labAnimator.SetTrigger("gone");
+        //wallsAndRoof.SetActive(false);
+        wallsAndRoof.AddForce(transform.up * 2000f + transform.right * 2000f );
     }
 
 
