@@ -9,6 +9,7 @@ TagManager:
   - Anchor
   - PlayerHand
   - Destroyer
+  - hurtDino
   layers:
   - Default
   - TransparentFX

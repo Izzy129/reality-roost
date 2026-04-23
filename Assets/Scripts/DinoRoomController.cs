@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,33 +21,61 @@ public class DinoRoomController : MonoBehaviour
     public AudioSource dinoAudioSource;
     public AudioClip dinoFootstepClip;
 
+    bool inIntro = true;
     bool isDinoRunning = true;
     public float raptorSpeed = 2f;
 
+    public GameObject alarm;
+
+    float stepTimer = 0f;
+    float nextStepTime;
+
+    bool runStarted = false;
+
     void Start()
     {
+        nextStepTime = Random.Range(.5f, .6f);
         StartCoroutine(DinoRun());
     }
 
     private void Update()
     {
-        if (raptor.transform.localPosition.x < endX)
+        if (inIntro && raptor.transform.localPosition.x < endX)
+        {
             isDinoRunning = false;
+            inIntro = false;
+        }
 
         if (isDinoRunning)
             raptor.transform.Translate(Vector3.forward * -raptorSpeed * Time.deltaTime);
-    }
 
-    IEnumerator DinoRun()
-    {
-        while (isDinoRunning)
+        if (!runStarted || !isDinoRunning)
+            return;
+
+        stepTimer += Time.deltaTime;
+
+        if (stepTimer >= nextStepTime)
         {
+            stepTimer = 0f;
+            nextStepTime = Random.Range(.5f, .6f);
+
             dinoAudioSource.PlayOneShot(dinoFootstepClip);
 
             float strength = GetShakeStrength();
             ShakeRoom(shakeDuration, strength);
+        }
+    }
 
-            yield return new WaitForSeconds(Random.Range(.5f, .6f));
+    IEnumerator DinoRun()
+    {
+        yield return new WaitForSeconds(3f);
+        alarm.SetActive(true);
+
+        runStarted = true;
+
+        while (isDinoRunning)
+        {
+            yield return null;
         }
 
         StartCoroutine(DinoAttack());
@@ -67,9 +96,9 @@ public class DinoRoomController : MonoBehaviour
         ShakeRoom(shakeDuration, GetShakeStrength());
         raptorSoundEffects.Call();
 
-
         while (true)
-        {
+        { 
+
             yield return new WaitForSeconds(Random.Range(2f, 5f));
 
             dinoAnimator.SetTrigger("sniff");
@@ -81,6 +110,12 @@ public class DinoRoomController : MonoBehaviour
             dinoAnimator.SetTrigger("bite");
             yield return new WaitForSeconds(.5f);
             raptorSoundEffects.Bark();
+
+
+            //temp
+            StartCoroutine(DinoHit());
+            yield return new WaitForSeconds(1f);
+
 
         }
     }
@@ -124,5 +159,21 @@ public class DinoRoomController : MonoBehaviour
         {
             obj.localPosition = originalPositions[obj];
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("hurtDino"))
+        {
+            StartCoroutine(DinoHit());
+        }
+    }
+
+    IEnumerator DinoHit()
+    {
+        dinoAnimator.SetTrigger("hit");
+        yield return new WaitForSeconds(1f);
+        raptor.transform.Rotate(0f, 180f, 0f);
+        isDinoRunning = true;
     }
 }
