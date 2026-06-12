@@ -1,63 +1,138 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DinoRoomController : MonoBehaviour
 {
-
-    public List<Transform> walls; 
-    public float lowerDistance = 5f;
-    public float lowerDuration = 2f;
+    public Animator dinoAnimator, labAnimator;
 
     public List<Transform> shakeObjects;
+
     public float shakeDuration = 1f;
-    public float shakeStrength = 0.2f;
+    public float maxShakeStrength = 0.6f;
+    public float minShakeStrength = 0.05f;
+
+    public float startX = 50f;
+    public float endX = 15f;
+
+    public GameObject raptor;
+    public RaptorSoundEffects raptorSoundEffects;
+    public AudioSource dinoAudioSource;
+    public AudioClip dinoFootstepClip;
+
+    bool inIntro = true;
+    bool isDinoRunning = true;
+    public float raptorSpeed = 2f;
+
+    public GameObject alarm;
+
+    float stepTimer = 0f;
+    float nextStepTime;
+
+    bool runStarted = false;
 
     void Start()
     {
-        StartCoroutine(LowerWallsAfterDelay(3f));
+        nextStepTime = Random.Range(.5f, .6f);
+        StartCoroutine(DinoRun());
     }
 
-    IEnumerator LowerWallsAfterDelay(float delay)
+    private void Update()
     {
-        yield return new WaitForSeconds(delay);
-        yield return StartCoroutine(LowerWalls());
-    }
-
-    IEnumerator LowerWalls()
-    {
-        List<Vector3> startPositions = new List<Vector3>();
-        List<Vector3> targetPositions = new List<Vector3>();
-
-        foreach (Transform wall in walls)
+        if (inIntro && raptor.transform.localPosition.x < endX)
         {
-            startPositions.Add(wall.position);
-            targetPositions.Add(wall.position + Vector3.down * lowerDistance);
+            isDinoRunning = false;
+            inIntro = false;
         }
 
-        float time = 0f;
+        if (isDinoRunning)
+            raptor.transform.Translate(Vector3.forward * -raptorSpeed * Time.deltaTime);
 
-        while (time < lowerDuration)
+        if (!runStarted || !isDinoRunning)
+            return;
+
+        stepTimer += Time.deltaTime;
+
+        if (stepTimer >= nextStepTime)
         {
-            time += Time.deltaTime;
-            float t = time / lowerDuration;
+            stepTimer = 0f;
+            nextStepTime = Random.Range(.5f, .6f);
 
-            for (int i = 0; i < walls.Count; i++)
-            {
-                walls[i].position = Vector3.Lerp(startPositions[i], targetPositions[i], t);
-            }
+            dinoAudioSource.PlayOneShot(dinoFootstepClip);
 
+            float strength = GetShakeStrength();
+            ShakeRoom(shakeDuration, strength);
+        }
+    }
+
+    IEnumerator DinoRun()
+    {
+        yield return new WaitForSeconds(3f);
+        alarm.SetActive(true);
+
+        runStarted = true;
+
+        while (isDinoRunning)
+        {
             yield return null;
         }
+
+        StartCoroutine(DinoAttack());
     }
 
-
-    public void ShakeRoom()
+    IEnumerator DinoAttack()
     {
-        StartCoroutine(ShakeCoroutine());
+        raptorSoundEffects.Growl();
+        yield return new WaitForSeconds(Random.Range(2f, 4f));
+
+        raptorSoundEffects.Roar();
+        yield return new WaitForSeconds(Random.Range(2f, 4f));
+
+        dinoAnimator.SetTrigger("tackle");
+        yield return new WaitForSeconds(.2f);
+
+        labAnimator.SetTrigger("gone");
+        ShakeRoom(shakeDuration, GetShakeStrength());
+        raptorSoundEffects.Call();
+
+        while (true)
+        { 
+
+            yield return new WaitForSeconds(Random.Range(2f, 5f));
+
+            dinoAnimator.SetTrigger("sniff");
+            yield return new WaitForSeconds(.5f);
+            raptorSoundEffects.Sniff();
+
+            yield return new WaitForSeconds(Random.Range(2f, 5f));
+
+            dinoAnimator.SetTrigger("bite");
+            yield return new WaitForSeconds(.5f);
+            raptorSoundEffects.Bark();
+
+
+            //temp
+            StartCoroutine(DinoHit());
+            yield return new WaitForSeconds(1f);
+
+
+        }
     }
 
-    IEnumerator ShakeCoroutine()
+    float GetShakeStrength()
+    {
+        float currentX = raptor.transform.localPosition.x;
+        float t = Mathf.InverseLerp(startX, endX, currentX);
+        return Mathf.Lerp(minShakeStrength, maxShakeStrength, t);
+    }
+
+    public void ShakeRoom(float duration, float strength)
+    {
+        StartCoroutine(ShakeCoroutine(duration, strength));
+    }
+
+    IEnumerator ShakeCoroutine(float duration, float strength)
     {
         float elapsed = 0f;
 
@@ -67,13 +142,13 @@ public class DinoRoomController : MonoBehaviour
             originalPositions[obj] = obj.localPosition;
         }
 
-        while (elapsed < shakeDuration)
+        while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
 
             foreach (Transform obj in shakeObjects)
             {
-                Vector3 randomOffset = Random.insideUnitSphere * shakeStrength;
+                Vector3 randomOffset = Random.insideUnitSphere * strength;
                 obj.localPosition = originalPositions[obj] + randomOffset;
             }
 
@@ -84,5 +159,21 @@ public class DinoRoomController : MonoBehaviour
         {
             obj.localPosition = originalPositions[obj];
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("hurtDino"))
+        {
+            StartCoroutine(DinoHit());
+        }
+    }
+
+    IEnumerator DinoHit()
+    {
+        dinoAnimator.SetTrigger("hit");
+        yield return new WaitForSeconds(1f);
+        raptor.transform.Rotate(0f, 180f, 0f);
+        isDinoRunning = true;
     }
 }
