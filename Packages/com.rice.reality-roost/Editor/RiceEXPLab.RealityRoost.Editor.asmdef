@@ -1,0 +1,11 @@
+{
+    "name": "RiceEXPLab.RealityRoost.Editor",
+    "rootNamespace": "RiceEXPLab.RealityRoost.Editor",
+    "references": [
+        "RiceEXPLab.RealityRoost"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true
+}
