@@ -2,7 +2,6 @@
   "dependencies": {
     "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
     "com.iam1337.extosc": "https://github.com/iam1337/extOSC.git#upm",
-    "com.meta.xr.sdk.all": "85.0.0",
     "com.stereolabs.zed": "https://github.com/stereolabs/zed-unity.git?path=/ZEDCamera/Assets",
     "com.unity.burst": "1.8.25",
     "com.unity.feature.development": "1.0.2",
@@ -28,7 +27,6 @@
     "com.unity.xr.management": "4.5.4",
     "com.unity.xr.meta-openxr": "2.4.0",
     "com.unity.xr.openxr": "1.15.1",
-    "com.valvesoftware.unity.openvr": "file:../Assets/SteamVR/OpenVRUnityXRPackage/Editor/com.valvesoftware.unity.openvr-1.2.1.tgz",
     "com.unity.modules.accessibility": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
