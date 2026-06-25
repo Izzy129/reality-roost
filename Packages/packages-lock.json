@@ -12,6 +12,15 @@
       },
       "hash": "25a5fd212420688952ead9deba735357656278ec"
     },
+    "com.iam1337.extosc": {
+      "version": "https://github.com/iam1337/extOSC.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.ugui": "1.0.0"
+      },
+      "hash": "b7c2bfa81633cbcbc8cc4312e15cb5fbd0ed7d1d"
+    },
     "com.meta.xr.mrutilitykit": {
       "version": "85.0.0",
       "depth": 1,
@@ -98,6 +107,18 @@
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
+    },
+    "com.stereolabs.zed": {
+      "version": "https://github.com/stereolabs/zed-unity.git?path=/ZEDCamera/Assets",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.xr.management": "4.4.0",
+        "com.unity.ugui": "1.0.0",
+        "com.unity.modules.animation": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0"
+      },
+      "hash": "9abf612bc5e37b74014274c594faf9e93e086771"
     },
     "com.unity.ai.navigation": {
       "version": "2.0.9",
