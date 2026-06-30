@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - HelpObject
   - Projectile
   - Target
   - Anchor
@@ -27,7 +28,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - tagInvisibleToZED
   - 
   - 
   - 
