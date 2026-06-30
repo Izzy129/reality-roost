@@ -1,0 +1,95 @@
+{
+    "version": 1,
+    "name": "VIVETrackers",
+    "maps": [
+        {
+            "name": "VIVETracker",
+            "id": "11e9ef6e-fde9-43df-b9c1-3066d7a285f5",
+            "actions": [
+                {
+                    "name": "LeftAnklePosition",
+                    "type": "Value",
+                    "id": "330f6c0a-e85d-47df-a187-6e71391dffc7",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LeftAnkleRotation",
+                    "type": "Value",
+                    "id": "aed67d39-0083-451c-b93c-bda117ca72b6",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightAnklePosition",
+                    "type": "Value",
+                    "id": "ed3bc4bd-555e-46c5-8a0b-5f3bcf159c5c",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "RightAnkleRotation",
+                    "type": "Value",
+                    "id": "d592107b-952a-4fee-b479-87ea584088d1",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "bfbf5a54-cb13-468d-9a25-fefe603c14d3",
+                    "path": "<XRViveTracker>{Left Foot}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAnklePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "925988bd-1bcf-4735-85ef-57fe824742fc",
+                    "path": "<XRViveTracker>{Left Foot}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LeftAnkleRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4136cb05-8bed-473e-9f9a-68ef6f21e45a",
+                    "path": "<XRViveTracker>{Right Foot}/devicePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAnklePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "649fe75c-249d-496a-8354-d2f64b9eda91",
+                    "path": "<XRViveTracker>{Right Foot}/deviceRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightAnkleRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
