@@ -1,0 +1,13 @@
+{
+  "name": "net.xpixels.reality-roost",
+  "version": "0.1.0",
+  "displayName": "Reality Roost SDK",
+  "description": "SDK for Reality Roost @ Rice University.",
+  "unity": "6000.0",
+  "unityRelease": "60f1",
+  "author": {
+    "name": "Rice EXP Lab",
+    "url": "https://xpixels.net/"
+  },
+  "dependencies": {}
+}

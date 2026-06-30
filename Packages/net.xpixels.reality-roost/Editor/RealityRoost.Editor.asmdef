@@ -1,0 +1,19 @@
+{
+    "name": "RealityRoost.Editor",
+    "rootNamespace": "RealityRoost.Editor",
+    "references": [
+        "RealityRoost.Shared",
+        "RealityRoost.Client"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

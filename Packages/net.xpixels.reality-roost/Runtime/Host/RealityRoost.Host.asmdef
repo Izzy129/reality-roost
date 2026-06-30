@@ -1,0 +1,20 @@
+{
+    "name": "RealityRoost.Host",
+    "rootNamespace": "RealityRoost.Host",
+    "references": [
+        "RealityRoost.Shared",
+        "Unity.Netcode.Runtime",
+        "extOSC"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "RR_HOST"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -12,12 +12,6 @@
       },
       "hash": "25a5fd212420688952ead9deba735357656278ec"
     },
-    "com.rice.reality-roost": {
-      "version": "file:com.rice.reality-roost",
-      "depth": 0,
-      "source": "embedded",
-      "dependencies": {}
-    },
     "com.unity.burst": {
       "version": "1.8.25",
       "depth": 0,
@@ -531,6 +525,12 @@
         "com.unity.ugui": "1.0.0",
         "com.unity.xr.legacyinputhelpers": "2.1.4"
       }
+    },
+    "net.xpixels.reality-roost": {
+      "version": "file:net.xpixels.reality-roost",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
