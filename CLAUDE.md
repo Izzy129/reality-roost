@@ -62,6 +62,30 @@ Three runtime assemblies, organized layer-first:
 - Operator dashboard: web/Flask, separate design doc. Only its Unity hooks (bird's-eye NDI, heartbeat) live in this repo.
 - ArUco CV pipeline: Python, emits finished room-space poses over OSC. Unity consumes final poses, does not own CV.
 
+## Logging
+
+All log messages must begin with `[RR]` for Unity Console filtering.
+
+**Format:** `[RR][LEVEL] <subsystem>: <message>`
+
+| Level | Unity method | When to use |
+| --- | --- | --- |
+| `INFO` | `Debug.Log` | Normal lifecycle events (subsystem init, connection established) |
+| `DEBUG` | `Debug.Log` | Verbose per-frame or per-call output — guard with `#if UNITY_EDITOR` or `RR_VERBOSE` define |
+| `WARN` | `Debug.LogWarning` | Unexpected but recoverable state (missing config, fallback used) |
+| `ERROR` | `Debug.LogError` | Unrecoverable failure or violated contract |
+
+Examples:
+
+```csharp
+Debug.Log("[RR][INFO] HapticFloor: Subsystem started.");
+Debug.LogWarning("[RR][WARN] HapticFloor: No tiles registered, Rumble() is a no-op.");
+Debug.LogError("[RR][ERROR] HapticFloor: ServerRpc called on client — not allowed.");
+```
+
+- Never log per-frame in production builds — guard with `#if UNITY_EDITOR` or `RR_VERBOSE`.
+- Student-facing error messages must explain what the student needs to fix, not internal state.
+
 ## Style
 
 - Direct, concise. No vague phrasing ("does the real work", "gives teeth to").
