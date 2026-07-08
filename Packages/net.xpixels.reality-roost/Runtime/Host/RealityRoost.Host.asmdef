@@ -4,7 +4,8 @@
     "references": [
         "RealityRoost.Shared",
         "Unity.Netcode.Runtime",
-        "extOSC"
+        "extOSC",
+        "FMODUnity"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

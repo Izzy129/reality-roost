@@ -6,28 +6,45 @@ namespace RealityRoost.Client.HapticFloor
 {
     public class HapticFloorClient : NetworkBehaviour
     {
-        public void TriggerRumble(int tileIndex, int soundIndex, float intensity)
+        // Scene-placed NetworkObject, one per scene
+        // RRHapticEmitter and other client code call haptic floor events through this
+        public static HapticFloorClient Instance { get; private set; }
+
+        private void Awake()
         {
-            if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(TriggerRumble)))
+            if (Instance != null && Instance != this)
             {
+                Debug.LogWarning("[RR][WARN] HapticFloorClient: Another instance already exists in this scene, only one is supported.");
                 return;
             }
 
-            intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(TriggerRumble));
-
-            TriggerRumbleServerRpc(tileIndex, soundIndex, intensity);
+            Instance = this;
         }
 
-        public void SetIntensity(int tileIndex, float intensity)
+        private void OnDestroy()
         {
-            if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(SetIntensity)))
+            if (Instance == this)
+            {
+                Instance = null;
+            }
+        }
+
+        public void PlayClip(int tileIndex, string clipResourcePath, float intensity, bool loop)
+        {
+            if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(PlayClip)))
             {
                 return;
             }
 
-            intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(SetIntensity));
+            if (string.IsNullOrEmpty(clipResourcePath))
+            {
+                Debug.LogError("[RR][ERROR] HapticFloorClient: clipResourcePath is null or empty.");
+                return;
+            }
 
-            SetIntensityServerRpc(tileIndex, intensity);
+            intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(PlayClip));
+
+            PlayClipServerRpc(tileIndex, clipResourcePath, intensity, loop);
         }
 
         public void StopRumble(int tileIndex)
@@ -41,17 +58,10 @@ namespace RealityRoost.Client.HapticFloor
         }
 
         [ServerRpc(RequireOwnership = false)]
-        private void TriggerRumbleServerRpc(int tileIndex, int soundIndex, float intensity)
+        private void PlayClipServerRpc(int tileIndex, string clipResourcePath, float intensity, bool loop)
         {
-            Debug.Log("[RR][DEBUG] HapticFloorClient: Client requested rumble trigger!");
-            HapticFloorEvents.RaiseRumbleTriggered(tileIndex, soundIndex, intensity);
-        }
-
-        [ServerRpc(RequireOwnership = false)]
-        private void SetIntensityServerRpc(int tileIndex, float intensity)
-        {
-            Debug.Log("[RR][DEBUG] HapticFloorClient: Client requested intensity update!");
-            HapticFloorEvents.RaiseIntensityUpdated(tileIndex, intensity);
+            Debug.Log("[RR][DEBUG] HapticFloorClient: Client requested clip playback!");
+            HapticFloorEvents.RaisePlayClipRequested(tileIndex, clipResourcePath, intensity, loop);
         }
 
         [ServerRpc(RequireOwnership = false)]

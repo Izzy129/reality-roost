@@ -4,18 +4,13 @@ namespace RealityRoost.Shared.HapticFloor
 {
     public static class HapticFloorEvents
     {
-        public static event Action<int, int, float> OnRumbleTriggered;
-        public static event Action<int, float> OnIntensityUpdated;
+        // tileIndex, clipResourcePath (Resources-relative, no extension), intensity, loop
+        public static event Action<int, string, float, bool> OnPlayClipRequested;
         public static event Action<int> OnRumbleStopped;
 
-        public static void RaiseRumbleTriggered(int tileIndex, int soundIndex, float intensity)
+        public static void RaisePlayClipRequested(int tileIndex, string clipResourcePath, float intensity, bool loop)
         {
-            OnRumbleTriggered?.Invoke(tileIndex, soundIndex, intensity);
-        }
-
-        public static void RaiseIntensityUpdated(int tileIndex, float intensity)
-        {
-            OnIntensityUpdated?.Invoke(tileIndex, intensity);
+            OnPlayClipRequested?.Invoke(tileIndex, clipResourcePath, intensity, loop);
         }
 
         public static void RaiseRumbleStopped(int tileIndex)
