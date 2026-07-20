@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 838253632418003406}
   - component: {fileID: 8376843323604062544}
   - component: {fileID: 5306651926404655612}
-  - component: {fileID: 6591579267959270149}
   m_Layer: 0
   m_Name: Roost XRI Network Connection Manager
   m_TagString: Untagged
@@ -111,15 +110,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Id: 05a2526b-d50f-4964-b0e6-f05f9c0b885d
---- !u!114 &6591579267959270149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6989623585487683212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9597a08779e8d049b766a4089c7e29c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
