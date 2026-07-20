@@ -7,6 +7,7 @@ namespace RealityRoost.Shared.Core
     public abstract class RRSubsystem : MonoBehaviour
     {
         protected abstract string SubsystemName { get; }
+        protected virtual bool LogLifecycle => true;
 
         private void Awake()
         {
@@ -16,13 +17,13 @@ namespace RealityRoost.Shared.Core
         private void OnEnable()
         {
             OnSubsystemStart();
-            LogInfo("Subsystem started.");
+            if (LogLifecycle) LogInfo("Subsystem started.");
         }
 
         private void OnDisable()
         {
             OnSubsystemStop();
-            LogInfo("Subsystem stopped.");
+            if (LogLifecycle) LogInfo("Subsystem stopped.");
         }
 
         protected virtual void OnSubsystemAwake() { }
@@ -36,9 +37,7 @@ namespace RealityRoost.Shared.Core
         
         protected void LogDebug(string message)
         {
-#if UNITY_EDITOR || RR_VERBOSE
             Debug.Log($"[RR][DEBUG] {SubsystemName}: {message}");
-#endif
         }
 
         protected void LogWarning(string message)
