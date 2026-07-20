@@ -1,8 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Unity.XR;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class AvatarCalibrator : MonoBehaviour
 {
@@ -15,12 +12,14 @@ public class AvatarCalibrator : MonoBehaviour
     private float _avatarEyeHeight; // Avatar model height
     private float _heightScale;
 
-    [SerializeField] private InputActionReference _leftSecondaryButton;
+    [SerializeField] private InputActionAsset _inputActions;
+    private InputAction _calibrationInputButton;
 
     private void Start()
     {
         _avatarAnim = _avatar.GetComponent<Animator>();
-        _leftSecondaryButton.action.performed += CalibrationButtonPressed;
+        _calibrationInputButton = _inputActions.FindAction("Calibration");
+        _calibrationInputButton.performed += CalibrationButtonPressed;
     }
     private void CalibrationButtonPressed(InputAction.CallbackContext obj)
     {
