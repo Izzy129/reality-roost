@@ -383,7 +383,7 @@ namespace XRMultiplayer
         /// <summary>
         /// Called from the UI to set the IP address for joining a direct connection.
         /// </summary>
-        /// <param name="address">IP address or DNS</param>
+        /// <param name="address">IPv4 address</param>
         public void SetIP(string address)
         {
             SetIPAsync(address);
@@ -391,14 +391,12 @@ namespace XRMultiplayer
 
         /// <summary>
         ///  Asynchronously sets the IP address for joining a direct connection.
-        ///  This method validates the IP address format and resolves it to ensure it's valid.
+        ///  This method validates the IP address format, expecting a numeric IPv4 literal (e.g., 192.168.1.50).
         /// </summary>
-        /// <param name="address">IP address or DNS</param>
-        public virtual async void SetIPAsync(string address)
+        /// <param name="address">IPv4 address</param>
+        public virtual void SetIPAsync(string address)
         {
-            // Validate the IP address format
-            var hostEntry = await System.Net.Dns.GetHostEntryAsync(address);
-            if (hostEntry == null || hostEntry.AddressList.Length == 0)
+            if (!System.Net.IPAddress.TryParse(address, out var literal))
             {
                 Utils.LogError($"Failed to resolve IP address: {address}");
                 m_ConnectionFailedText.text = $"<b>Error:</b> Invalid IP address";
@@ -406,13 +404,8 @@ namespace XRMultiplayer
                 return;
             }
 
-            // If multiple addresses are found, log a warning as we only use the first one
-            if (hostEntry.AddressList.Length > 1)
-                Utils.LogWarning($"Multiple IP addresses found for {address}. Using the first one: {hostEntry.AddressList[0]}");
-
-            var ipAddress = hostEntry.AddressList[0].ToString();
             var transport = (UnityTransport)NetworkManager.Singleton.NetworkConfig.NetworkTransport;
-            transport.SetConnectionData(ipAddress, transport.ConnectionData.Port); // Assuming default port is 7777, change as needed
+            transport.SetConnectionData(literal.ToString(), transport.ConnectionData.Port); // Assuming default port is 7777, change as needed
         }
 
         /// <summary>
