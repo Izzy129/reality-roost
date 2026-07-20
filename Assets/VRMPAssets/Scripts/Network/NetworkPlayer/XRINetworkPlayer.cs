@@ -195,7 +195,7 @@ namespace XRMultiplayer
                 {
                     m_VoicePositionCheckTimer += m_VoicePositionUpdateTime;
 
-                    if (Vector3.Distance(m_PrevHeadPos, m_HeadOrigin.position) > m_VoiceUpdatePosotionDelta)
+                    if (m_HeadOrigin != null && Vector3.Distance(m_PrevHeadPos, m_HeadOrigin.position) > m_VoiceUpdatePosotionDelta)
                     {
                         m_PrevHeadPos = m_HeadOrigin.position;
                         if (XRINetworkGameManager.Instance.positionalVoiceChat)
@@ -213,6 +213,13 @@ namespace XRMultiplayer
         protected virtual void LateUpdate()
         {
             if (!IsOwner) return;
+
+            // If rig cached in OnNetworkSpawn was destroyed (scene switch with per-scene rig), re-resolve instead of tracking a dead transform
+            if (m_HeadOrigin == null)
+            {
+                m_XROrigin = FindFirstObjectByType<XROrigin>();
+                m_HeadOrigin = m_XROrigin != null ? m_XROrigin.Camera.transform : null;
+            }
 
             if (m_HeadOrigin != null)
                 head.SetPositionAndRotation(m_HeadOrigin.position, m_HeadOrigin.rotation);

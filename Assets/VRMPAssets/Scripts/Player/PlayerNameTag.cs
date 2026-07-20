@@ -56,6 +56,14 @@ namespace XRMultiplayer
 
         void LateUpdate()
         {
+            // cached camera dies with its scene on a scene switch while this name tag survives 
+            // re-resolving for now...
+            if (m_Camera == null)
+            {
+                m_Camera = Camera.main;
+                if (m_Camera == null) return;
+            }
+
             UpdateRotation();
             UpdateMinimizedState();
         }
