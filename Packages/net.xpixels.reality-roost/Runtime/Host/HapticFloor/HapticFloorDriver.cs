@@ -64,6 +64,7 @@ namespace RealityRoost.Host.HapticFloor
 
             HapticFloorEvents.OnPlayClipRequested += HandlePlayClipRequested;
             HapticFloorEvents.OnRumbleStopped += HandleRumbleStopped;
+            LogDebug("haptic floor driver initialized successfully");
         }
 
         protected override void OnSubsystemStop()
@@ -204,6 +205,7 @@ namespace RealityRoost.Host.HapticFloor
         {
             if (debugTransmitter == null)
             {
+                LogError("Debug OSC Transmitter not assigned in inspector!");
                 return;
             }
 
@@ -300,9 +302,11 @@ namespace RealityRoost.Host.HapticFloor
             for (int i = 0; i < numDrivers; i++)
             {
                 Check(_fmodSystem.getDriverInfo(i, out string name, 256, out Guid _, out int _, out FMOD.SPEAKERMODE _, out int _));
+                LogDebug($"found asio device {name} @ index {i}");
                 if (name.Contains(deviceName))
                 {
                     driverIndex = i;
+                    LogDebug($"desired device found!! using asio device {name} @ index {i}");
                     return true;
                 }
             }

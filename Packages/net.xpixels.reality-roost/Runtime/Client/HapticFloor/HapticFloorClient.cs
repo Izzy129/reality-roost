@@ -33,6 +33,7 @@ namespace RealityRoost.Client.HapticFloor
         {
             if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(PlayClip)))
             {
+                Debug.LogError("[RR][ERROR] HapticFloorClient: Tile index out of bounds!");
                 return;
             }
 
@@ -43,7 +44,8 @@ namespace RealityRoost.Client.HapticFloor
             }
 
             intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(PlayClip));
-
+            Debug.Log($"[RR][DEBUG] HapticFloorClient: sending haptic request to host: clip {clipResourcePath} on tile {tileIndex} @ {(intensity * 100):0.00} intensity");
+            Debug.Log($"[RR][DEBUG] HapticFloorClient: IsSpawned={IsSpawned}, NetworkObjectId={NetworkObjectId}");
             PlayClipServerRpc(tileIndex, clipResourcePath, intensity, loop);
         }
 
@@ -51,8 +53,10 @@ namespace RealityRoost.Client.HapticFloor
         {
             if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(StopRumble)))
             {
+                Debug.LogError("[RR][ERROR] HapticFloorClient: Tile index out of bounds!");
                 return;
             }
+            Debug.Log($"[RR][DEBUG] HapticFloorClient: sending stop request to host: tile {tileIndex}");
 
             StopRumbleServerRpc(tileIndex);
         }
@@ -69,6 +73,10 @@ namespace RealityRoost.Client.HapticFloor
         {
             Debug.Log("[RR][DEBUG] HapticFloorClient: Client requested rumble stop!");
             HapticFloorEvents.RaiseRumbleStopped(tileIndex);
+        }
+        public override void OnNetworkSpawn()
+        {
+            Debug.Log($"[RR][DEBUG] HapticFloorClient: OnNetworkSpawn — IsServer={IsServer} IsHost={IsHost} IsClient={IsClient} NetworkObjectId={NetworkObjectId} OwnerClientId={OwnerClientId}");
         }
     }
 }
