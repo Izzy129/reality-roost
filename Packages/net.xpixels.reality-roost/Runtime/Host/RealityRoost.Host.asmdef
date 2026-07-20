@@ -5,7 +5,9 @@
         "RealityRoost.Shared",
         "Unity.Netcode.Runtime",
         "extOSC",
-        "FMODUnity"
+        "FMODUnity",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

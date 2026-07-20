@@ -10,7 +10,9 @@
         "Unity.XR.Interaction.Toolkit",
         "Unity.XR.OpenXR",
         "Unity.XR.Management",
-        "Unity.XR.ARFoundation"
+        "Unity.XR.ARFoundation",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
