@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class AvatarCalibrator : MonoBehaviour
 {
     private bool _hasCalibrated = false;
-    [SerializeField] private GameObject _calibrationUI; // Local calibration UI menu
     [SerializeField] private GameObject _avatar;
     private Animator _avatarAnim;
 
@@ -12,14 +12,18 @@ public class AvatarCalibrator : MonoBehaviour
     private float _avatarEyeHeight; // Avatar model height
     private float _heightScale;
 
+    [SerializeField] private GameObject _calibrationUI; // Local calibration UI menu
+    private Button _calibrationUIButton; // Local calibration UI Button
     [SerializeField] private InputActionAsset _inputActions;
     private InputAction _calibrationInputButton;
 
     private void Start()
     {
         _avatarAnim = _avatar.GetComponent<Animator>();
+        _calibrationUIButton = _calibrationUI.GetComponentInChildren<Button>();
         _calibrationInputButton = _inputActions.FindAction("Calibration");
         _calibrationInputButton.performed += CalibrationButtonPressed;
+        _calibrationUIButton.onClick.AddListener(delegate { CalibrateUser(_avatar, _avatarAnim); }); // Local OnClick() call
     }
     private void CalibrationButtonPressed(InputAction.CallbackContext obj)
     {
@@ -28,13 +32,14 @@ public class AvatarCalibrator : MonoBehaviour
     /// <summary>
     /// Calibrate user so avatar fits user properly 
     /// </summary>
-    public void CalibrateUser()
+    public void CalibrateUser(GameObject avatar, Animator animator)
     {
-        ResetAvatarScale(_avatar);
+        ResetAvatarScale(avatar);
         MeasureUserEyeHeight();
-        MeasureAvatarEyeHeight(_avatarAnim);
+        MeasureAvatarEyeHeight(animator);
         CalculateHeightScale();
-        ScaleAvatar(_avatar);
+        ScaleAvatar(avatar);
+        Debug.Log("Character resized");
     }
     /// <summary>
     /// Resets avatar scale if user re-calibrates multiple times during gameplay
@@ -59,7 +64,7 @@ public class AvatarCalibrator : MonoBehaviour
     public void MeasureAvatarEyeHeight(Animator animator)
     {
         // Evalulate the current status of the animator
-        _avatarAnim.Update(0f);
+        animator.Update(0f);
         // Access head, feet bones
         Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
         Transform leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
@@ -81,6 +86,6 @@ public class AvatarCalibrator : MonoBehaviour
     /// <param name="avatarRoot"></param>
     private void ScaleAvatar(GameObject avatar)
     {
-        _avatar.transform.localScale = Vector3.one * _heightScale;
+        avatar.transform.localScale = Vector3.one * _heightScale;
     }
 }
