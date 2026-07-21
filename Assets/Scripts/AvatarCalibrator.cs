@@ -25,16 +25,24 @@ public class AvatarCalibrator : MonoBehaviour
     {
         _calibrationUI.SetActive(!_calibrationUI.activeInHierarchy);
     }
-
     /// <summary>
     /// Calibrate user so avatar fits user properly 
     /// </summary>
     public void CalibrateUser()
     {
+        ResetAvatarScale(_avatar);
         MeasureUserEyeHeight();
         MeasureAvatarEyeHeight(_avatarAnim);
         CalculateHeightScale();
         ScaleAvatar(_avatar);
+    }
+    /// <summary>
+    /// Resets avatar scale if user re-calibrates multiple times during gameplay
+    /// </summary>
+    /// <param name="avatar"></param>
+    private void ResetAvatarScale(GameObject avatar)
+    {
+        avatar.transform.localScale = Vector3.one;
     }
     /// <summary>
     /// Get user height from XR Origin
