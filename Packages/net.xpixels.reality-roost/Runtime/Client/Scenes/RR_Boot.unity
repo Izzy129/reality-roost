@@ -267,7 +267,7 @@ GameObject:
   - component: {fileID: 1538526726}
   - component: {fileID: 1538526725}
   m_Layer: 0
-  m_Name: RR Bootstrap
+  m_Name: Roost Bootstrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,6 +554,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3205678949650449924, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3668234983965060444, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_SizeDelta.y
@@ -781,7 +786,7 @@ PrefabInstance:
     - target: {fileID: 7515755490253990970, guid: 0ef8621e9655302409fc7c65f0e519f7,
         type: 3}
       propertyPath: m_Name
-      value: Network Manager VR Multiplayer
+      value: Roost Network Manager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -860,9 +865,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1538526726}
   - {fileID: 1413651092}
   - {fileID: 2090371709}
+  - {fileID: 1538526726}
   - {fileID: 1899507304914922905}
   - {fileID: 6729194916958510285}
   - {fileID: 1725693439}
