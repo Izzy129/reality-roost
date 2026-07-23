@@ -9,5 +9,12 @@
     "name": "Rice EXP Lab",
     "url": "https://xpixels.net/"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "samples": [
+    {
+      "displayName": "Boot Scenes",
+      "description": "RR_Boot and RR_Calib lifecycle scenes. After importing, add them to your Build Profile scene list: RR_Boot at index 0, RR_Calib at index 1, your experience scenes at 2+.",
+      "path": "Samples~/BootScenes"
+    }
+  ]
 }
