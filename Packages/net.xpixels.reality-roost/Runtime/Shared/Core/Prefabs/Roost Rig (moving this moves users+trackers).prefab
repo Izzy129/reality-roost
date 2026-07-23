@@ -1267,8 +1267,6 @@ MonoBehaviour:
         m_CallState: 2
   m_LargeMovementDistanceThreshold: 0.05
   m_LargeMovementCoolDownTime: 0.25
-  m_UseDistanceThreshold: 0
-  m_MaxDistanceThreshold: 10
 --- !u!1 &174658692766480047
 GameObject:
   m_ObjectHideFlags: 0
@@ -12867,8 +12865,6 @@ MonoBehaviour:
         m_CallState: 2
   m_LargeMovementDistanceThreshold: 0.05
   m_LargeMovementCoolDownTime: 0.25
-  m_UseDistanceThreshold: 0
-  m_MaxDistanceThreshold: 10
 --- !u!1 &1538690281388127355
 GameObject:
   m_ObjectHideFlags: 0
@@ -18184,7 +18180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   switcher: {fileID: 8078885226093003535}
   contentParent: {fileID: 7509076620068477864}
-  sceneSlotPrefab: {fileID: 2810046357255839364, guid: 7179bbd6549d95c4babb270f671f273e,
+  sceneSlotPrefab: {fileID: 2810046357255839364, guid: 108eaec2f41f4e1498c757d3e1b2ca83,
     type: 3}
   firstSwitchableBuildIndex: 1
 --- !u!1 &2188394145384916895
@@ -22198,7 +22194,7 @@ MonoBehaviour:
       allowSmoothing: 1
       followLowerSmoothingValue: 12
       followUpperSmoothingValue: 16
-    m_Variable: {fileID: 11400000, guid: 04b63e9e2e7da674d939e4e64dc192d8, type: 2}
+    m_Variable: {fileID: 11400000, guid: dab8a3f77d3d4bc4489721a7dfe5cb95, type: 2}
 --- !u!1 &2667975352676176871
 GameObject:
   m_ObjectHideFlags: 0
@@ -26667,7 +26663,7 @@ MonoBehaviour:
       allowSmoothing: 1
       followLowerSmoothingValue: 12
       followUpperSmoothingValue: 16
-    m_Variable: {fileID: 11400000, guid: 947754b5e95e05f44bf6d530c1ff7c32, type: 2}
+    m_Variable: {fileID: 11400000, guid: 7b2f9eb572f0dc541945daa3e338d306, type: 2}
 --- !u!1 &3238767545665419443
 GameObject:
   m_ObjectHideFlags: 0
