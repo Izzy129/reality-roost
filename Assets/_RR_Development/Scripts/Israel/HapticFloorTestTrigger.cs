@@ -3,46 +3,33 @@ using UnityEngine;
 
 public class HapticFloorTestTrigger : MonoBehaviour
 {
-    [SerializeField] private HapticFloorClient hapticFloor;
-
     [Header("Test Values")]
     [SerializeField] private int tileIndex = 0;
+    [SerializeField] private string clipResourcePath = "RumbleSounds/Footstep";
     [SerializeField, Range(0f, 1f)] private float intensity = 1f;
-    [SerializeField] private int soundIndex = 0;
+    [SerializeField] private bool loop = false;
 
-    [ContextMenu("Test Trigger Rumble")]
-    public void TestTriggerRumble()
+    [ContextMenu("Test Play Clip")]
+    public void TestPlayClip()
     {
-        if (hapticFloor == null)
+        if (HapticFloorClient.Instance == null)
         {
-            Debug.LogError("[HapticFloorTestTrigger] HapticFloorClient reference is not assigned in Inspector!");
+            Debug.LogError("[HapticFloorTestTrigger] No HapticFloorClient.Instance in the scene!");
             return;
         }
 
-        hapticFloor.TriggerRumble(tileIndex, soundIndex, intensity);
-    }
-
-    [ContextMenu("Test Set Intensity")]
-    public void TestSetIntensity()
-    {
-        if (hapticFloor == null)
-        {
-            Debug.LogError("[HapticFloorTestTrigger] HapticFloorClient reference is not assigned in Inspector!");
-            return;
-        }
-
-        hapticFloor.SetIntensity(tileIndex, intensity);
+        HapticFloorClient.Instance.PlayClip(tileIndex, clipResourcePath, intensity, loop);
     }
 
     [ContextMenu("Test Stop Rumble")]
     public void TestStopRumble()
     {
-        if (hapticFloor == null)
+        if (HapticFloorClient.Instance == null)
         {
-            Debug.LogError("[HapticFloorTestTrigger] HapticFloorClient reference is not assigned in Inspector!");
+            Debug.LogError("[HapticFloorTestTrigger] No HapticFloorClient.Instance in the scene!");
             return;
         }
 
-        hapticFloor.StopRumble(tileIndex);
+        HapticFloorClient.Instance.StopRumble(tileIndex);
     }
 }

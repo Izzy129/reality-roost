@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 4041478041
+  GlobalObjectIdHash: 2763505617
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -1108,8 +1108,8 @@ GameObject:
   - component: {fileID: 1645203438}
   - component: {fileID: 1645203437}
   - component: {fileID: 1645203436}
-  - component: {fileID: 1645203442}
   - component: {fileID: 1645203441}
+  - component: {fileID: 1645203442}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -1236,7 +1236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 103312242
+  GlobalObjectIdHash: 2962545918
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1

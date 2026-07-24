@@ -32,7 +32,7 @@ Three runtime assemblies, organized layer-first:
 
 ## Hardware
 
-- Headsets: Meta Quest 3S, hand tracking only (no VR controllers)
+- Headsets: Meta Quest 3S
 - Haptic floor: 6 tiles × 2 Dayton Audio TT25-8 pucks each = 12 Dante channels
 - Amplifier: MA1240a (not MA1260). Dante interface: AVN-AO16.
 - Fan array for wind simulation

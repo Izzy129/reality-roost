@@ -17,6 +17,20 @@ MonoBehaviour:
   m_AutomaticRunning: 0
   m_Loaders:
   - {fileID: 11400000, guid: 54863b214ad6f4e4c81f9dc85bd3a2cf, type: 2}
+--- !u!114 &-8489434175234624799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d236b7d11115f2143951f1e14045df39, type: 3}
+  m_Name: Metro Settings
+  m_EditorClassIdentifier: 
+  m_LoaderManagerInstance: {fileID: -5143260771680959357}
+  m_InitManagerOnStart: 1
 --- !u!114 &-6283244721492138042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,6 +45,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LoaderManagerInstance: {fileID: 1397492963038243757}
   m_InitManagerOnStart: 1
+--- !u!114 &-5143260771680959357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4c3631f5e58749a59194e0cf6baf6d5, type: 3}
+  m_Name: Metro Providers
+  m_EditorClassIdentifier: 
+  m_RequiresSettingsUpdate: 0
+  m_AutomaticLoading: 0
+  m_AutomaticRunning: 0
+  m_Loaders: []
 --- !u!114 &-1785797306426998866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,11 +90,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2dc886499c26824283350fa532d087d, type: 3}
   m_Name: XRGeneralSettingsPerBuildTarget
   m_EditorClassIdentifier: 
-  Keys: 01000000070000000d000000
+  Keys: 01000000070000000d0000000e000000
   Values:
   - {fileID: -6283244721492138042}
   - {fileID: 5269706996647393442}
   - {fileID: 5300942530751758060}
+  - {fileID: -8489434175234624799}
 --- !u!114 &1397492963038243757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +112,6 @@ MonoBehaviour:
   m_AutomaticLoading: 0
   m_AutomaticRunning: 0
   m_Loaders:
-  - {fileID: 11400000, guid: e24eec99ff870fb4d90472caab740b07, type: 2}
   - {fileID: 11400000, guid: 54863b214ad6f4e4c81f9dc85bd3a2cf, type: 2}
 --- !u!114 &5269706996647393442
 MonoBehaviour:
