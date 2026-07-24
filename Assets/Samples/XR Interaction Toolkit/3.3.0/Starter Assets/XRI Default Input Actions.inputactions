@@ -2069,15 +2069,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Calibration Button (Right Thumbstick In)",
-                    "type": "Button",
-                    "id": "46376e30-6f1c-4ed8-bc6b-97d61e0324d3",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2386,17 +2377,6 @@
                     "processors": "ScaleVector2(x=0),StickDeadzone",
                     "groups": "",
                     "action": "Translate Manipulation",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aa74da2b-10fe-44cb-968a-683a6aa59945",
-                    "path": "<XRController>{RightHand}/{Primary2DAxisClick}",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Calibration Button (Right Thumbstick In)",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

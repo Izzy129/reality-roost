@@ -1267,6 +1267,8 @@ MonoBehaviour:
         m_CallState: 2
   m_LargeMovementDistanceThreshold: 0.05
   m_LargeMovementCoolDownTime: 0.25
+  m_UseDistanceThreshold: 0
+  m_MaxDistanceThreshold: 10
 --- !u!1 &174658692766480047
 GameObject:
   m_ObjectHideFlags: 0
@@ -12865,6 +12867,8 @@ MonoBehaviour:
         m_CallState: 2
   m_LargeMovementDistanceThreshold: 0.05
   m_LargeMovementCoolDownTime: 0.25
+  m_UseDistanceThreshold: 0
+  m_MaxDistanceThreshold: 10
 --- !u!1 &1538690281388127355
 GameObject:
   m_ObjectHideFlags: 0
@@ -72320,8 +72324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   railingAnchor: {fileID: 5304063584538247828}
   captureTip: {fileID: 3805878685822107096}
-  captureAction: {fileID: -4084729805156114980, guid: c348712bda248c246b8c49b3db54643f,
-    type: 3}
+  captureAction: {fileID: 0}
   railingWidth: 1.9304
   railingDepth: 2.8448
   backLeftCornerMarker: {fileID: 3024499110767553846}
