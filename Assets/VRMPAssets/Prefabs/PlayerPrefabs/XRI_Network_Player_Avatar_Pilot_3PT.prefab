@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 7635316160425884342}
   - component: {fileID: 4441156231528909443}
   m_Layer: 0
-  m_Name: XRI_Network_Player_Avatar_Pilot
+  m_Name: XRI_Network_Player_Avatar_Pilot_3PT
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
+  _in3PTMode: 1
   head: {fileID: 8428554821243864899}
   leftController: {fileID: 4986528853260587318}
   rightController: {fileID: 7186574632870116062}
