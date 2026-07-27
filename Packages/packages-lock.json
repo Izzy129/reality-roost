@@ -546,7 +546,17 @@
       "version": "file:net.xpixels.reality-roost",
       "depth": 0,
       "source": "embedded",
-      "dependencies": {}
+      "dependencies": {
+        "com.unity.inputsystem": "1.18.0",
+        "com.unity.netcode.gameobjects": "2.7.0",
+        "com.unity.ugui": "2.0.0",
+        "com.unity.xr.arfoundation": "6.3.1",
+        "com.unity.xr.core-utils": "2.5.3",
+        "com.unity.xr.hands": "1.7.3",
+        "com.unity.xr.interaction.toolkit": "3.3.1",
+        "com.unity.xr.management": "4.5.4",
+        "com.unity.xr.openxr": "1.15.1"
+      }
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
