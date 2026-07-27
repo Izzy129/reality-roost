@@ -10,6 +10,8 @@ namespace RealityRoost.Shared.Core
 
         public static string CalibrationFilePath => Path.Combine(Application.persistentDataPath, CalibrationFileName);
 
-        // TODO: add automatic connection details here (host IP, client IPs, etc.)
+        public const string NetworkFileName = "rr_network.json";
+
+        public static string NetworkFilePath => Path.GetFullPath(Path.Combine(Application.dataPath, "..", NetworkFileName));
     }
 }
