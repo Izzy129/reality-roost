@@ -481,7 +481,7 @@ RectTransform:
   - {fileID: 65470198}
   - {fileID: 81133508}
   - {fileID: 3279776}
-  m_Father: {fileID: 1497878641}
+  m_Father: {fileID: 1497878640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -9498,7 +9498,7 @@ PrefabInstance:
     - target: {fileID: 1163162708345038871, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.004302908
+      value: -0.0023968348
       objectReference: {fileID: 0}
     - target: {fileID: 1187386868643401260, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
@@ -9599,6 +9599,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255198816601433141, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.007308957
       objectReference: {fileID: 0}
     - target: {fileID: 2277160564488731880, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
@@ -9738,12 +9743,47 @@ PrefabInstance:
     - target: {fileID: 3668234983965060444, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00016002581
+      value: -0.002052521
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918327710665223545, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918327710665223545, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4918327710665223545, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4953379011509433011, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_Name
       value: Roost Rig (moving this moves users+trackers)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531548770562613331, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531548770562613331, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6531548770562613331, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6581769469990247896, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.001919709
       objectReference: {fileID: 0}
     - target: {fileID: 7186703992943576161, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
@@ -9763,7 +9803,7 @@ PrefabInstance:
     - target: {fileID: 7509076620068477864, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.0066852462
+      value: -0.011368125
       objectReference: {fileID: 0}
     - target: {fileID: 9177540154027589729, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
@@ -9792,21 +9832,15 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 885847613}
-    - targetCorrespondingSourceObject: {fileID: 4163756081824250640, guid: 227822bec89e7c64d84e0d5b7342932e,
+    - targetCorrespondingSourceObject: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
-      insertIndex: 0
+      insertIndex: -1
       addedObject: {fileID: 24102504}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 227822bec89e7c64d84e0d5b7342932e, type: 3}
 --- !u!4 &1497878640 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1497878639}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1497878641 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4163756081824250640, guid: 227822bec89e7c64d84e0d5b7342932e,
     type: 3}
   m_PrefabInstance: {fileID: 1497878639}
   m_PrefabAsset: {fileID: 0}
