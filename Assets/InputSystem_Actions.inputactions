@@ -1017,32 +1017,23 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Mouse Zoom",
+                    "name": "Zoom",
                     "type": "Value",
                     "id": "364b1fed-f6a7-4b6a-81e6-5f134f9d0ae2",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Controller Zoom",
-                    "type": "Button",
-                    "id": "329c8dff-e5b3-4dbd-8284-7a5aa35c34db",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "370d4439-2273-4151-89f6-74c5ebf68334",
-                    "path": "<OculusTouchController>{LeftHand}/thumbstick",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";XR;Joystick;Keyboard&Mouse",
+                    "groups": ";XR;Joystick",
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1148,23 +1139,23 @@
                 },
                 {
                     "name": "",
-                    "id": "5ee41813-ed98-400c-b357-05c32387284b",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "Mouse Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b80e828c-eaef-4197-a9e0-40f876848f37",
                     "path": "<XRController>{RightHand}/{Primary2DAxis}",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Joystick;XR",
-                    "action": "Controller Zoom",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ee41813-ed98-400c-b357-05c32387284b",
+                    "path": "<Mouse>/scroll",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -171,6 +171,8 @@ MonoBehaviour:
     - line: '|   bundleVersion: 0.0.1'
     - line: '|   preloadedAssets:'
     - line: '|   - {instanceID: 0}'
+    - line: '|   - {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
+        type: 3}'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
     - line: '|   m_HolographicPauseOnTrackingLoss: 1'

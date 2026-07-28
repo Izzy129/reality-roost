@@ -9,7 +9,6 @@ public class CylindricalCamera : MonoBehaviour
     //private Rigidbody rb;
     public InputActionAsset InputActions;
     public float thetaX, thetaY;
-    
     private InputAction rotateAction;
     float movementUp, turnDirectionY;
     private void OnEnable()
@@ -25,10 +24,6 @@ public class CylindricalCamera : MonoBehaviour
     private void Awake()
     {
         rotateAction = InputActions.FindAction("Rotate");
-        if (rotateAction == null)
-        {
-            Debug.Log("broken");
-        }
     }
 
     void Start()
@@ -70,7 +65,6 @@ public class CylindricalCamera : MonoBehaviour
         turnDirectionY = moveInput.y; */
         movementUp = 0f;
         turnDirectionY = 0f;
-        Debug.Log("hi");
         if (rotateAction.IsPressed()){
             movementUp =  rotateAction.ReadValue<Vector2>().y;
             turnDirectionY = -1*rotateAction.ReadValue<Vector2>().x;
