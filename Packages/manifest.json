@@ -2,7 +2,6 @@
   "dependencies": {
     "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
     "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
-    "com.iam1337.extosc": "https://github.com/iam1337/extOSC.git#upm",
     "com.unity.burst": "1.8.25",
     "com.unity.feature.development": "1.0.2",
     "com.unity.ide.rider": "3.0.38",

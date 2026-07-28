@@ -16,12 +16,16 @@ Embedded UPM package at `Packages/net.xpixels.reality-roost/`.
 
 Three runtime assemblies, organized layer-first:
 
-- `Runtime/Shared/` → `RealityRoost.Shared.asmdef` — network message types, enums, `INetworkSerializable` structs, `RRSubsystem` base class, `RRConfig`. No define constraints. `autoReferenced: true`.
+- `Runtime/Shared/` → `RealityRoost.Shared.asmdef` — network message types, enums, `INetworkSerializable` structs, `RRSubsystem` base class, `RRConfig`, `SceneSwitching/`. No define constraints. `autoReferenced: true`.
 - `Runtime/Client/` → `RealityRoost.Client.asmdef` — student-facing API (`RRHapticFloor.Rumble()`, etc.), XR integration, NGO client bootstrap. Refs Shared. `autoReferenced: true`.
 - `Runtime/Host/` → `RealityRoost.Host.asmdef` — OSC middleware connectors, NGO host bootstrap, NDI rig. Refs Shared. `defineConstraints: RR_HOST`. `autoReferenced: false`.
 - `Editor/` → `RealityRoost.Editor.asmdef` — inspectors, editor tools. Refs Shared + Client. `includePlatforms: Editor`.
 
+Plus `ThirdParty/` at the package root — vendored third-party source with its own upstream asmdefs. Not ours: don't restyle it, don't apply the `[RR]` logging convention to it. Each vendored folder carries a `VENDORED.md` recording version, commit, license, and any local patches.
+
 **Dependency rule:** Client → Shared, Host → Shared. Client ↔ Host never reference each other. If both need a type, it goes in Shared.
+
+**Prefabs follow the same rule.** A prefab under `Runtime/Shared/` (e.g. `Roost Rig`) may only reference Shared components. If it references a `Runtime/Host/` script, the script silently fails to compile in any project without `RR_HOST` and the prefab shows a greyed-out, field-less `(Script)` inspector — the GUID still resolves to the `MonoScript` asset, but no compiled type exists behind it, so `UnityEvent` bindings like `OnClick()` break. This is why `SceneSwitching/` lives in Shared.
 
 ## Assets Layout
 
@@ -51,7 +55,7 @@ Three runtime assemblies, organized layer-first:
 
 - Unity 6000.0.60f1, URP
 - NGO: `com.unity.netcode.gameobjects` 2.7.0 (assembly: `Unity.Netcode.Runtime`)
-- ExtOSC: `com.iam1337.extosc` 1.21.0 (verify assembly name — needed by Host asmdef)
+- extOSC: **vendored**, not a UPM dependency. Lives at `Packages/net.xpixels.reality-roost/ThirdParty/extOSC/` (v1.21.0, MIT). Assembly name is `extOSC`; Host asmdef references it by name. Do not also install it via UPM/OpenUPM — duplicate assembly names are a compile error. See that folder's `VENDORED.md` before touching or re-syncing it.
 - KlakNDI: not yet installed (add to Host asmdef when installed)
 - XR: OpenXR, XR Hands, XR Interaction Toolkit, XR Core Utils, Input System
 
