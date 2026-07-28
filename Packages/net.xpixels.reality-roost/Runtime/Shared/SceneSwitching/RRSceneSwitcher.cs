@@ -4,9 +4,11 @@ using RealityRoost.Shared.Core;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
 
-namespace RealityRoost.Host.SceneSwitching
+namespace RealityRoost.Shared.SceneSwitching
 {
-    // Host-only, server-authoritative scene switcher for Reality Roost
+    // Server-authoritative scene switcher for Reality Roost. Lives in Shared so the
+    // Roost Rig prefab can reference it without the Host assembly's RR_HOST constraint.
+    // LoadExperience() still hard-fails on anything that is not the NGO host.
     // Call LoadExperience(buildIndex) to switch scenes.
     // Netcode replicates the load to every connected client in sync.
     // Each client's RRSpatialCalibrator re-applies its own persisted calibration on load.

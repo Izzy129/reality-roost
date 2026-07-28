@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RealityRoost.Host.SceneSwitching
+namespace RealityRoost.Shared.SceneSwitching
 {
     // Script that represents an entry in the scene switcher UI's list
     

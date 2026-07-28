@@ -2,7 +2,9 @@
     "name": "RealityRoost.Shared",
     "rootNamespace": "RealityRoost.Shared",
     "references": [
-        "Unity.Netcode.Runtime"
+        "Unity.Netcode.Runtime",
+        "UnityEngine.UI",
+        "Unity.TextMeshPro"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

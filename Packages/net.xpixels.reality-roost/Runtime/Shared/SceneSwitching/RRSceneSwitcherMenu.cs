@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace RealityRoost.Host.SceneSwitching
+namespace RealityRoost.Shared.SceneSwitching
 {
     // This script handles the operator scene-switcher hand menu. 
     public class RRSceneSwitcherMenu : MonoBehaviour
