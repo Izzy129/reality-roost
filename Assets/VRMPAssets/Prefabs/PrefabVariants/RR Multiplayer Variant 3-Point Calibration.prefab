@@ -1836,8 +1836,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 060641b4d680b334f9f8b0d80d6c7126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _calibrationUI: {fileID: 2400880452976895511}
+  _calibrationMode: 0
   _avatar: {fileID: 2390454500275609457}
+  _calibrationUI: {fileID: 2400880452976895511}
   _inputActions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
 --- !u!1 &5827567248131123830
@@ -3073,7 +3074,7 @@ PrefabInstance:
     - target: {fileID: 3024705259714637897, guid: bcb2e2b49fcaaad40a56daa1fd356602,
         type: 3}
       propertyPath: m_Name
-      value: RR Multiplayer Variant Avatar Calibration
+      value: RR Multiplayer Variant 3-Point Calibration
       objectReference: {fileID: 0}
     - target: {fileID: 3024705259714637897, guid: bcb2e2b49fcaaad40a56daa1fd356602,
         type: 3}

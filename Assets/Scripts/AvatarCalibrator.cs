@@ -1,10 +1,17 @@
+using RootMotion.FinalIK;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class AvatarCalibrator : MonoBehaviour
 {
-    private bool _hasCalibrated = false;
+    public enum CalibrationMode
+    {
+        ThreePoint,
+        FullBody
+    }
+
+    [SerializeField] private CalibrationMode _calibrationMode;
     [SerializeField] private GameObject _avatar;
     private Animator _avatarAnim;
 
@@ -16,6 +23,11 @@ public class AvatarCalibrator : MonoBehaviour
     private Button _calibrationUIButton; // Local calibration UI Button
     [SerializeField] private InputActionAsset _inputActions;
     private InputAction _calibrationInputButton;
+
+    private float _leftFootOffset;
+    private float _rightFootOffset;
+    private GameObject _leftAnkleTarget;
+    private GameObject _rightAnkleTarget;
 
     private void Start()
     {
@@ -30,16 +42,66 @@ public class AvatarCalibrator : MonoBehaviour
         _calibrationUI.SetActive(!_calibrationUI.activeInHierarchy);
     }
     /// <summary>
-    /// Calibrate user so avatar fits user properly 
+    /// Toggles VRIK before and after avatar calibration
+    /// </summary>
+    /// <param name="avatar"></param>
+    private void ToggleVRIK(GameObject avatar)
+    {
+        var state = avatar.GetComponent<VRIK>().enabled;
+        state = !state;
+        avatar.GetComponent<VRIK>().enabled = state;
+        UnityEngine.Debug.Log("[VRIK State] " + state);
+    }
+    /// <summary>
+    /// Calibrates avatar to user properly 
     /// </summary>
     public void CalibrateUser(GameObject avatar, Animator animator)
     {
+        switch(_calibrationMode)
+        {
+            case CalibrationMode.ThreePoint:
+                Calibrate3PT(avatar, animator);
+                break;
+            case CalibrationMode.FullBody:
+                _leftAnkleTarget = GameObject.Find("Left Ankle Target");
+                _rightAnkleTarget = GameObject.Find("Right Ankle Target");
+                CalibrateFBT(avatar, animator, _leftAnkleTarget, _rightAnkleTarget);
+                break;
+        }             
+    }
+    /// <summary>
+    /// Calibrates 3 Point avatar to user. 
+    /// 3PT: Tracking user head, controllers.
+    /// </summary>
+    /// <param name="avatar"></param>
+    /// <param name="animator"></param>
+    public void Calibrate3PT(GameObject avatar, Animator animator)
+    {
+        if (avatar.GetComponent<VRIK>().enabled) ToggleVRIK(avatar);
         ResetAvatarScale(avatar);
         MeasureUserEyeHeight();
         MeasureAvatarEyeHeight(animator);
         CalculateHeightScale();
         ScaleAvatar(avatar);
-        Debug.Log("Character resized");
+        ToggleVRIK(avatar);
+    }
+    /// <summary>
+    /// Calibrates FBT avatar to user
+    /// </summary>
+    /// <param name="avatar"></param>
+    /// <param name="animator"></param>
+    /// <param name="leftAnkleTracker"></param>
+    /// <param name="rightAnkleTracker"></param>
+    public void CalibrateFBT(GameObject avatar, Animator animator, GameObject leftAnkleTracker, GameObject rightAnkleTracker)
+    {
+        if (avatar.GetComponent<VRIK>().enabled) ToggleVRIK(avatar);
+        ResetAvatarScale(avatar);
+        MeasureUserEyeHeight();
+        MeasureAvatarEyeHeight(animator);
+        CalculateHeightScale();
+        ScaleAvatar(avatar);
+        ToggleVRIK(avatar);
+        CalculateFeetOffset(animator, _leftAnkleTarget, _rightAnkleTarget);
     }
     /// <summary>
     /// Resets avatar scale if user re-calibrates multiple times during gameplay
@@ -55,7 +117,6 @@ public class AvatarCalibrator : MonoBehaviour
     public void MeasureUserEyeHeight()
     {
         _playerEyeHeight = Camera.main.transform.localPosition.y;
-        Debug.Log("[h user eye height " + +_playerEyeHeight);
     }
     /// <summary>
     /// Get avatar height from feet to head bone
@@ -65,13 +126,15 @@ public class AvatarCalibrator : MonoBehaviour
     {
         // Evalulate the current status of the animator
         animator.Update(0f);
-        // Access head, feet bones
-        Transform head = animator.GetBoneTransform(HumanBodyBones.Head);
-        Transform leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftFoot);
-        Transform rightFoot = animator.GetBoneTransform(HumanBodyBones.RightFoot);
-        // Calculate player height by finding feet avg, then finding the difference
+        // Access eye, feet bones
+        Transform leftEye = animator.GetBoneTransform(HumanBodyBones.LeftEye);
+        Transform rightEye = animator.GetBoneTransform(HumanBodyBones.RightEye);
+        Transform leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftToes); // Foot
+        Transform rightFoot = animator.GetBoneTransform(HumanBodyBones.RightToes);
+        // Calculate player height by finding avg, then finding the difference
+        float eyeY = (leftEye.position.y + rightEye.position.y) / 2f;
         float footY = (leftFoot.position.y + rightFoot.position.y) / 2f;
-        _avatarEyeHeight = head.position.y - footY;
+        _avatarEyeHeight = eyeY - footY;
     }
     /// <summary>
     /// Calculate scale from user height and avatar eye height
@@ -87,5 +150,22 @@ public class AvatarCalibrator : MonoBehaviour
     private void ScaleAvatar(GameObject avatar)
     {
         avatar.transform.localScale = Vector3.one * _heightScale;
+    }
+    /// <summary>
+    /// Calculates offset from user's ankle tracker to avatar's foot bone. Ensures avatar's feet are grounded. 
+    /// </summary>
+    /// <param name="animator"></param>
+    /// <param name="leftAnkleTracker"></param>
+    /// <param name="rightAnkleTracker"></param>
+    private void CalculateFeetOffset(Animator animator, GameObject leftAnkleTracker, GameObject rightAnkleTracker)
+    {
+        // Calculate left foot offset
+        var leftFoot = animator.GetBoneTransform(HumanBodyBones.LeftToes);
+        _leftFootOffset = leftFoot.position.y - leftAnkleTracker.transform.position.y;
+        leftAnkleTracker.transform.localPosition = new Vector3(0, _leftFootOffset,0);
+        // Calculate right foot offset
+        var rightFoot = animator.GetBoneTransform(HumanBodyBones.RightToes);
+        _rightFootOffset = rightFoot.position.y - rightAnkleTracker.transform.position.y;
+        rightAnkleTracker.transform.localPosition = new Vector3(0, _rightFootOffset, 0);
     }
 }
