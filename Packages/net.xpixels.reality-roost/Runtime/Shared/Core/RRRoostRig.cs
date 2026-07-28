@@ -151,11 +151,33 @@ namespace RealityRoost.Shared.Core
                 }
                 else
                 {
+                    ReleaseNgoParenting(copyChild);
                     copyChild.SetParent(liveNode, false);
                     adopted.Add(copyChild.gameObject);
                     Debug.Log($"[RR][INFO] RoostRig: re-homed scene object '{copyChild.name}' into the live rig under '{liveNode.name}'.");
                 }
             }
+        }
+        static readonly List<NetworkObject> s_NetworkObjects = new();
+
+        // Opts a subtree out of NGO's transform-parent syncing before we re-home it with our transform-parent syncing
+        static void ReleaseNgoParenting(Transform root)
+        {
+            root.GetComponentsInChildren(true, s_NetworkObjects);
+
+            int released = 0;
+            foreach (var networkObject in s_NetworkObjects)
+            {
+                if (!networkObject.AutoObjectParentSync)
+                    continue;
+                networkObject.AutoObjectParentSync = false;
+                released++;
+            }
+
+            if (released > 0)
+                Debug.Log($"[RR][INFO] RoostRig: disabled AutoObjectParentSync on {released} NetworkObject(s) under '{root.name}' so it can be re-homed onto the live rig.");
+
+            s_NetworkObjects.Clear();
         }
 
         void DestroyAdoptedContent()
