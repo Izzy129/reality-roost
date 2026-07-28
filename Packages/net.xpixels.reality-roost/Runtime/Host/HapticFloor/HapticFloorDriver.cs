@@ -1,326 +1,326 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using extOSC;
-using RealityRoost.Shared.Core;
-using RealityRoost.Shared.HapticFloor;
-using UnityEngine;
+// using System;
+// using System.Collections.Generic;
+// using System.Runtime.InteropServices;
+// using extOSC;
+// using RealityRoost.Shared.Core;
+// using RealityRoost.Shared.HapticFloor;
+// using UnityEngine;
 
-namespace RealityRoost.Host.HapticFloor
-{
-    // Drives the haptic floor directly via FMOD's Core/Low-Level API over ASIO.
-    // Has its own FMOD.System bound to the Dante ASIO device for the transducers.
-    //
-    // Users supply plain Unity AudioClips (via RRHapticEmitter).
-    // This driver loads them from Resources, converts them to FMOD.Sound once, and caches the result.
-    // Each tile gets its own FMOD.Channel so different tiles can play different clips simultaneously.
-    // a new PlayClip on a busy tile interrupts whatever was playing there.
-    public class HapticFloorDriver : RRSubsystem
-    {
-        protected override string SubsystemName => "HapticFloorDriver";
-        // ASIO device name (Default "Dante Virtual Soundcard")
-        [SerializeField] private string asioDeviceName = "Dante Virtual Soundcard";
-        [SerializeField] private int sampleRate = 48000;
+// namespace RealityRoost.Host.HapticFloor
+// {
+//     // Drives the haptic floor directly via FMOD's Core/Low-Level API over ASIO.
+//     // Has its own FMOD.System bound to the Dante ASIO device for the transducers.
+//     //
+//     // Users supply plain Unity AudioClips (via RRHapticEmitter).
+//     // This driver loads them from Resources, converts them to FMOD.Sound once, and caches the result.
+//     // Each tile gets its own FMOD.Channel so different tiles can play different clips simultaneously.
+//     // a new PlayClip on a busy tile interrupts whatever was playing there.
+//     public class HapticFloorDriver : RRSubsystem
+//     {
+//         protected override string SubsystemName => "HapticFloorDriver";
+//         // ASIO device name (Default "Dante Virtual Soundcard")
+//         [SerializeField] private string asioDeviceName = "Dante Virtual Soundcard";
+//         [SerializeField] private int sampleRate = 48000;
 
-        [Header("OSC Debug Tap")]
-        [Tooltip("Broadcasts per-tile levels over OSC for dante_channel_monitor.py debugger")]
-        [SerializeField] private OSCTransmitter debugTransmitter;
-        [SerializeField] private string debugOscAddress = "/rr/debug/tile_levels";
+//         [Header("OSC Debug Tap")]
+//         [Tooltip("Broadcasts per-tile levels over OSC for dante_channel_monitor.py debugger")]
+//         [SerializeField] private OSCTransmitter debugTransmitter;
+//         [SerializeField] private string debugOscAddress = "/rr/debug/tile_levels";
 
-        private const int ChannelsPerTile = 2; // left, right
-        private static readonly int NumChannels = HapticConstants.TILE_COUNT * ChannelsPerTile;
+//         private const int ChannelsPerTile = 2; // left, right
+//         private static readonly int NumChannels = HapticConstants.TILE_COUNT * ChannelsPerTile;
 
-        private FMOD.System _fmodSystem;
-        private readonly FMOD.Channel[] _tileChannels = new FMOD.Channel[HapticConstants.TILE_COUNT];
-        private readonly Dictionary<string, CachedClip> _clipCache = new Dictionary<string, CachedClip>();
-        private readonly float[] _tileDebugLevels = new float[HapticConstants.TILE_COUNT * ChannelsPerTile];
+//         private FMOD.System _fmodSystem;
+//         private readonly FMOD.Channel[] _tileChannels = new FMOD.Channel[HapticConstants.TILE_COUNT];
+//         private readonly Dictionary<string, CachedClip> _clipCache = new Dictionary<string, CachedClip>();
+//         private readonly float[] _tileDebugLevels = new float[HapticConstants.TILE_COUNT * ChannelsPerTile];
 
-        private readonly struct CachedClip
-        {
-            public readonly FMOD.Sound Sound;
-            public readonly int Channels;
+//         private readonly struct CachedClip
+//         {
+//             public readonly FMOD.Sound Sound;
+//             public readonly int Channels;
 
-            public CachedClip(FMOD.Sound sound, int channels)
-            {
-                Sound = sound;
-                Channels = channels;
-            }
-        }
+//             public CachedClip(FMOD.Sound sound, int channels)
+//             {
+//                 Sound = sound;
+//                 Channels = channels;
+//             }
+//         }
 
-        protected override void OnSubsystemStart()
-        {
-            Check(FMOD.Factory.System_Create(out _fmodSystem));
-            Check(_fmodSystem.setOutput(FMOD.OUTPUTTYPE.ASIO));
+//         protected override void OnSubsystemStart()
+//         {
+//             Check(FMOD.Factory.System_Create(out _fmodSystem));
+//             Check(_fmodSystem.setOutput(FMOD.OUTPUTTYPE.ASIO));
 
-            if (!TryFindAsioDriver(asioDeviceName, out int driverIndex))
-            {
-                LogError($"ASIO driver containing '{asioDeviceName}' not found. Is Dante Virtual Soundcard installed and running?");
-                return;
-            }
+//             if (!TryFindAsioDriver(asioDeviceName, out int driverIndex))
+//             {
+//                 LogError($"ASIO driver containing '{asioDeviceName}' not found. Is Dante Virtual Soundcard installed and running?");
+//                 return;
+//             }
 
-            Check(_fmodSystem.setDriver(driverIndex));
-            Check(_fmodSystem.setSoftwareFormat(sampleRate, FMOD.SPEAKERMODE.RAW, NumChannels));
-            Check(_fmodSystem.init(32, FMOD.INITFLAGS.NORMAL, IntPtr.Zero));
+//             Check(_fmodSystem.setDriver(driverIndex));
+//             Check(_fmodSystem.setSoftwareFormat(sampleRate, FMOD.SPEAKERMODE.RAW, NumChannels));
+//             Check(_fmodSystem.init(32, FMOD.INITFLAGS.NORMAL, IntPtr.Zero));
 
-            HapticFloorEvents.OnPlayClipRequested += HandlePlayClipRequested;
-            HapticFloorEvents.OnRumbleStopped += HandleRumbleStopped;
-            LogDebug("haptic floor driver initialized successfully");
-        }
+//             HapticFloorEvents.OnPlayClipRequested += HandlePlayClipRequested;
+//             HapticFloorEvents.OnRumbleStopped += HandleRumbleStopped;
+//             LogDebug("haptic floor driver initialized successfully");
+//         }
 
-        protected override void OnSubsystemStop()
-        {
-            HapticFloorEvents.OnPlayClipRequested -= HandlePlayClipRequested;
-            HapticFloorEvents.OnRumbleStopped -= HandleRumbleStopped;
+//         protected override void OnSubsystemStop()
+//         {
+//             HapticFloorEvents.OnPlayClipRequested -= HandlePlayClipRequested;
+//             HapticFloorEvents.OnRumbleStopped -= HandleRumbleStopped;
 
-            for (int tileIndex = 0; tileIndex < HapticConstants.TILE_COUNT; tileIndex++)
-            {
-                StopTileChannel(tileIndex);
-            }
+//             for (int tileIndex = 0; tileIndex < HapticConstants.TILE_COUNT; tileIndex++)
+//             {
+//                 StopTileChannel(tileIndex);
+//             }
 
-            foreach (CachedClip clip in _clipCache.Values)
-            {
-                if (clip.Sound.hasHandle())
-                {
-                    clip.Sound.release();
-                }
-            }
+//             foreach (CachedClip clip in _clipCache.Values)
+//             {
+//                 if (clip.Sound.hasHandle())
+//                 {
+//                     clip.Sound.release();
+//                 }
+//             }
 
-            _clipCache.Clear();
+//             _clipCache.Clear();
 
-            if (_fmodSystem.hasHandle())
-            {
-                _fmodSystem.close();
-                _fmodSystem.release();
-            }
-        }
+//             if (_fmodSystem.hasHandle())
+//             {
+//                 _fmodSystem.close();
+//                 _fmodSystem.release();
+//             }
+//         }
 
-        private void Update()
-        {
-            if (!_fmodSystem.hasHandle())
-            {
-                return;
-            }
+//         private void Update()
+//         {
+//             if (!_fmodSystem.hasHandle())
+//             {
+//                 return;
+//             }
 
-            _fmodSystem.update();
-            PollFinishedChannels();
-        }
+//             _fmodSystem.update();
+//             PollFinishedChannels();
+//         }
 
-        private void PollFinishedChannels()
-        {
-            for (int tileIndex = 0; tileIndex < HapticConstants.TILE_COUNT; tileIndex++)
-            {
-                FMOD.Channel channel = _tileChannels[tileIndex];
-                if (!channel.hasHandle())
-                {
-                    continue;
-                }
+//         private void PollFinishedChannels()
+//         {
+//             for (int tileIndex = 0; tileIndex < HapticConstants.TILE_COUNT; tileIndex++)
+//             {
+//                 FMOD.Channel channel = _tileChannels[tileIndex];
+//                 if (!channel.hasHandle())
+//                 {
+//                     continue;
+//                 }
 
-                FMOD.RESULT result = channel.isPlaying(out bool isPlaying);
-                if (result == FMOD.RESULT.OK && isPlaying)
-                {
-                    continue;
-                }
+//                 FMOD.RESULT result = channel.isPlaying(out bool isPlaying);
+//                 if (result == FMOD.RESULT.OK && isPlaying)
+//                 {
+//                     continue;
+//                 }
 
-                _tileChannels[tileIndex] = default;
-                _tileDebugLevels[tileIndex * ChannelsPerTile] = 0f;
-                _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = 0f;
-                SendDebugLevels();
-            }
-        }
+//                 _tileChannels[tileIndex] = default;
+//                 _tileDebugLevels[tileIndex * ChannelsPerTile] = 0f;
+//                 _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = 0f;
+//                 SendDebugLevels();
+//             }
+//         }
 
-        private void HandlePlayClipRequested(int tileIndex, string clipResourcePath, float intensity, bool loop)
-        {
-            if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(HandlePlayClipRequested)))
-            {
-                return;
-            }
+//         private void HandlePlayClipRequested(int tileIndex, string clipResourcePath, float intensity, bool loop)
+//         {
+//             if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(HandlePlayClipRequested)))
+//             {
+//                 return;
+//             }
 
-            intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(HandlePlayClipRequested));
-            PlayClipOnTile(tileIndex, clipResourcePath, intensity, loop);
-        }
+//             intensity = HapticFloorUtils.ClampIntensity(intensity, nameof(HandlePlayClipRequested));
+//             PlayClipOnTile(tileIndex, clipResourcePath, intensity, loop);
+//         }
 
-        private void HandleRumbleStopped(int tileIndex)
-        {
-            if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(HandleRumbleStopped)))
-            {
-                return;
-            }
+//         private void HandleRumbleStopped(int tileIndex)
+//         {
+//             if (!HapticFloorUtils.IsValidTileIndex(tileIndex, nameof(HandleRumbleStopped)))
+//             {
+//                 return;
+//             }
 
-            StopTileChannel(tileIndex);
-        }
+//             StopTileChannel(tileIndex);
+//         }
 
-        private void PlayClipOnTile(int tileIndex, string clipResourcePath, float intensity, bool loop)
-        {
-            if (!_fmodSystem.hasHandle())
-            {
-                LogWarning($"ASIO system not initialized, ignoring tile {tileIndex}.");
-                return;
-            }
+//         private void PlayClipOnTile(int tileIndex, string clipResourcePath, float intensity, bool loop)
+//         {
+//             if (!_fmodSystem.hasHandle())
+//             {
+//                 LogWarning($"ASIO system not initialized, ignoring tile {tileIndex}.");
+//                 return;
+//             }
 
-            // Interrupt: a new request for a tile that's already playing something replaces it
-            StopTileChannel(tileIndex);
+//             // Interrupt: a new request for a tile that's already playing something replaces it
+//             StopTileChannel(tileIndex);
 
-            if (!TryGetOrLoadClip(clipResourcePath, out CachedClip clip))
-            {
-                return;
-            }
+//             if (!TryGetOrLoadClip(clipResourcePath, out CachedClip clip))
+//             {
+//                 return;
+//             }
 
-            Check(_fmodSystem.playSound(clip.Sound, default, true, out FMOD.Channel channel));
+//             Check(_fmodSystem.playSound(clip.Sound, default, true, out FMOD.Channel channel));
 
-            float[] matrix = BuildTileMixMatrix(tileIndex, clip.Channels, intensity);
-            Check(channel.setMixMatrix(matrix, NumChannels, clip.Channels));
-            Check(channel.setMode(loop ? FMOD.MODE.LOOP_NORMAL : FMOD.MODE.LOOP_OFF));
-            Check(channel.setLoopCount(loop ? -1 : 0));
-            Check(channel.setPaused(false));
+//             float[] matrix = BuildTileMixMatrix(tileIndex, clip.Channels, intensity);
+//             Check(channel.setMixMatrix(matrix, NumChannels, clip.Channels));
+//             Check(channel.setMode(loop ? FMOD.MODE.LOOP_NORMAL : FMOD.MODE.LOOP_OFF));
+//             Check(channel.setLoopCount(loop ? -1 : 0));
+//             Check(channel.setPaused(false));
 
-            _tileChannels[tileIndex] = channel;
+//             _tileChannels[tileIndex] = channel;
 
-            _tileDebugLevels[tileIndex * ChannelsPerTile] = intensity;
-            _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = intensity;
-            SendDebugLevels();
-        }
+//             _tileDebugLevels[tileIndex * ChannelsPerTile] = intensity;
+//             _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = intensity;
+//             SendDebugLevels();
+//         }
 
-        private void StopTileChannel(int tileIndex)
-        {
-            FMOD.Channel channel = _tileChannels[tileIndex];
-            if (!channel.hasHandle())
-            {
-                return;
-            }
+//         private void StopTileChannel(int tileIndex)
+//         {
+//             FMOD.Channel channel = _tileChannels[tileIndex];
+//             if (!channel.hasHandle())
+//             {
+//                 return;
+//             }
 
-            FMOD.RESULT result = channel.stop();
-            if (result != FMOD.RESULT.OK && result != FMOD.RESULT.ERR_INVALID_HANDLE)
-            {
-                LogError($"FMOD call failed - {result} ({FMOD.Error.String(result)})");
-            }
+//             FMOD.RESULT result = channel.stop();
+//             if (result != FMOD.RESULT.OK && result != FMOD.RESULT.ERR_INVALID_HANDLE)
+//             {
+//                 LogError($"FMOD call failed - {result} ({FMOD.Error.String(result)})");
+//             }
 
-            _tileChannels[tileIndex] = default;
+//             _tileChannels[tileIndex] = default;
 
-            _tileDebugLevels[tileIndex * ChannelsPerTile] = 0f;
-            _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = 0f;
-            SendDebugLevels();
-        }
+//             _tileDebugLevels[tileIndex * ChannelsPerTile] = 0f;
+//             _tileDebugLevels[tileIndex * ChannelsPerTile + 1] = 0f;
+//             SendDebugLevels();
+//         }
 
-        private void SendDebugLevels()
-        {
-            if (debugTransmitter == null)
-            {
-                LogError("Debug OSC Transmitter not assigned in inspector!");
-                return;
-            }
+//         private void SendDebugLevels()
+//         {
+//             if (debugTransmitter == null)
+//             {
+//                 LogError("Debug OSC Transmitter not assigned in inspector!");
+//                 return;
+//             }
 
-            var message = new OSCMessage(debugOscAddress);
-            for (int i = 0; i < _tileDebugLevels.Length; i++)
-            {
-                message.AddValue(OSCValue.Float(_tileDebugLevels[i]));
-            }
+//             var message = new OSCMessage(debugOscAddress);
+//             for (int i = 0; i < _tileDebugLevels.Length; i++)
+//             {
+//                 message.AddValue(OSCValue.Float(_tileDebugLevels[i]));
+//             }
 
-            try
-            {
-                debugTransmitter.Send(message);
-            }
-            catch (Exception ex)
-            {
-                LogError($"Failed to send debug OSC message - {ex.Message}");
-            }
-        }
+//             try
+//             {
+//                 debugTransmitter.Send(message);
+//             }
+//             catch (Exception ex)
+//             {
+//                 LogError($"Failed to send debug OSC message - {ex.Message}");
+//             }
+//         }
 
-        private static float[] BuildTileMixMatrix(int tileIndex, int inChannels, float gain)
-        {
-            var matrix = new float[NumChannels * inChannels];
-            int leftOut = tileIndex * ChannelsPerTile;
-            int rightOut = leftOut + 1;
+//         private static float[] BuildTileMixMatrix(int tileIndex, int inChannels, float gain)
+//         {
+//             var matrix = new float[NumChannels * inChannels];
+//             int leftOut = tileIndex * ChannelsPerTile;
+//             int rightOut = leftOut + 1;
 
-            if (inChannels == 1)
-            {
-                // mono
-                matrix[leftOut * inChannels] = gain;
-                matrix[rightOut * inChannels] = gain;
-            }
-            else
-            {
-                // stereo up to 2 channels per tile
-                matrix[leftOut * inChannels] = gain;
-                matrix[rightOut * inChannels + 1] = gain;
-            }
+//             if (inChannels == 1)
+//             {
+//                 // mono
+//                 matrix[leftOut * inChannels] = gain;
+//                 matrix[rightOut * inChannels] = gain;
+//             }
+//             else
+//             {
+//                 // stereo up to 2 channels per tile
+//                 matrix[leftOut * inChannels] = gain;
+//                 matrix[rightOut * inChannels + 1] = gain;
+//             }
 
-            return matrix;
-        }
+//             return matrix;
+//         }
 
-        private bool TryGetOrLoadClip(string clipResourcePath, out CachedClip clip)
-        {
-            if (_clipCache.TryGetValue(clipResourcePath, out clip))
-            {
-                return true;
-            }
+//         private bool TryGetOrLoadClip(string clipResourcePath, out CachedClip clip)
+//         {
+//             if (_clipCache.TryGetValue(clipResourcePath, out clip))
+//             {
+//                 return true;
+//             }
 
-            AudioClip unityClip = Resources.Load<AudioClip>(clipResourcePath);
-            if (unityClip == null)
-            {
-                LogError($"AudioClip not found at Resources/{clipResourcePath}.");
-                clip = default;
-                return false;
-            }
+//             AudioClip unityClip = Resources.Load<AudioClip>(clipResourcePath);
+//             if (unityClip == null)
+//             {
+//                 LogError($"AudioClip not found at Resources/{clipResourcePath}.");
+//                 clip = default;
+//                 return false;
+//             }
 
-            var samples = new float[unityClip.samples * unityClip.channels];
-            unityClip.GetData(samples, 0);
+//             var samples = new float[unityClip.samples * unityClip.channels];
+//             unityClip.GetData(samples, 0);
 
-            var bytes = new byte[samples.Length * sizeof(float)];
-            Buffer.BlockCopy(samples, 0, bytes, 0, bytes.Length);
+//             var bytes = new byte[samples.Length * sizeof(float)];
+//             Buffer.BlockCopy(samples, 0, bytes, 0, bytes.Length);
 
-            var exInfo = new FMOD.CREATESOUNDEXINFO
-            {
-                cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO)),
-                numchannels = unityClip.channels,
-                defaultfrequency = unityClip.frequency,
-                format = FMOD.SOUND_FORMAT.PCMFLOAT,
-                length = (uint)bytes.Length,
-            };
+//             var exInfo = new FMOD.CREATESOUNDEXINFO
+//             {
+//                 cbsize = Marshal.SizeOf(typeof(FMOD.CREATESOUNDEXINFO)),
+//                 numchannels = unityClip.channels,
+//                 defaultfrequency = unityClip.frequency,
+//                 format = FMOD.SOUND_FORMAT.PCMFLOAT,
+//                 length = (uint)bytes.Length,
+//             };
 
-            FMOD.RESULT result = _fmodSystem.createSound(
-                bytes,
-                FMOD.MODE.OPENMEMORY | FMOD.MODE.OPENRAW | FMOD.MODE.CREATESAMPLE,
-                ref exInfo,
-                out FMOD.Sound sound);
+//             FMOD.RESULT result = _fmodSystem.createSound(
+//                 bytes,
+//                 FMOD.MODE.OPENMEMORY | FMOD.MODE.OPENRAW | FMOD.MODE.CREATESAMPLE,
+//                 ref exInfo,
+//                 out FMOD.Sound sound);
 
-            Check(result);
-            if (result != FMOD.RESULT.OK)
-            {
-                clip = default;
-                return false;
-            }
+//             Check(result);
+//             if (result != FMOD.RESULT.OK)
+//             {
+//                 clip = default;
+//                 return false;
+//             }
 
-            clip = new CachedClip(sound, unityClip.channels);
-            _clipCache[clipResourcePath] = clip;
-            return true;
-        }
+//             clip = new CachedClip(sound, unityClip.channels);
+//             _clipCache[clipResourcePath] = clip;
+//             return true;
+//         }
 
-        private bool TryFindAsioDriver(string deviceName, out int driverIndex)
-        {
-            Check(_fmodSystem.getNumDrivers(out int numDrivers));
+//         private bool TryFindAsioDriver(string deviceName, out int driverIndex)
+//         {
+//             Check(_fmodSystem.getNumDrivers(out int numDrivers));
 
-            for (int i = 0; i < numDrivers; i++)
-            {
-                Check(_fmodSystem.getDriverInfo(i, out string name, 256, out Guid _, out int _, out FMOD.SPEAKERMODE _, out int _));
-                LogDebug($"found asio device {name} @ index {i}");
-                if (name.Contains(deviceName))
-                {
-                    driverIndex = i;
-                    LogDebug($"desired device found!! using asio device {name} @ index {i}");
-                    return true;
-                }
-            }
+//             for (int i = 0; i < numDrivers; i++)
+//             {
+//                 Check(_fmodSystem.getDriverInfo(i, out string name, 256, out Guid _, out int _, out FMOD.SPEAKERMODE _, out int _));
+//                 LogDebug($"found asio device {name} @ index {i}");
+//                 if (name.Contains(deviceName))
+//                 {
+//                     driverIndex = i;
+//                     LogDebug($"desired device found!! using asio device {name} @ index {i}");
+//                     return true;
+//                 }
+//             }
 
-            driverIndex = -1;
-            return false;
-        }
+//             driverIndex = -1;
+//             return false;
+//         }
 
-        private void Check(FMOD.RESULT result)
-        {
-            if (result != FMOD.RESULT.OK)
-            {
-                LogError($"FMOD call failed - {result} ({FMOD.Error.String(result)})");
-            }
-        }
-    }
-}
+//         private void Check(FMOD.RESULT result)
+//         {
+//             if (result != FMOD.RESULT.OK)
+//             {
+//                 LogError($"FMOD call failed - {result} ({FMOD.Error.String(result)})");
+//             }
+//         }
+//     }
+// }
