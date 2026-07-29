@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class NetworkFollower : NetworkBehaviour
 {
-    [SerializeField] private bool _isInFBT = false;
     // Prefab references
     public GameObject head;
     public GameObject leftController;
@@ -28,7 +27,7 @@ public class NetworkFollower : NetworkBehaviour
             leftControllerRef = GameObject.Find("Left Hand Target");
             rightControllerRef = GameObject.Find("Right Hand Target");
 
-            if(_isInFBT)
+            if (CalibrationState.Value == CalibrationMode.FullBody)
             {
                 leftAnkleRef = GameObject.Find("Left Ankle Target");
                 rightAnkleRef = GameObject.Find("Right Ankle Target");
@@ -45,7 +44,7 @@ public class NetworkFollower : NetworkBehaviour
             FollowTransform(leftController, leftControllerRef);
             FollowTransform(rightController, rightControllerRef);
             
-            if (_isInFBT)
+            if (CalibrationState.Value == CalibrationMode.FullBody)
             {
                 FollowTransform(leftAnkle, leftAnkleRef);
                 FollowTransform (rightAnkle, rightAnkleRef);

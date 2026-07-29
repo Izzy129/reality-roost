@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class AvatarCalibrator : MonoBehaviour
 {
-    public enum CalibrationMode
-    {
-        ThreePoint,
-        FullBody
-    }
-
     [SerializeField] private CalibrationMode _calibrationMode;
     [SerializeField] private GameObject _avatar;
     private Animator _avatarAnim;
@@ -24,14 +18,14 @@ public class AvatarCalibrator : MonoBehaviour
     [SerializeField] private InputActionAsset _inputActions;
     private InputAction _calibrationInputButton;
 
-    private float _leftFootOffset;
-    private float _rightFootOffset;
-    private GameObject _leftAnkleTarget;
-    private GameObject _rightAnkleTarget;
+    private float _leftFootOffset, _rightFootOffset;
+    private GameObject _leftAnkleTarget, _rightAnkleTarget;
 
     private void Start()
     {
         _avatarAnim = _avatar.GetComponent<Animator>();
+        CalibrationState.Value = _calibrationMode;
+
         _calibrationUIButton = _calibrationUI.GetComponentInChildren<Button>();
         _calibrationInputButton = _inputActions.FindAction("Calibration");
         _calibrationInputButton.performed += CalibrationButtonPressed;
