@@ -9,7 +9,7 @@ public class NetworkFollower : NetworkBehaviour
     public GameObject rightController;
     public GameObject leftAnkle;
     public GameObject rightAnkle;
-    //public GameObject waist;
+    public GameObject waist;
 
     // Scene references
     private GameObject headRef;
@@ -17,7 +17,7 @@ public class NetworkFollower : NetworkBehaviour
     private GameObject rightControllerRef;
     private GameObject leftAnkleRef;
     private GameObject rightAnkleRef;
-    //private GameObject waistRef;
+    private GameObject waistRef;
 
     private void Start()
     {
@@ -31,7 +31,7 @@ public class NetworkFollower : NetworkBehaviour
             {
                 leftAnkleRef = GameObject.Find("Left Ankle Target");
                 rightAnkleRef = GameObject.Find("Right Ankle Target");
-                //waistRef = GameObject.Find("Waist Target");
+                waistRef = GameObject.Find("Waist Target");
             }
         }
     }
@@ -48,7 +48,7 @@ public class NetworkFollower : NetworkBehaviour
             {
                 FollowTransform(leftAnkle, leftAnkleRef);
                 FollowTransform (rightAnkle, rightAnkleRef);
-                //FollowTransform(waist, waistRef);
+                FollowTransform(waist, waistRef);
             }
         }
     }
