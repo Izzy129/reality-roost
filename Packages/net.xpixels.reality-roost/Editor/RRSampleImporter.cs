@@ -132,8 +132,9 @@ namespace RealityRoost.Editor
         public static void ImportTMPEssentials()
         {
             Debug.Log("[RR][INFO] SampleImporter: opening the TMP importer - click 'Import' in the " +
-                      "dialog. Repeat with 'Import TMP Examples and Extras' if you want the examples.");
+                      "dialog.");
             EditorApplication.ExecuteMenuItem("Window/TextMeshPro/Import TMP Essential Resources");
+            EditorApplication.ExecuteMenuItem("Window/TextMeshPro/Import TMP Examples and Extras");
         }
     }
 }
