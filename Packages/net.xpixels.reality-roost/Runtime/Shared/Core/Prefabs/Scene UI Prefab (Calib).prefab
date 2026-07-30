@@ -378,7 +378,6 @@ GameObject:
   - component: {fileID: 2370962739832466313}
   - component: {fileID: 4328058536403353735}
   - component: {fileID: 6324835208759773070}
-  - component: {fileID: 1692925520096161754}
   m_Layer: 5
   m_Name: XRI TMP Button Fill Affordance
   m_TagString: Untagged
@@ -644,29 +643,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &1692925520096161754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675249125184248181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0908100b30fe0ab4191734ae3261431f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PokeFollowTransform: {fileID: 977667340305114913}
-  m_PokeFill: {fileID: 1448616299871274648}
-  m_PokeFillMaxSizeX: 150
-  m_PokeFillMaxSizeY: 60
-  m_SmoothingSpeed: 8
-  m_ReturnToInitialPosition: 1
-  m_ApplyIfChildIsTarget: 1
-  m_ClampToMinDistance: 1
-  m_MinDistance: 0.15
-  m_ClampToMaxDistance: 1
-  m_MaxDistance: 0
 --- !u!1 &4461212699983152810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1091,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14.35
+  m_fontSize: 10
   m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 1
