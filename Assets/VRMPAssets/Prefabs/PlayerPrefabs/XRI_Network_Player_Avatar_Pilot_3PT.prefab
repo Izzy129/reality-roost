@@ -155,13 +155,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  _in3PTMode: 1
   head: {fileID: 8428554821243864899}
   leftController: {fileID: 4986528853260587318}
   rightController: {fileID: 7186574632870116062}
-  headRef: {fileID: 0}
-  leftControllerRef: {fileID: 0}
-  rightControllerRef: {fileID: 0}
+  leftAnkle: {fileID: 0}
+  rightAnkle: {fileID: 0}
+  waist: {fileID: 0}
 --- !u!114 &4441156231528909443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,7 +403,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5085328908083532334}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfac4fa329d1f4f23814af71a247c14b, type: 3}
   m_Name: 
