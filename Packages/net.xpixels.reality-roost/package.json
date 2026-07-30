@@ -23,8 +23,13 @@
   "samples": [
     {
       "displayName": "Required Boot Scenes",
-      "description": "Scenes required for a Reality Roost experience. Ensure RR_Boot is in index 0, and RR_Calib is in index 1.",
+      "description": "Scenes required for a Reality Roost experience. Ensure RR_Boot is @ index 0, and RR_Calib is @ index 1 in the RR-Host build profile scene list.",
       "path": "Samples~/Required_Scenes"
+    },
+    {
+      "displayName": "Example Experience Scene",
+      "description": "A scene with a Roost Rig to use as a starting point when making your experiences' scenes.",
+      "path": "Samples~/Example_Scene"
     }
   ]
 }
