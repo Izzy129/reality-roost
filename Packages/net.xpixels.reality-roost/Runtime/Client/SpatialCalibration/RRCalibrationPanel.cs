@@ -2,6 +2,7 @@ using RealityRoost.Shared.Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace RealityRoost.Client.SpatialCalibration
@@ -18,6 +19,10 @@ namespace RealityRoost.Client.SpatialCalibration
         [SerializeField] private RRSpatialCalibrator calibrator;
         [Tooltip("Live status label at the bottom of the panel.")]
         [SerializeField] private TMP_Text status;
+
+        [SerializeField] private InputActionAsset _inputActions;
+        private InputAction _showMenuButton;
+        [SerializeField] private GameObject _menuUI;
 
         [Header("Corner-select highlight")]
         [Tooltip("Image on the L Rail button. Colored to show which corner nudges currently move.")]
@@ -45,6 +50,7 @@ namespace RealityRoost.Client.SpatialCalibration
                 return;
             }
 
+
             calibrator.OnSelectedCornerChanged += UpdateCornerButtonColors;
             UpdateCornerButtonColors(calibrator.SelectedCorner);
         }
@@ -71,6 +77,17 @@ namespace RealityRoost.Client.SpatialCalibration
             }
         }
 
+        private void Start()
+        {
+            _showMenuButton= _inputActions.FindAction("Calibration");
+            _showMenuButton.performed += ShowMenuButtonPressed;
+
+        }
+        private void ShowMenuButtonPressed(InputAction.CallbackContext obj)
+        {
+            _menuUI.SetActive(!_menuUI.activeInHierarchy);
+
+        }
         private void Update()
         {
             if (status == null || calibrator == null)
