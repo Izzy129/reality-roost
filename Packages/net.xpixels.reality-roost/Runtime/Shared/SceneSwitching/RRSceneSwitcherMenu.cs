@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace RealityRoost.Shared.SceneSwitching
@@ -17,6 +18,10 @@ namespace RealityRoost.Shared.SceneSwitching
         [Tooltip("First Build Settings index to list. RR_Boot = index 0, and is never a switch target, so this defaults to 1 (RR_Calib).")]
         [SerializeField] private int firstSwitchableBuildIndex = 1;
 
+        [SerializeField] private InputActionAsset _inputActions;
+        private InputAction _showMenuButton;
+        [SerializeField] private GameObject _menuUI;
+
         private readonly List<RRSceneSlotUI> _slots = new List<RRSceneSlotUI>();
         private int _desiredIndex = -1;
 
@@ -29,7 +34,15 @@ namespace RealityRoost.Shared.SceneSwitching
             {
                 switcher = FindFirstObjectByType<RRSceneSwitcher>();
             }
+
+            _showMenuButton = _inputActions.FindAction("Calibration");
+            _showMenuButton.performed += ShowMenuButtonPressed;
             Populate();
+
+        }
+        private void ShowMenuButtonPressed(InputAction.CallbackContext obj)
+        {
+            _menuUI.SetActive(!_menuUI.activeInHierarchy);
         }
 
         // Rebuild the row list from the Build Settings scene list and select the active scene
