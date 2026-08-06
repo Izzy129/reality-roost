@@ -6,6 +6,7 @@ using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Management;
 
 namespace RealityRoost.Shared.Core
 {
@@ -49,26 +50,56 @@ namespace RealityRoost.Shared.Core
 
         // ---- Lifecycle ----
 
-        private void Start()
+        private IEnumerator Start()
         {
             if (Nm == null)
             {
                 LogError("No NetworkManager in the RR_Boot scene - add the Roost Network Manager " +
                          "prefab. Networking is disabled.");
                 SetStatus("No NetworkManager");
-                return;
+                yield break;
             }
 
-            Config = RRNetworkConfig.Load();
+            SetStatus("Waiting for XR...");
+            yield return WaitForXrAndRendering();
 
+            Config = RRNetworkConfig.Load();
+            LogDebug("RR Network Config Loaded!");
             if (Config.isHost)
             {
+                LogDebug("Starting Netcode Session...");
                 StartHosting();
             }
             else
             {
+                LogDebug("Joining Netcode Session...");
                 StartJoining(Config.hostIP);
             }
+        }
+
+        // Blocks Start() (before Network config loading and server start/join ) until OpenXR has initialized
+        private IEnumerator WaitForXrAndRendering()
+        {
+            XRManagerSettings manager = XRGeneralSettings.Instance.Manager;
+
+            LogDebug("Waiting for XR initialization...");
+            while (!manager.isInitializationComplete)
+            {
+                LogDebug("XR Manager has not init yet");
+                yield return null;
+            }
+
+            // Let render pipeline produce at least one full frame before we proceed
+            yield return new WaitForEndOfFrame();
+
+            // height check lol
+            while (Camera.main == null || Camera.main.transform.localPosition.y < 0.1)
+            {
+                LogDebug($"Main camera is null or height {Camera.main.transform.localPosition.y} is too low");
+                yield return null;
+            }
+            LogDebug($"height is good now at {Camera.main.transform.localPosition.y}");
+            LogDebug("XR initialized, rendering ready.");
         }
 
         protected override void OnSubsystemStop()
@@ -162,6 +193,7 @@ namespace RealityRoost.Shared.Core
             Nm.OnServerStarted -= HandleServerStarted;
             Nm.OnServerStarted += HandleServerStarted;
 
+            LogDebug("Calling Network Manager StartHost()...");
             if (!Nm.StartHost())
             {
                 LogError($"StartHost failed on port {Config.port}. Another process may already be " +
@@ -169,7 +201,7 @@ namespace RealityRoost.Shared.Core
                 SetStatus("Host failed");
                 return;
             }
-
+            LogDebug("Netcode Server successfully started!");
             SetStatus($"Hosting on {LocalIPAddress}:{Config.port}");
             LogInfo($"Hosting on {LocalIPAddress}:{Config.port}.");
         }
