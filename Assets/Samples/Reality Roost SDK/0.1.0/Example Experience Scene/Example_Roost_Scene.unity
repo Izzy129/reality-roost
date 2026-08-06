@@ -302,6 +302,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roost Rig (moving this moves users+trackers)
       objectReference: {fileID: 0}
+    - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

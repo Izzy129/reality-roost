@@ -85,6 +85,9 @@ namespace RealityRoost.Shared.Core
                 nm.OnClientStarted -= TryHookNgo;
                 if (m_NgoHooked && nm.SceneManager != null)
                     nm.SceneManager.OnSceneEvent -= OnNgoSceneEvent;
+            } else
+            {
+                Debug.LogError("No network manager to read Ngo scene switch events from...");
             }
         }
 
@@ -185,9 +188,11 @@ namespace RealityRoost.Shared.Core
             foreach (var go in m_AdoptedContent)
             {
                 if (go != null)
+                    Debug.Log($"Destroying custom child \"{go.name}\" from Roost Rig");
                     Destroy(go);
             }
             m_AdoptedContent.Clear();
+            Debug.Log("[RR][DEBUG] RoostRig: all custom children of Roost Rig destroyed, ready to mark DDOL!!!");
         }
 
         // ---- Detach / fallback (run on the live rig) ----
@@ -201,7 +206,7 @@ namespace RealityRoost.Shared.Core
                 return;
             nm.SceneManager.OnSceneEvent += OnNgoSceneEvent;
             m_NgoHooked = true;
-            Debug.Log("[RR][INFO] RoostRig: hooked NGO scene events for pre-switch detach.");
+            Debug.Log("[RR][INFO] RoostRig: hooked to NGO scene events. we are now listening for scene switch events for reparenting and custom object adoption");
         }
 
         void OnNgoSceneEvent(SceneEvent sceneEvent)
@@ -217,7 +222,7 @@ namespace RealityRoost.Shared.Core
             DestroyAdoptedContent();
             transform.SetParent(null);
             DontDestroyOnLoad(gameObject);
-            Debug.Log("[RR][INFO] RoostRig: detached to DontDestroyOnLoad ahead of scene switch. Ready to switch scenes!");
+            Debug.Log("[RR][INFO] RoostRig: moved to DontDestroyOnLoad. Ready to switch scenes!");
         }
 
         void OnUnitySceneLoaded(Scene scene, LoadSceneMode mode)
