@@ -212,16 +212,6 @@ namespace XRMultiplayer
             }
             s_Instance = this;
 
-            // Persist across scene loads. DontDestroyOnLoad only works on root objects.
-            if (transform.parent != null)
-            {
-                Utils.Log($"{k_DebugPrepend}'{name}' is not a root object, so it will not persist across scene loads.", 2);
-            }
-            else
-            {
-                DontDestroyOnLoad(gameObject);
-            }
-
             // Check for Lobby Manager, if none exist, early out.
             if (TryGetComponent(out m_SessionManager) && TryGetComponent(out m_AuthenticationManager))
             {
@@ -627,7 +617,6 @@ namespace XRMultiplayer
             var transport = NetworkManager.Singleton.NetworkConfig.NetworkTransport as UnityTransport;
 
             transport.ConnectionData.Address = localIP;
-            transport.ConnectionData.ServerListenAddress = "0.0.0.0";
             ConnectedRoomName.Value = "Local Room";
             ConnectedRoomCode = localIP;
             return NetworkManager.Singleton.StartHost();

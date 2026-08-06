@@ -4,7 +4,9 @@
     "references": [
         "Unity.Netcode.Runtime",
         "UnityEngine.UI",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+		"Unity.InputSystem",
+        "Unity.XR.Management"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
