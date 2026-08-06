@@ -1246,6 +1246,74 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Testing"",
+            ""id"": ""4c207b45-f7ef-4175-ba7d-686d261f4603"",
+            ""actions"": [
+                {
+                    ""name"": ""Up and Side"",
+                    ""type"": ""Value"",
+                    ""id"": ""9d00d545-99e6-4564-86c5-3ba2b754aa8c"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Speed Control"",
+                    ""type"": ""Value"",
+                    ""id"": ""77aad318-422a-4a43-b203-29b4889e84d7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""In and Out"",
+                    ""type"": ""Value"",
+                    ""id"": ""2f75af5a-c4d4-46df-814d-d556553fa518"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""497fcc61-ad80-467c-9c80-2484cbda8a15"",
+                    ""path"": ""<HID::Thrustmaster Sol-R [R] Flightstick>/stick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Joystick"",
+                    ""action"": ""Up and Side"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7a951fc1-7209-41dd-87c9-2e7c3ee99a2d"",
+                    ""path"": ""<HID::Thrustmaster Sol-R [R] Flightstick>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Joystick"",
+                    ""action"": ""Speed Control"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7508d586-0032-4789-8cf6-bd874cc2e403"",
+                    ""path"": ""<HID::Thrustmaster Sol-R [R] Flightstick>/rz"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Joystick"",
+                    ""action"": ""In and Out"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1338,6 +1406,11 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Viewing = asset.FindActionMap("Viewing", throwIfNotFound: true);
         m_Viewing_Rotate = m_Viewing.FindAction("Rotate", throwIfNotFound: true);
         m_Viewing_Zoom = m_Viewing.FindAction("Zoom", throwIfNotFound: true);
+        // Testing
+        m_Testing = asset.FindActionMap("Testing", throwIfNotFound: true);
+        m_Testing_UpandSide = m_Testing.FindAction("Up and Side", throwIfNotFound: true);
+        m_Testing_SpeedControl = m_Testing.FindAction("Speed Control", throwIfNotFound: true);
+        m_Testing_InandOut = m_Testing.FindAction("In and Out", throwIfNotFound: true);
     }
 
     ~@InputSystem_Actions()
@@ -1345,6 +1418,7 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputSystem_Actions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Viewing.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Viewing.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_Testing.enabled, "This will cause a leak and performance issues, InputSystem_Actions.Testing.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1902,6 +1976,124 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="ViewingActions" /> instance referencing this action map.
     /// </summary>
     public ViewingActions @Viewing => new ViewingActions(this);
+
+    // Testing
+    private readonly InputActionMap m_Testing;
+    private List<ITestingActions> m_TestingActionsCallbackInterfaces = new List<ITestingActions>();
+    private readonly InputAction m_Testing_UpandSide;
+    private readonly InputAction m_Testing_SpeedControl;
+    private readonly InputAction m_Testing_InandOut;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "Testing".
+    /// </summary>
+    public struct TestingActions
+    {
+        private @InputSystem_Actions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public TestingActions(@InputSystem_Actions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "Testing/UpandSide".
+        /// </summary>
+        public InputAction @UpandSide => m_Wrapper.m_Testing_UpandSide;
+        /// <summary>
+        /// Provides access to the underlying input action "Testing/SpeedControl".
+        /// </summary>
+        public InputAction @SpeedControl => m_Wrapper.m_Testing_SpeedControl;
+        /// <summary>
+        /// Provides access to the underlying input action "Testing/InandOut".
+        /// </summary>
+        public InputAction @InandOut => m_Wrapper.m_Testing_InandOut;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_Testing; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="TestingActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(TestingActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="TestingActions" />
+        public void AddCallbacks(ITestingActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TestingActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TestingActionsCallbackInterfaces.Add(instance);
+            @UpandSide.started += instance.OnUpandSide;
+            @UpandSide.performed += instance.OnUpandSide;
+            @UpandSide.canceled += instance.OnUpandSide;
+            @SpeedControl.started += instance.OnSpeedControl;
+            @SpeedControl.performed += instance.OnSpeedControl;
+            @SpeedControl.canceled += instance.OnSpeedControl;
+            @InandOut.started += instance.OnInandOut;
+            @InandOut.performed += instance.OnInandOut;
+            @InandOut.canceled += instance.OnInandOut;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="TestingActions" />
+        private void UnregisterCallbacks(ITestingActions instance)
+        {
+            @UpandSide.started -= instance.OnUpandSide;
+            @UpandSide.performed -= instance.OnUpandSide;
+            @UpandSide.canceled -= instance.OnUpandSide;
+            @SpeedControl.started -= instance.OnSpeedControl;
+            @SpeedControl.performed -= instance.OnSpeedControl;
+            @SpeedControl.canceled -= instance.OnSpeedControl;
+            @InandOut.started -= instance.OnInandOut;
+            @InandOut.performed -= instance.OnInandOut;
+            @InandOut.canceled -= instance.OnInandOut;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="TestingActions.UnregisterCallbacks(ITestingActions)" />.
+        /// </summary>
+        /// <seealso cref="TestingActions.UnregisterCallbacks(ITestingActions)" />
+        public void RemoveCallbacks(ITestingActions instance)
+        {
+            if (m_Wrapper.m_TestingActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="TestingActions.AddCallbacks(ITestingActions)" />
+        /// <seealso cref="TestingActions.RemoveCallbacks(ITestingActions)" />
+        /// <seealso cref="TestingActions.UnregisterCallbacks(ITestingActions)" />
+        public void SetCallbacks(ITestingActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TestingActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TestingActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="TestingActions" /> instance referencing this action map.
+    /// </summary>
+    public TestingActions @Testing => new TestingActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -2137,5 +2329,34 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnZoom(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Testing" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="TestingActions.AddCallbacks(ITestingActions)" />
+    /// <seealso cref="TestingActions.RemoveCallbacks(ITestingActions)" />
+    public interface ITestingActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Up and Side" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUpandSide(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Speed Control" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSpeedControl(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "In and Out" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInandOut(InputAction.CallbackContext context);
     }
 }

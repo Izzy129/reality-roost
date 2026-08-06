@@ -1160,6 +1160,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Testing",
+            "id": "4c207b45-f7ef-4175-ba7d-686d261f4603",
+            "actions": [
+                {
+                    "name": "Up and Side",
+                    "type": "Value",
+                    "id": "9d00d545-99e6-4564-86c5-3ba2b754aa8c",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Speed Control",
+                    "type": "Value",
+                    "id": "77aad318-422a-4a43-b203-29b4889e84d7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "In and Out",
+                    "type": "Value",
+                    "id": "2f75af5a-c4d4-46df-814d-d556553fa518",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "497fcc61-ad80-467c-9c80-2484cbda8a15",
+                    "path": "<HID::Thrustmaster Sol-R [R] Flightstick>/stick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Up and Side",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a951fc1-7209-41dd-87c9-2e7c3ee99a2d",
+                    "path": "<HID::Thrustmaster Sol-R [R] Flightstick>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "Speed Control",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7508d586-0032-4789-8cf6-bd874cc2e403",
+                    "path": "<HID::Thrustmaster Sol-R [R] Flightstick>/rz",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Joystick",
+                    "action": "In and Out",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
