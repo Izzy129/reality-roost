@@ -8,14 +8,12 @@ public class FileSelector : MonoBehaviour
 {
     string[] filesArr = Directory.GetFiles(Application.streamingAssetsPath);
     List<string> m_DropOptions;
-
     TMP_Dropdown m_Dropdown;
     void Start()
     {
         m_DropOptions = GetOptions(filesArr);
         //Fetch the Dropdown GameObject
         m_Dropdown = GetComponent<TMP_Dropdown>();
-        
 
         //Clear the old options of the Dropdown menu
         m_Dropdown.ClearOptions();

@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using System;
-using JetBrains.Annotations;
 
 [System.Serializable]
 public class NodeData
@@ -12,7 +10,6 @@ public class NodeData
     public float velocityMagnitude;
     public Vector3 velocityComponents;
     public float pressure;
-    
 }
 
 [RequireComponent(typeof(ParticleSystem))]
@@ -44,7 +41,7 @@ public class NodeVisualizer : MonoBehaviour
     {
         _particleSystem = GetComponent<ParticleSystem>();
         psr = GetComponent<ParticleSystemRenderer>();
-        psr.renderMode = ParticleSystemRenderMode.Mesh;
+        psr.renderMode = ParticleSystemRenderMode.Billboard;
         psr.mesh = Resources.GetBuiltinResource<Mesh>("Cube.fbx");
     }
 
@@ -95,7 +92,7 @@ public class NodeVisualizer : MonoBehaviour
         main.startLifetime = Mathf.Infinity;
         main.startSpeed = 0f;
         main.maxParticles = count;
-        main.simulationSpeed = 0f; 
+        main.simulationSpeed = 0f;
         var emission = _particleSystem.emission;
         emission.enabled = false;
 
@@ -135,7 +132,7 @@ public class NodeVisualizer : MonoBehaviour
             }
             p.startLifetime = Mathf.Infinity;
             p.remainingLifetime = Mathf.Infinity;
-            
+
             if (velocityColorGradient != null) //1f is used as a placeholder for maxVelocity for now
             {
                 //float v01 = Mathf.InverseLerp(0f, velMagnitude, node.velocityComponents.magnitude);
@@ -157,7 +154,7 @@ public class NodeVisualizer : MonoBehaviour
             particles[i] = p;
         }
 
-        _particleSystem.SetParticles(particles, particles.Length);
+        _particleSystem.SetParticles(particles, particles.Length);  
     }
 
     
