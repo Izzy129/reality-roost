@@ -71120,11 +71120,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917581361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2a8fe7ceb23f254eb5ce36b6b4db866, type: 3}
+  m_Script: {fileID: 11500000, guid: b012acd41ab7e17449ff704b93f1de3e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkedRoostZoom
+  m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b,
+  InputActions: {fileID: -944628639613478452, guid: f47ad13e8ce4057468b3547f34bf3347,
     type: 3}
 --- !u!114 &1917581367
 MonoBehaviour:
@@ -71135,13 +71135,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1917581361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 964a1db1aaa05b04cac151230c3303d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e6bc95eb6278ca48b2b4cdd84a793f0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NetworkedRoostCamera
+  m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  baseRotationSpeed: 50
-  baseMovementSpeed: 25
-  InputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b,
+  baseRotationSpeed: 20
+  baseMovementSpeed: 10
+  InputActions: {fileID: -944628639613478452, guid: f47ad13e8ce4057468b3547f34bf3347,
     type: 3}
   thetaX: 0
   thetaY: 0
