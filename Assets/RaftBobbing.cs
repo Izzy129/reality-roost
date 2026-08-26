@@ -9,6 +9,6 @@ public class RaftBobbing : MonoBehaviour
     void Update()
     {
         float tilt = Mathf.Sin(Time.time * rotationSpeed) * tiltAngle;
-        transform.rotation = Quaternion.Euler(tilt, 0, tilt * 0.5f);
+        transform.localRotation = Quaternion.Euler(tilt, 0, tilt * 0.5f);
     }
 }
