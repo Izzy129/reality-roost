@@ -27,9 +27,9 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Samples/Reality Roost SDK/0.1.0/Example Experience Scene/Example_Roost_Scene.unity
   - m_enabled: 1
-    m_path: Assets/_RR_Development/Scenes/Raft Networked Movement 8.3.26.unity
+    m_path: Assets/_RR_Development/Samples/Demo Scenes/RR_Demo_Ocean_Prototype.unity
   - m_enabled: 1
-    m_path: Assets/_RR_Development/Scenes/Data Viz Networked Movement 7.31.26.unity
+    m_path: Assets/_Project/Scenes/Study Room.unity
   m_ScriptingDefines:
   - RR_HOST
   m_PlayerSettingsYaml:

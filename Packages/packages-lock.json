@@ -536,6 +536,18 @@
         "com.unity.xr.openxr": "1.15.1"
       }
     },
+    "org.khronos.unitygltf": {
+      "version": "https://github.com/KhronosGroup/UnityGLTF.git#release/2.17.8",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "2.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.shadergraph": "10.0.0",
+        "com.unity.mathematics": "1.0.0"
+      },
+      "hash": "cadc7a813043d273331ea4da27161096f608f172"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

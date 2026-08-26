@@ -64,7 +64,9 @@ namespace UnityFBXExporter
 			// refreshing the database. A chicken and the egg issue
 			AssetDatabase.Refresh();
 			string stringLocalPath = newPath.Remove(0, newPath.LastIndexOf("/Assets") + 1);
-			ModelImporter modelImporter = ModelImporter.GetAtPath(stringLocalPath) as ModelImporter;
+UnityEditor.ModelImporter modelImporter =
+    UnityEditor.AssetImporter.GetAtPath(stringLocalPath) as UnityEditor.ModelImporter;
+
 			if(modelImporter != null)
 			{
 				//ModelImporterMaterialName modelImportOld = modelImporter.materialName;
