@@ -35,7 +35,7 @@ namespace RealityRoost.Shared.SceneSwitching
                 switcher = FindFirstObjectByType<RRSceneSwitcher>();
             }
 
-            _showMenuButton = _inputActions.FindAction("Calibration");
+            _showMenuButton = _inputActions.FindAction("Scale Toggle"); // "Left Thumbstick In" that's already included in XRI Default Input Actions
             _showMenuButton.performed += ShowMenuButtonPressed;
             Populate();
 
