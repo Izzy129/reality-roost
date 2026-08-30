@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cesium.unity": "1.25.0",
     "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
     "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
     "com.unity.burst": "1.8.25",
@@ -59,5 +60,14 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "Cesium",
+      "url": "https://unity.pkg.cesium.com",
+      "scopes": [
+        "com.cesium.unity"
+      ]
+    }
+  ]
 }

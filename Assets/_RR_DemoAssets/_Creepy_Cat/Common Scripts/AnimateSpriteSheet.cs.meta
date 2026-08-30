@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f4a48e7d8ef634f459896235fb5cf328
+timeCreated: 1431519484
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39202
+  packageName: 3D Scifi Kit Vol 1
+  packageVersion: 2.1
+  assetPath: Assets/_Creepy_Cat/Common Scripts/AnimateSpriteSheet.cs
+  uploadId: 689260

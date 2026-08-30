@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 4068b8482da5e4c70b1b4ae2960ecbc1
+timeCreated: 1512840086
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 39202
+  packageName: 3D Scifi Kit Vol 1
+  packageVersion: 2.1
+  assetPath: Assets/_Creepy_Cat/Common Scripts/Turn_Move.cs
+  uploadId: 689260
