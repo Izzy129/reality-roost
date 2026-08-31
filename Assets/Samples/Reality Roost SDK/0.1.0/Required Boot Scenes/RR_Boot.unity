@@ -229,6 +229,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roost Rig (moving this moves users+trackers)
       objectReference: {fileID: 0}
+    - target: {fileID: 5334102219742064221, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3503603406
+      objectReference: {fileID: 0}
     - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchorMax.x
