@@ -36,13 +36,20 @@ namespace RealityRoost.Editor
             }
         };
 
-        [MenuItem("Reality Roost/Import Required Samples", priority = 100)]
+        // Pulls open Unity XR Setings for easy-access
+        [MenuItem("Reality Roost/Open XR Settings", priority = 99)]
+        public static void OpenXRSettings()
+        {
+            SettingsService.OpenProjectSettings("Project/XR Plug-in Management");
+        }
+
+        [MenuItem("Reality Roost/Import Samples/Import Required Samples", priority = 100)]
         public static void ImportRequiredSamples()
         {
             Import(false);
         }
 
-        [MenuItem("Reality Roost/Import Required Samples (force reimport)", priority = 101)]
+        [MenuItem("Reality Roost/Import Samples/Force Reimport Samples", priority = 101)]
         public static void ForceImportRequiredSamples()
         {
             if (!EditorUtility.DisplayDialog(
