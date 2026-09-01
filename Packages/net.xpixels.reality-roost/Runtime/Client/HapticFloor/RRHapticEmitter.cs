@@ -1,7 +1,6 @@
 using RealityRoost.Shared.HapticFloor;
 using UnityEngine;
 
-
 #if UNITY_EDITOR
 using System;
 using UnityEditor;
@@ -32,11 +31,6 @@ namespace RealityRoost.Client.HapticFloor
         }
 
         public void Play(float playIntensity)
-        { 
-            _activeTileIndex = HapticFloorUtils.PositionToTileIndex(transform.position);
-            Play(playIntensity, _activeTileIndex);
-        }
-        public void Play(float playIntensity, int tileIndex)
         {
             if (HapticFloorClient.Instance == null)
             {
@@ -50,9 +44,9 @@ namespace RealityRoost.Client.HapticFloor
                 return;
             }
 
-            HapticFloorClient.Instance.PlayClip(tileIndex, audioClipResourcePath, playIntensity, loop);
+            _activeTileIndex = HapticFloorUtils.PositionToTileIndex(transform.position);
+            HapticFloorClient.Instance.PlayClip(_activeTileIndex, audioClipResourcePath, playIntensity, loop);
         }
-        
 
         [ContextMenu("Test Stop")]
         public void Stop()
@@ -64,14 +58,6 @@ namespace RealityRoost.Client.HapticFloor
 
             HapticFloorClient.Instance.StopRumble(_activeTileIndex);
             _activeTileIndex = -1;
-        }
-        public void Stop(int tileIndex)
-        {
-            if (HapticFloorClient.Instance == null || tileIndex < 0 || tileIndex > 5)
-            {
-                return;
-            }
-            HapticFloorClient.Instance.StopRumble(tileIndex);
         }
 
 #if UNITY_EDITOR

@@ -61,19 +61,12 @@ namespace RealityRoost.Host.HapticFloor
 
         protected override void OnSubsystemStart()
         {
-            RRNetworkConfig config = RRNetworkConfig.Load();
-            if (!config.isHost)
-            {
-                LogInfo("Not configured as host, skipping HapticFloorDriver initialization.");
-                return;
-            }
-
             Check(FMOD.Factory.System_Create(out _fmodSystem));
             Check(_fmodSystem.setOutput(FMOD.OUTPUTTYPE.ASIO));
 
             if (!TryFindAsioDriver(asioDeviceName, out int driverIndex))
             {
-                LogError($"ASIO driver containing '{asioDeviceName}' not found. Haptic Floor will not init. Is Dante Virtual Soundcard installed and running?");
+                LogError($"ASIO driver containing '{asioDeviceName}' not found. Is Dante Virtual Soundcard installed and running?");
                 return;
             }
 
@@ -83,7 +76,7 @@ namespace RealityRoost.Host.HapticFloor
 
             HapticFloorEvents.OnPlayClipRequested += HandlePlayClipRequested;
             HapticFloorEvents.OnRumbleStopped += HandleRumbleStopped;
-            LogInfo("haptic floor driver initialized successfully");
+            LogDebug("haptic floor driver initialized successfully");
         }
 
         protected override void OnSubsystemStop()
