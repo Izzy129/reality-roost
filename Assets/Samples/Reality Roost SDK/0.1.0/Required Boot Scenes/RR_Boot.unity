@@ -439,11 +439,6 @@ PrefabInstance:
       propertyPath: NetworkConfig.LoadSceneTimeOut
       value: 266
       objectReference: {fileID: 0}
-    - target: {fileID: 5822900639459433441, guid: 0ef8621e9655302409fc7c65f0e519f7,
-        type: 3}
-      propertyPath: ConnectionData.Port
-      value: 7779
-      objectReference: {fileID: 0}
     - target: {fileID: 7515755490253990970, guid: 0ef8621e9655302409fc7c65f0e519f7,
         type: 3}
       propertyPath: m_Name
