@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59101d4549b87a43870c513da21e412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isHost: 0
   calibrationSceneBuildIndex: 1
   connectTimeoutSeconds: 5
   retryIntervalSeconds: 3

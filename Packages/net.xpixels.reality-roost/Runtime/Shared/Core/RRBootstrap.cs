@@ -22,6 +22,10 @@ namespace RealityRoost.Shared.Core
     {
         protected override string SubsystemName => "Network";
 
+        [Header("Host or Client Instance?")]
+        public bool isHost = true; // User can change via inspector (for testing multiplayer in-editor)
+
+        [Header("Network Connection Settings")]
         [Tooltip("Build Settings index of the calibration scene the host loads on start (RR_Boot is 0).")]
         [SerializeField] private int calibrationSceneBuildIndex = 1;
 
@@ -62,9 +66,9 @@ namespace RealityRoost.Shared.Core
 
             SetStatus("Waiting for XR...");
             yield return WaitForXrAndRendering();
-
-            Config = RRNetworkConfig.Load();
+            Config = RRNetworkConfig.Load(isHost);
             LogDebug("RR Network Config Loaded!");
+            Config.Save();
             if (Config.isHost)
             {
                 LogDebug("Starting Netcode Session...");

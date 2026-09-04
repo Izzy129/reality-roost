@@ -32,7 +32,8 @@ namespace RealityRoost.Shared.Core
 
         // Loads config from RRConfig.NetworkFilePath.
         // Falls back to defaults (solo host) and warns.
-        public static RRNetworkConfig Load()
+        //  hostValue = if the user is a Host or Client
+        public static RRNetworkConfig Load(bool hostValue)
         {
             string path = RRConfig.NetworkFilePath;
 
@@ -48,6 +49,9 @@ namespace RealityRoost.Shared.Core
             {
                 string json = File.ReadAllText(path);
                 RRNetworkConfig config = JsonUtility.FromJson<RRNetworkConfig>(json);
+                config.RestoreToDefault();
+
+                config.isHost = hostValue;
                 if (config == null)
                 {
                     Debug.LogError($"[RR][ERROR] Network: '{path}' is not valid JSON - " +
@@ -55,11 +59,17 @@ namespace RealityRoost.Shared.Core
                     return new RRNetworkConfig();
                 }
 
+                if (config.isHost == false)
+                {
+                    config.hostIP = "192.168.50.193"; // change to using RRBoostrap "LocalIPAddress"
+                    Debug.Log("Config isHost = false");
+                }
+                Debug.Log("host IP config: " + config.hostIP);
+
                 if (string.IsNullOrWhiteSpace(config.hostIP))
                 {
                     Debug.LogWarning("[RR][WARN] Network: hostIP is missing from JSON, setting hostIP to localhost.");
                     config.hostIP = "127.0.0.1";
-                    
                 }
                 if (config.port <= 0 || config.port > 65535)
                 {
@@ -94,6 +104,13 @@ namespace RealityRoost.Shared.Core
             {
                 Debug.LogError($"[RR][ERROR] Network: could not write '{path}' ({e.Message}).");
             }
+        }
+        public void RestoreToDefault()
+        {
+            isHost = true;
+            hostIP = "127.0.0.1";
+            port = 7777;
+            Save();
         }
     }
 }

@@ -1,5 +1,5 @@
 {
-  "isHost": true,
-  "hostIP": "127.0.0.1",
-  "port": 7778
+    "isHost": true,
+    "hostIP": "127.0.0.1",
+    "port": 7777
 }
