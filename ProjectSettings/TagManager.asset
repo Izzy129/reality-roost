@@ -10,6 +10,7 @@ TagManager:
   - PlayerHand
   - Destroyer
   - hurtDino
+  - Roost Rig
   layers:
   - Default
   - TransparentFX
