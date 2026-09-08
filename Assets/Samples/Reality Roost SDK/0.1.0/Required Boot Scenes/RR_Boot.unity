@@ -119,7 +119,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &608171253
+--- !u!1001 &754457219
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -185,12 +185,12 @@ PrefabInstance:
     - target: {fileID: 6026392181008459389, guid: 5710497ff43d52a44a4c41d48244344c,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 2631181527
+      value: 2523390396
       objectReference: {fileID: 0}
     - target: {fileID: 7207262821232727243, guid: 5710497ff43d52a44a4c41d48244344c,
         type: 3}
       propertyPath: GlobalObjectIdHash
-      value: 3395819123
+      value: 4268998953
       objectReference: {fileID: 0}
     - target: {fileID: 8608549087827387623, guid: 5710497ff43d52a44a4c41d48244344c,
         type: 3}
@@ -255,124 +255,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1725693439
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634810508945391131, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953379011509433011, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_Name
-      value: Roost Rig (moving this moves users+trackers)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4953379011509433011, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5334102219742064221, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 3503603406
-      objectReference: {fileID: 0}
-    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 4259921439
-      objectReference: {fileID: 0}
-    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: SceneMigrationSynchronization
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3601863221
-      objectReference: {fileID: 0}
-    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: GlobalObjectIdHash
-      value: 2244839050
-      objectReference: {fileID: 0}
-    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: SceneMigrationSynchronization
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: InScenePlacedSourceGlobalObjectIdHash
-      value: 3601863221
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 227822bec89e7c64d84e0d5b7342932e, type: 3}
 --- !u!1 &2090371706
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,11 +440,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5358844088564582620, guid: 990628d454db7554d966b1fe713b7f39,
         type: 3}
-    - target: {fileID: 5065131665929698010, guid: 0ef8621e9655302409fc7c65f0e519f7,
-        type: 3}
-      propertyPath: NetworkConfig.LoadSceneTimeOut
-      value: 266
-      objectReference: {fileID: 0}
     - target: {fileID: 7515755490253990970, guid: 0ef8621e9655302409fc7c65f0e519f7,
         type: 3}
       propertyPath: m_Name
@@ -579,6 +456,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 2090371709}
   - {fileID: 1538526726}
-  - {fileID: 1725693439}
   - {fileID: 1899507304914922905}
-  - {fileID: 608171253}
+  - {fileID: 754457219}
