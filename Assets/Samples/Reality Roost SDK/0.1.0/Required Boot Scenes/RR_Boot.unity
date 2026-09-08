@@ -119,6 +119,94 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &608171253
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2634810508945391131, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4953379011509433011, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_Name
+      value: Roost Origin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026392181008459389, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2631181527
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207262821232727243, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3395819123
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608549087827387623, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8608549087827387623, guid: 5710497ff43d52a44a4c41d48244344c,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5710497ff43d52a44a4c41d48244344c, type: 3}
 --- !u!1 &1538526724
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59101d4549b87a43870c513da21e412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isHost: 0
+  isHost: 1
   calibrationSceneBuildIndex: 1
   connectTimeoutSeconds: 5
   retryIntervalSeconds: 3
@@ -230,20 +318,55 @@ PrefabInstance:
       propertyPath: m_Name
       value: Roost Rig (moving this moves users+trackers)
       objectReference: {fileID: 0}
+    - target: {fileID: 4953379011509433011, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5334102219742064221, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: GlobalObjectIdHash
       value: 3503603406
       objectReference: {fileID: 0}
+    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 4259921439
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026392181008459389, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 3601863221
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 2244839050
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: SceneMigrationSynchronization
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7207262821232727243, guid: 227822bec89e7c64d84e0d5b7342932e,
+        type: 3}
+      propertyPath: InScenePlacedSourceGlobalObjectIdHash
+      value: 3601863221
+      objectReference: {fileID: 0}
     - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8608549087827387623, guid: 227822bec89e7c64d84e0d5b7342932e,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -458,3 +581,4 @@ SceneRoots:
   - {fileID: 1538526726}
   - {fileID: 1725693439}
   - {fileID: 1899507304914922905}
+  - {fileID: 608171253}
