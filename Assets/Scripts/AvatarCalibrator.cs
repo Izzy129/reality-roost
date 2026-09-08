@@ -7,34 +7,17 @@ using UnityEngine.UI;
 public class AvatarCalibrator : MonoBehaviour
 {
     [SerializeField] private CalibrationMode _calibrationMode;
-    [SerializeField] private GameObject _avatar;
-    private Animator _avatarAnim;
 
     private float _playerEyeHeight; // Real life user
     private float _avatarEyeHeight; // Avatar model height
     private float _heightScale;
-
-    [SerializeField] private GameObject _calibrationUI; // Local calibration UI menu
-    public Button CalibrateUIButton; // Calibration UI Button
-    [SerializeField] private InputActionAsset _inputActions;
-    private InputAction _calibrationInputButton;
 
     private float _leftFootOffset, _rightFootOffset;
     private GameObject _leftAnkleTarget, _rightAnkleTarget;
 
     private void Start()
     {
-        _avatarAnim = _avatar.GetComponent<Animator>();
         CalibrationState.Value = _calibrationMode;
-
-        CalibrateUIButton = _calibrationUI.GetComponentInChildren<Button>();
-        _calibrationInputButton = _inputActions.FindAction("Calibration");
-        _calibrationInputButton.performed += CalibrationButtonPressed;
-        //CalibrateUIButton.onClick.AddListener(delegate { CalibrateUser(_avatar, _avatarAnim); }); // Local OnClick() call -- removed for now
-    }
-    private void CalibrationButtonPressed(InputAction.CallbackContext obj)
-    {
-        _calibrationUI.SetActive(!_calibrationUI.activeInHierarchy);
     }
     /// <summary>
     /// Toggles VRIK before and after avatar calibration
