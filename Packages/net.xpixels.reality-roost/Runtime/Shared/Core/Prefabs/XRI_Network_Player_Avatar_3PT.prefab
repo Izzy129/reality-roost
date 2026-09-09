@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 6913818244571813981}
   - component: {fileID: 3240456498834066550}
   - component: {fileID: 5992676810618367315}
+  - component: {fileID: 6271796720565828724}
   m_Layer: 0
   m_Name: XRI_Network_Player_Avatar_3PT
   m_TagString: Untagged
@@ -267,6 +268,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92f5fe9cda2b2d45b55f7151b12c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6271796720565828724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5358844088564582620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f20f1e992834f4d8a628d3926d994a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
+  head: {fileID: 8428554821243864899}
+  leftController: {fileID: 4986528853260587318}
+  rightController: {fileID: 7186574632870116062}
+  leftAnkle: {fileID: 0}
+  rightAnkle: {fileID: 0}
+  waist: {fileID: 0}
 --- !u!1 &6144013571195380227
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,7 +815,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8383272522410122095}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfac4fa329d1f4f23814af71a247c14b, type: 3}
   m_Name: 
