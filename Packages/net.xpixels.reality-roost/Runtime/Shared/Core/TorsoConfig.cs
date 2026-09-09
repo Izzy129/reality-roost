@@ -1,5 +1,4 @@
 using UnityEngine;
-using RootMotion.FinalIK;
 
 public class TorsoConfig : MonoBehaviour
 {
