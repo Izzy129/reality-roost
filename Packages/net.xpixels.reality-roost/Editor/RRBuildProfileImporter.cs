@@ -8,9 +8,9 @@ namespace RealityRoost.Editor
 #if UNITY_6000_6_OR_NEWER
 
         const string Source = "Packages/Reality Roost SDK/Editor/Build Profiles/RR-Host.asset";
-        const string DestinationFolder = "Assets/Settings/Build Profiles";
+        const string Destination = "Assets/Settings/Build Profiles/RR-Host.asset";
 
-        [MenuItem("Add Build Profile", priority = 99)]
+        [MenuItem("Reality Roost/Add Build Profile", priority = 99)]
         public static void AddBuildProfilesToAssets()
         {
             if (!AssetDatabase.IsValidFolder("Assets/Settings"))
