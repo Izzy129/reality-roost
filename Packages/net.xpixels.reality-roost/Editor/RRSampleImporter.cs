@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Transactions;
 using UnityEditor;
 using UnityEditor.PackageManager.UI;
 using UnityEngine;
@@ -37,7 +38,7 @@ namespace RealityRoost.Editor
         };
 
         // Pulls open Unity XR Setings for easy-access
-        [MenuItem("Reality Roost/Open XR Settings", priority = 99)]
+        [MenuItem("Reality Roost/Open XR Settings", priority = 98)]
         public static void OpenXRSettings()
         {
             SettingsService.OpenProjectSettings("Project/XR Plug-in Management");
