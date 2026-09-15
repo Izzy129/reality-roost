@@ -16,7 +16,96 @@ Shader "UI/DefaultNoBackface"
         _ColorMask ("Color Mask", Float) = 15
     }
 
-    SubShader
+    // URP stereo path; retain the original Built-in SubShader below.
+SubShader
+    {
+        Tags
+        {
+        "RenderPipeline"="UniversalPipeline"
+            "Queue"="Transparent"
+            "IgnoreProjector"="True"
+            "RenderType"="Transparent"
+            "PreviewType"="Plane"
+            "CanUseSpriteAtlas"="True"
+        }
+
+        Stencil
+        {
+            Ref [_Stencil]
+            Comp [_StencilComp]
+            Pass [_StencilOp]
+            ReadMask [_StencilReadMask]
+            WriteMask [_StencilWriteMask]
+        }
+
+        Cull Back
+        Lighting Off
+        ZWrite Off
+        ZTest [unity_GUIZTestMode]
+        Fog { Mode Off }
+        Blend SrcAlpha OneMinusSrcAlpha
+        ColorMask [_ColorMask]
+
+        Pass
+        {
+        HLSLPROGRAM
+            #pragma multi_compile_instancing
+            #pragma vertex vert
+            #pragma fragment frag
+            #include "Packages/net.xpixels.reality-roost/Runtime/Shared/Shaders/RoostURPUIBridge.hlsl"
+
+            struct appdata_t
+            {
+                float4 vertex   : POSITION;
+                float4 color    : COLOR;
+                float2 texcoord : TEXCOORD0;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
+            };
+
+            struct v2f
+            {
+                float4 vertex   : SV_POSITION;
+                fixed4 color    : COLOR;
+                half2 texcoord  : TEXCOORD0;
+
+                UNITY_VERTEX_OUTPUT_STEREO
+            };
+
+            fixed4 _Color;
+
+            v2f vert(appdata_t IN)
+            {
+                v2f OUT;
+
+
+                UNITY_SETUP_INSTANCE_ID(IN); //Insert
+                UNITY_INITIALIZE_OUTPUT(v2f, OUT); //Insert
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT); //Inser
+
+                OUT.vertex = UnityObjectToClipPos(IN.vertex);
+                OUT.texcoord = IN.texcoord;
+#ifdef UNITY_HALF_TEXEL_OFFSET
+                OUT.vertex.xy += (_ScreenParams.zw-1.0)*float2(-1,1);
+#endif
+                OUT.color = IN.color * _Color;
+                return OUT;
+            }
+
+            sampler2D _MainTex;
+
+            fixed4 frag(v2f IN) : SV_Target
+            {
+            UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(IN);
+                half4 color = tex2D(_MainTex, IN.texcoord) * IN.color;
+                clip (color.a - 0.01);
+                return color;
+            }
+        ENDHLSL
+        }
+    }
+
+SubShader
     {
         Tags
         {
