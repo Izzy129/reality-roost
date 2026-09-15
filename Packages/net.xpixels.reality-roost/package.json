@@ -1,6 +1,6 @@
 {
   "name": "net.xpixels.reality-roost",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "displayName": "Reality Roost SDK",
   "description": "SDK for Reality Roost @ Rice University.",
   "unity": "6000.0",
