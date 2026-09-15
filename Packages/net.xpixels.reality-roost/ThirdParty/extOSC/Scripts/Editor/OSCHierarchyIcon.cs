@@ -1,4 +1,4 @@
-﻿/* Copyright (c) 2024 dr. ext (Vladimir Sigalkin) */
+/* Copyright (c) 2024 dr. ext (Vladimir Sigalkin) */
 
 using UnityEditor;
 using UnityEngine;
@@ -14,18 +14,30 @@ namespace extOSC.Editor
 
 		static OSCHierarchyIcon()
 		{
+#if UNITY_6000_5_OR_NEWER
+			EditorApplication.hierarchyWindowItemByEntityIdOnGUI += DrawHierarchyIcon;
+#else
 			EditorApplication.hierarchyWindowItemOnGUI += DrawHierarchyIcon;
+#endif
 		}
 
 		#endregion
 
 		#region Private Methods
 
+#if UNITY_6000_5_OR_NEWER
+		private static void DrawHierarchyIcon(EntityId entityId, Rect selectionRect)
+#else
 		private static void DrawHierarchyIcon(int instanceId, Rect selectionRect)
+#endif
 		{
 			if (OSCEditorTextures.IronWall == null) return;
 
+#if UNITY_6000_5_OR_NEWER
+			var gameObject = EditorUtility.EntityIdToObject(entityId) as GameObject;
+#else
 			var gameObject = EditorUtility.InstanceIDToObject(instanceId) as GameObject;
+#endif
 			if (gameObject == null) return;
 
 			var oscBase = gameObject.GetComponent<OSCBase>();
