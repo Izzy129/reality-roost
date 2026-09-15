@@ -1407,6 +1407,7 @@ MonoBehaviour:
   m_Name: Standalone
   m_EditorClassIdentifier: 
   features:
+  - {fileID: 1592314113747997998}
   - {fileID: 2123424781130391193}
   - {fileID: -8901900931313660571}
   - {fileID: -5307197123633945927}
@@ -1947,7 +1948,6 @@ MonoBehaviour:
   m_Name: OpenXRCompositionLayersFeature Standalone
   m_EditorClassIdentifier: 
   m_enabled: 1
-  <failedInitialization>k__BackingField: 0
   nameUi: Composition Layers Support
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.compositionlayers
@@ -2193,6 +2193,7 @@ MonoBehaviour:
   m_Name: Android
   m_EditorClassIdentifier: 
   features:
+  - {fileID: 4136821578857462071}
   - {fileID: -1776440421019933078}
   - {fileID: -185474913109636274}
   - {fileID: 9011612072392039164}
@@ -2239,7 +2240,7 @@ MonoBehaviour:
   - {fileID: -5388713419288798666}
   - {fileID: 2036943342453295590}
   - {fileID: 8805819820171693453}
-  m_renderMode: 1
+  m_renderMode: 0
   m_latencyOptimization: 1
   m_autoColorSubmissionMode: 1
   m_colorSubmissionModes:
@@ -2345,6 +2346,7 @@ MonoBehaviour:
   m_Name: Metro
   m_EditorClassIdentifier: 
   features:
+  - {fileID: 8188378671986383043}
   - {fileID: -7564618509765835209}
   - {fileID: -7998532153452474581}
   - {fileID: 1528995010696308656}
@@ -2410,7 +2412,6 @@ MonoBehaviour:
   m_Name: OpenXRCompositionLayersFeature Android
   m_EditorClassIdentifier: 
   m_enabled: 1
-  <failedInitialization>k__BackingField: 0
   nameUi: Composition Layers Support
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.compositionlayers
@@ -3270,7 +3271,6 @@ MonoBehaviour:
   m_Name: OpenXRCompositionLayersFeature Metro
   m_EditorClassIdentifier: 
   m_enabled: 0
-  <failedInitialization>k__BackingField: 0
   nameUi: Composition Layers Support
   version: 1.0.0
   featureIdInternal: com.unity.openxr.feature.compositionlayers
