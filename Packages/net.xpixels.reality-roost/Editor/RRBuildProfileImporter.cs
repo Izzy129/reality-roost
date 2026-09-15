@@ -27,7 +27,7 @@ namespace RealityRoost.Editor
             }
 
             // Copy profile
-            if (!AssetDatabase.CopyAsset(Source, DestinationFolder))
+            if (!AssetDatabase.CopyAsset(Source, Destination))
             {
                 Debug.LogError("Failed to copy RR-Host.");
                 return;
