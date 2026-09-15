@@ -126,7 +126,7 @@ SubShader {
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
 		#include "Packages/net.xpixels.reality-roost/Runtime/Shared/Shaders/RoostURPUIBridge.hlsl"
-		
+
 		#include "TMPro_Properties.cginc"
 		#include "TMPro.cginc"
 
@@ -319,7 +319,7 @@ SubShader {
 			clip(faceColor.a - 0.001);
 		    #endif
 
-  		    return faceColor * input.color.a;
+		    return faceColor * input.color.a;
 		}
 		ENDHLSL
 	}

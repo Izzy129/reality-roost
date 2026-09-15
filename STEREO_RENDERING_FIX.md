@@ -26,6 +26,13 @@ The supplied document's simulated stereo comparison tool and source assets were 
 included. Its reported two-eye test results do not validate this recreated patch.
 Local shader validation artifacts are under `Logs/StereoShaderValidation*`.
 
+The isolated Unity 6000.0.60f1 / Direct3D 11 check compiled nine shaders across
+54 variants with zero shader errors. Test copies explicitly expose stereo
+instancing and multiview keywords for offline compilation; this does not exercise
+XR rendering or validate Vulkan multiview. TMP emitted vector-truncation warnings
+in retained shading expressions. Structural checks verified the original fallback
+SubShaders and GUIDs and exactly 13 + 4 material-only prefab changes.
+
 Rebuild and redeploy the **XR client**, then verify both controller rays,
 calibration UI, scene menu, text, masking, and transparency in both eyes on Unity
 6.6. Also check Android/Vulkan if used. A host-only rebuild does not update client

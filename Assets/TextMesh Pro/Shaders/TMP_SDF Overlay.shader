@@ -126,7 +126,7 @@ SubShader {
 		#pragma multi_compile __ UNITY_UI_ALPHACLIP
 
 		#include "Packages/net.xpixels.reality-roost/Runtime/Shared/Shaders/RoostURPUIBridge.hlsl"
-		
+
 		#include "TMPro_Properties.cginc"
 		#include "TMPro.cginc"
 
