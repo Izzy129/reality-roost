@@ -61,6 +61,7 @@ namespace RealityRoost.Editor
             AssetDatabase.SaveAssetIfDirty(profile);
 
             Debug.Log("RR-Host scenes added successfully.");
+        }
 #endif
 #if UNITY_6000_6_OR_NEWER
 
@@ -152,4 +153,3 @@ namespace RealityRoost.Editor
 #endif
         }
     }
-}
