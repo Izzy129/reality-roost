@@ -6,7 +6,7 @@ namespace RealityRoost.Editor
 {
     public static class RRBuildProfileImporter
     {
-#if UNITY_6000_0
+#if UNITY_6000_0_OR_NEWER && !UNITY_6000_4_OR_NEWER
         // Add scenes to build profile
         [MenuItem("Reality Roost/Add Build Profile", priority = 99)]
         public static void AddScenesToBuildProfile()
@@ -63,7 +63,7 @@ namespace RealityRoost.Editor
             Debug.Log("RR-Host scenes added successfully.");
         }
 #endif
-#if UNITY_6000_6_OR_NEWER
+#if UNITY_6000_4_OR_NEWER
 
         const string Source = "Packages/net.xpixels.reality-roost/Editor/Build Profiles/RR-Host.asset";
         const string Destination = "Assets/Settings/Build Profiles/RR-Host.asset";
