@@ -37,21 +37,36 @@ namespace RealityRoost.Shared.Core
         {
             string path = RRConfig.NetworkFilePath;
 
-            if (!File.Exists(path))
-            {
-                Debug.LogWarning($"[RR][WARN] Network: no config at '{path}' - " +
-                                 "starting as a solo host. Create rr_network.json next to the " +
-                                 "executable to join a running experience.");
-                return new RRNetworkConfig();
-            }
-
             try
             {
+                // Creates the config file automatically if doesn't exist
+                if (!File.Exists(path))
+                {
+                    Debug.Log($"[RR][INFO] Network config not found at '{path}'. Creating default config.");
+
+                    RRNetworkConfig newConfig = new RRNetworkConfig();
+                    newConfig.RestoreToDefault();
+                    newConfig.isHost = hostValue;
+
+                    if (newConfig.isHost == false)
+                    {
+                        newConfig.hostIP = "192.168.50.193"; // change to using RRBoostrap "LocalIPAddress"
+                        Debug.Log("Config isHost = false");
+                    }
+
+                    // Save the default config to disk
+                    newConfig.Save();
+
+                    Debug.Log($"[RR][INFO] Network config created at '{path}'.");
+
+                    return newConfig;
+                }
+
+                // File exists
                 string json = File.ReadAllText(path);
                 RRNetworkConfig config = JsonUtility.FromJson<RRNetworkConfig>(json);
                 config.RestoreToDefault();
 
-                config.isHost = hostValue;
                 if (config == null)
                 {
                     Debug.LogError($"[RR][ERROR] Network: '{path}' is not valid JSON - " +
@@ -59,6 +74,8 @@ namespace RealityRoost.Shared.Core
                     return new RRNetworkConfig();
                 }
 
+                config.isHost = hostValue;
+                
                 if (config.isHost == false)
                 {
                     config.hostIP = "192.168.50.193"; // change to using RRBoostrap "LocalIPAddress"
@@ -78,20 +95,22 @@ namespace RealityRoost.Shared.Core
                     config.port = 7777;
                 }
 
+                config.Save();
+
                 Debug.Log($"[RR][INFO] Network: config loaded from '{path}' " +
                           $"(isHost={config.isHost}, hostIP={config.hostIP}, port={config.port}).");
                 return config;
             }
             catch (Exception e)
             {
-                Debug.LogError($"[RR][ERROR] Network: could not read '{path}' ({e.Message}) - " +
-                               "starting as a solo host.");
+                Debug.LogError($"[RR][ERROR] Network: unexpected error reading/writing '{path}' " + 
+                    $"({e.Message})."
+    );
                 return new RRNetworkConfig();
             }
         }
 
-        // Writes the current values to RRConfig.NetworkFilePath.
-        // Used by editor tooling; the runtime only ever reads.
+        // Writes the current values to RRConfig.NetworkFilePath
         public void Save()
         {
             string path = RRConfig.NetworkFilePath;
