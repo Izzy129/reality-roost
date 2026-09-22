@@ -25,7 +25,7 @@ public class CustomSceneConfig : MonoBehaviour
         if(cameraMinClippingPlane != 0) mainCamera.nearClipPlane = cameraMinClippingPlane;
         if(cameraMaxClippingPlane != 0) mainCamera.farClipPlane = cameraMaxClippingPlane;
     }
-    private void OnDestroy()
+    private void OnDisable()
     {
         // Reset values back to default
         mainCamera.nearClipPlane = init_cameraMinClippingPlane;

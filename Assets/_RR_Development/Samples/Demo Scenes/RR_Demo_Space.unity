@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 7dc728ec3a5a35040aed0b30c6bc1498, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2d056ac30ecc9e542b26e06133f23602, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -11120,6 +11120,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 123136, guid: 6479f0193ab6d4d639f1bd02246f8db6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 123136, guid: 6479f0193ab6d4d639f1bd02246f8db6, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -11242,6 +11246,10 @@ PrefabInstance:
     - target: {fileID: 147836, guid: 6479f0193ab6d4d639f1bd02246f8db6, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 148210, guid: 6479f0193ab6d4d639f1bd02246f8db6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 148210, guid: 6479f0193ab6d4d639f1bd02246f8db6, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -19231,7 +19239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 490018, guid: e81a9dbd1c87a45f387ea1f08c6225bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.12
+      value: 0.004
       objectReference: {fileID: 0}
     - target: {fileID: 490018, guid: e81a9dbd1c87a45f387ea1f08c6225bf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -39231,7 +39239,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 490018, guid: e81a9dbd1c87a45f387ea1f08c6225bf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.06
+      value: 0.009
       objectReference: {fileID: 0}
     - target: {fileID: 490018, guid: e81a9dbd1c87a45f387ea1f08c6225bf, type: 3}
       propertyPath: m_LocalPosition.z
