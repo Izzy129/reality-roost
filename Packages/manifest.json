@@ -1,8 +1,10 @@
 {
   "dependencies": {
+    "com.arloopa.unitysplats": "https://github.com/arloopa/UnitySplats.git",
     "com.cesium.unity": "1.25.0",
     "com.coplaydev.unity-mcp": "https://github.com/CoplayDev/unity-mcp.git?path=/MCPForUnity#main",
     "com.htc.upm.vive.openxr": "https://github.com/ViveSoftware/VIVE-OpenXR.git?path=com.htc.upm.vive.openxr",
+    "com.netpyoung.webp": "https://github.com/netpyoung/unity.webp.git?path=unity_project/Assets/unity.webp#0.3.22",
     "com.unity.burst": "1.8.25",
     "com.unity.feature.development": "1.0.2",
     "com.unity.ide.rider": "3.0.38",
