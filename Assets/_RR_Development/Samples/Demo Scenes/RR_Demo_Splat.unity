@@ -351,7 +351,7 @@ MonoBehaviour:
   SplatDownscaleFactor: 0
   GammaToLinear: 1
   m_gammaToLinearDefaultApplied: 1
-  AsyncUpload: 0
+  AsyncUpload: 1
   RenderBeforeUploadComplete: 1
   CutoutsUpdateBounds: 1
   m_legacyRelightingEnabled: 0
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlyPath: C:\Users\roost\Documents\Reality Roost Development\Splats\Duncan_Hall_Balcony.ply
   Compression: 1
-  SourceCoordinates: 4
+  SourceCoordinates: 0
 --- !u!114 &1847599071
 MonoBehaviour:
   m_ObjectHideFlags: 0
