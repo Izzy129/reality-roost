@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class RigWaypointFollower : MonoBehaviour
+public class RigWaypointFollower : NetworkBehaviour
 {
     public GameObject movingObj;
     [SerializeField] private GameObject[] _waypoints;
@@ -13,39 +14,42 @@ public class RigWaypointFollower : MonoBehaviour
 
     void Update()
     {
-        if(!isPaused) // Move to next waypoint
+        if(IsServer)
         {
-            if (count < _waypoints.Length - 1)
+            if (!isPaused) // Move to next waypoint
             {
-                interpolationRatio += Time.deltaTime * speed;
-                // Lerp position
-                movingObj.transform.position = Vector3.Lerp(
-                    _waypoints[count].transform.position,
-                    _waypoints[count + 1].transform.position,
-                    interpolationRatio
-                );
-                // Lerp rotation
-                movingObj.transform.rotation = Quaternion.Lerp(
-                    _waypoints[count].transform.rotation,
-                    _waypoints[count+1].transform.rotation,
-                    interpolationRatio
-                );
-                // Reset interpolationRatio once reached destination
-                if (interpolationRatio >= 1f)
+                if (count < _waypoints.Length - 1)
                 {
-                    count++;
-                    interpolationRatio = 0f;
+                    interpolationRatio += Time.deltaTime * speed;
+                    // Lerp position
+                    movingObj.transform.position = Vector3.Lerp(
+                        _waypoints[count].transform.position,
+                        _waypoints[count + 1].transform.position,
+                        interpolationRatio
+                    );
+                    // Lerp rotation
+                    movingObj.transform.rotation = Quaternion.Lerp(
+                        _waypoints[count].transform.rotation,
+                        _waypoints[count + 1].transform.rotation,
+                        interpolationRatio
+                    );
+                    // Reset interpolationRatio once reached destination
+                    if (interpolationRatio >= 1f)
+                    {
+                        count++;
+                        interpolationRatio = 0f;
 
-                    if(_waypoints[count].name.Contains("Pause")) // We are at a waypoint where user pauses. Used typically in cases where it waits for user interaction
-                    { 
-                        Debug.Log("Paused"); 
-                        isPaused = true;
-
-                        if(_waypoints[count].name.Equals("Waypoint (5) - Pause")) // Refactor
+                        if (_waypoints[count].name.Contains("Pause")) // We are at a waypoint where user pauses. Used typically in cases where it waits for user interaction
                         {
-                            lowerButton.SetActive(true);
-                        } 
-                        else if(_waypoints[count].name.Equals("Waypoint (6) - Pause")) returnButton.SetActive(true);
+                            Debug.Log("Paused");
+                            isPaused = true;
+
+                            if (_waypoints[count].name.Equals("Waypoint (5) - Pause")) // Refactor
+                            {
+                                lowerButton.SetActive(true);
+                            }
+                            else if (_waypoints[count].name.Equals("Waypoint (6) - Pause")) returnButton.SetActive(true);
+                        }
                     }
                 }
             }
