@@ -12,7 +12,7 @@ public class RetrievePlySplat : MonoBehaviour
     public string fileName;
 
     private RuntimePlyBytesLoaderExample _RuntimePly;
-    void Start()
+    void Awake()
     {
         _RuntimePly = GetComponent<RuntimePlyBytesLoaderExample>();
         filePath = @"\\DXP4800-99FE\Rig Captures\Reality Roost Splats\" + fileName;

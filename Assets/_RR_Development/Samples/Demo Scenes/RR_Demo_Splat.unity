@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac767821d0af9854ebb8f7e6d1bf515e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlyPath: C:\Users\roost\Documents\Reality Roost Development\Splats\Duncan_Hall_Balcony.ply
+  PlyPath: 
   Compression: 1
   SourceCoordinates: 0
 --- !u!114 &1847599071
