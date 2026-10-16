@@ -11,6 +11,7 @@ using UnityEngine.XR.Management;
 namespace RealityRoost.Shared.Core
 {
     // RR_Boot (build index 0) holds persistent networking managers and starts the netcode session.
+    // It also waits for the XR systems to be ready before any networking begins. Handles testing in-editor for VR headset and XR Device Simulator.
     
     // On Start, rr_network.json decides the role (see RRNetworkConfig):
     //   host   - StartHost(), then loads the calibration scene through NGO's scene manager so
@@ -64,7 +65,6 @@ namespace RealityRoost.Shared.Core
                 yield break;
             }
 
-            SetStatus("Waiting for XR...");
             yield return WaitForXrAndRendering();
             Config = RRNetworkConfig.Load(isHost);
             LogDebug("RR Network Config Loaded!");
@@ -81,28 +81,65 @@ namespace RealityRoost.Shared.Core
             }
         }
 
-        // Blocks Start() (before Network config loading and server start/join ) until OpenXR has initialized
+#if UNITY_EDITOR
+        /// <summary>
+        /// Sees if user's XRI project settings is configured to instantiate a simulator in Play mode.
+        /// </summary>
+        private static bool IsEditorSimulatorEnabled()
+        {
+            // Find XR XR Device Simulator Settings in Resources/ folder
+            var settings = Resources.Load<ScriptableObject>("XRDeviceSimulatorSettings");
+            if (settings == null)
+                return false;
+
+            // Read serialized settings; XRI 3.3 stores settings type internally
+            using var serializedSettings = new UnityEditor.SerializedObject(settings);
+            var enabled = serializedSettings.FindProperty("m_AutomaticallyInstantiateSimulatorPrefab");
+            return enabled != null && enabled.boolValue; // Returns value of setting
+        }
+#endif
+
+        /// <summary>
+        /// Infrastructure waits to continue with the next step
+        ///     MODE 1: Testing in-editor with XR Device Simulator. Proceeds after 1 frane
+        ///     MODE 2: Testing in-editor with VR Headset. Waits for XR initialization and camera pose
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator WaitForXrAndRendering()
         {
-            XRManagerSettings manager = XRGeneralSettings.Instance.Manager;
-
-            LogDebug("Waiting for XR initialization...");
-            while (!manager.isInitializationComplete)
+#if UNITY_EDITOR
+            // MODE 1: User is testing via XR Device Simulator
+            if (IsEditorSimulatorEnabled())
             {
-                LogDebug("XR Manager has not init yet");
+                // Stop auto-started hardware XR so mouse raycasts match the simulator's Game view.
+                var manager = XRGeneralSettings.Instance?.Manager;
+                if (manager != null && manager.activeLoader != null)
+                    manager.StopSubsystems();
+
                 yield return null;
+                LogDebug("XR simulator enabled in settings: starting editor networking.");
+                yield break;
+            }
+#endif
+            // MODE 2: User is testing via VR headset
+            SetStatus("Waiting for XR...");
+            LogDebug("Waiting for XR initialization...");
+            while (true)
+            {
+                XRManagerSettings manager = XRGeneralSettings.Instance?.Manager;
+                if (manager != null && manager.isInitializationComplete)
+                    break;
+                yield return null; // Goes to next frame
             }
 
             // Let render pipeline produce at least one full frame before we proceed
             yield return new WaitForEndOfFrame();
 
-            // height check lol
-            while (Camera.main == null || Camera.main.transform.localPosition.y < 0.1)
+            while (Camera.main == null || Camera.main.transform.localPosition.y < 0.1f)
             {
-                LogDebug($"Main camera is null or height {Camera.main.transform.localPosition.y} is too low");
                 yield return null;
             }
-            LogDebug($"height is good now at {Camera.main.transform.localPosition.y}");
+            LogDebug($"Player height is good now at {Camera.main.transform.localPosition.y}");
             LogDebug("XR initialized, rendering ready.");
         }
 
