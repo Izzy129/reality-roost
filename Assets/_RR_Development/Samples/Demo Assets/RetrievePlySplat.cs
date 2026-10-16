@@ -49,6 +49,7 @@ public class RetrievePlySplat : MonoBehaviour
         }
     }
 
+#if UNITY_EDITOR
     /// <summary>
     /// Renders the splat in-editor via Gizmos. Does not render during Play mode.
     /// </summary>
@@ -75,4 +76,5 @@ public class RetrievePlySplat : MonoBehaviour
         }
         
     }
+#endif
 }
