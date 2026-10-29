@@ -16,7 +16,7 @@ public class ButtonPressVisual : NetworkBehaviour
     private NetworkedInteractable _networkedInteractable;
 
     [SerializeField] private float _maxPress = 0.0529f; // Value that button presses in
-    [SerializeField] private float _minPressChange = 0.002f;
+     private float _minPressChange = 0.002f;
     [SerializeField] private bool _stayPressedAfterInteraction = false; // Is the button able to be pressed many times, or is it only pressed once?
 
     private float _lastSentPress;
@@ -44,6 +44,8 @@ public class ButtonPressVisual : NetworkBehaviour
         _onTriggerEnter = true;
         
         _interactorStartPos = transform.InverseTransformPoint(other.bounds.center);
+
+        _networkedInteractable?.RequestSelect();
     }
 
     private void OnTriggerStay(Collider other)
@@ -72,12 +74,13 @@ public class ButtonPressVisual : NetworkBehaviour
             _hasBeenPressed = true;
 
             Debug.Log("Button fully pressed; calling RPCs");
-            _networkedInteractable?.RequestSelect();
+            _networkedInteractable?.RequestActivate();
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        /*
         if (!other.CompareTag("Hand")) return;
         _onTriggerEnter = false;
 
@@ -102,7 +105,21 @@ public class ButtonPressVisual : NetworkBehaviour
             _lastSentPress = 0f;
             _hasBeenPressed = false;
             _triggerRPCsOnce = true;
-        }
+        }*/
+
+        
+         if (!other.CompareTag("Hand") || !_onTriggerEnter) return;
+
+        _onTriggerEnter = false;
+        _networkedInteractable?.RequestDeselect();
+
+        if (_stayPressedAfterInteraction && _hasBeenPressed) return;
+
+        RequestVisualPress(0f);
+        _lastSentPress = 0f;
+        _hasBeenPressed = false;
+        _triggerRPCsOnce = true;
+        
     }
 
     #region Methods

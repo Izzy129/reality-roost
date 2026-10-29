@@ -8,15 +8,22 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 /// NetworkedInteracterable.cs handles custom user input & networks them across a multiplayer session via RPCs. 
 /// This script is designed to support any component that stems from the XRBaseInteractable class (i.e XR Simple Interactable, XR Grab Interactable). https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/api/UnityEngine.XR.Interaction.Toolkit.XRBaseInteractable.html
 /// 
-/// Workflow: User adds desired events to UnityEvents. During runtime, it will automatically call across the network for all connected clients. 
+/// Supports prefabs Networked Button (uses XR Simple Interactable) and Networked Grabbable (uses XR Grab Interactable)
+/// 
+/// Workflow: User adds desired events to UnityEvents. During runtime, it will automatically call across the network for all connected clients.
 /// </summary>
 public class NetworkedInteractable : NetworkBehaviour
 {
     #region Fields
-    [Header("Networked Interaction Events")]
-    [SerializeField] private UnityEvent _onSelect; // Event called when an interactor begins selecting this Interactable. (XR Simple Interactable: Triggered when user's 'Hand' collider goes through collider OR Networked Grabbable: when user picks up object via grip)
-    [SerializeField] private UnityEvent _onDeselect; // Event called when an interactor stops selecting this Interactable. (XR Simple Interactable: triggered when user's 'Hand' collider leaves button OR Networked Grabbable: When you release an object via grip)
-    [SerializeField] private UnityEvent _onActivate; // Event called when an interactor is currently selecting this Interactable & calls the Activate input, such as from a trigger pull on a controller 
+    [Header("Networked Interaction Events \n    Hover over each event to learn more")]
+    [Tooltip("Event called when user begins touching or selecting this Interactable")]
+    [SerializeField] private UnityEvent _onSelect; // Event called when an interactor begins selecting this Interactable. (Networked Button: triggered when user's 'Hand' collider goes through collider OR Networked Grabbable: triggered when user picks up object via grip)
+
+    [Tooltip("Event called when user stops touching or selecting this Interactable")]
+    [SerializeField] private UnityEvent _onDeselect; // Event called when an interactor stops selecting this Interactable. (Networked Button: triggered when user's 'Hand' collider leaves button OR Networked Grabbable: triggered when user releases an object via grip)
+
+    [Tooltip("Networked Button: called when the user fully pushes down the button in the scene.\n\nNetworked Grabbable: called when the user presses the Activate input (such as the controller trigger) while holding the object.")]
+    [SerializeField] private UnityEvent _onActivate; // Event called when an interactor has activated the Interactable (Networked Button: triggered when user fully presses button & triggers code OR Networked Grabbable: triggered when user is holding object and calls Activate input -- i.e trigger pull on controller)
 
     private XRBaseInteractable _xrBaseInteractable; // Refers to the XRBaseInteractable type component on the GameObject
     #endregion
@@ -101,7 +108,7 @@ public class NetworkedInteractable : NetworkBehaviour
     /// </summary>
     public void RequestActivate()
     {
-        Debug.Log("Request Deselect has been called.");
+        Debug.Log("Request Activation has been called.");
         if (IsSpawned) Activated_ServerRpc();
     }
     #endregion
