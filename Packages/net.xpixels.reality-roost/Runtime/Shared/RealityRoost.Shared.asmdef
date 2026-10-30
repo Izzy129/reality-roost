@@ -5,8 +5,9 @@
         "Unity.Netcode.Runtime",
         "UnityEngine.UI",
         "Unity.TextMeshPro",
-		"Unity.InputSystem",
-        "Unity.XR.Management"
+        "Unity.InputSystem",
+        "Unity.XR.Management",
+        "Unity.XR.Interaction.Toolkit"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
