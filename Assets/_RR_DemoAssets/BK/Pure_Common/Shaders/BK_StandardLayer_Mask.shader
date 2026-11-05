@@ -743,12 +743,14 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_MainTex = input.ase_texcoord6.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				float2 appendResult146 = (float2(_Tiling2 , _Tiling2));
 				float2 LayerUVs147 = appendResult146;
-				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, PositionWS, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
+				// Anchor the projection to the moving mesh while retaining world-scale tiling.
+				float3 projectionPosition = PositionWS - TransformObjectToWorld(float3(0, 0, 0));
+				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
 				float2 appendResult71 = (float2(_Tiling , _Tiling));
 				float2 DetailUVs48 = appendResult71;
-				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, PositionWS, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float3x3 ase_worldToTangent = float3x3( TangentWS, BitangentWS, NormalWS );
-				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, PositionWS, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
+				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
 				float3 tanTriplanarNormal63 = mul( ase_worldToTangent, triplanar63 );
 				float3 tanToWorld0 = float3( TangentWS.x, BitangentWS.x, NormalWS.x );
 				float3 tanToWorld1 = float3( TangentWS.y, BitangentWS.y, NormalWS.y );
@@ -788,7 +790,7 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_BumpMap = input.ase_texcoord6.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
 				float3 unpack3 = UnpackNormalScale( tex2D( _BumpMap, uv_BumpMap ), _NormalPower );
 				unpack3.z = lerp( 1, unpack3.z, saturate(_NormalPower) );
-				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, PositionWS, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
+				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
 				float3 tanTriplanarNormal150 = mul( ase_worldToTangent, triplanar150 );
 				float3 temp_output_138_0 = BlendNormal( unpack3 , tanTriplanarNormal150 );
 				float3 lerpResult13 = lerp( temp_output_138_0 , tanTriplanarNormal63 , BlendAlpha85);
@@ -797,8 +799,8 @@ Shader "BK/Standard Layered Masked"
 				float3 lerpResult185 = lerp( lerpResult13 , BlendNormal( temp_output_138_0 , lerpResult78 ) , _BlendPower);
 				float3 Normal118 = lerpResult185;
 				
-				float4 triplanar152 = TriplanarSampling152( _LayerMetallicGlossMap, _LayerMetallicGlossMap_ST, PositionWS, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
-				float4 triplanar65 = TriplanarSampling65( _DetailMetallicGlossMap, _DetailMetallicGlossMap_ST, PositionWS, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar152 = TriplanarSampling152( _LayerMetallicGlossMap, _LayerMetallicGlossMap_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
+				float4 triplanar65 = TriplanarSampling65( _DetailMetallicGlossMap, _DetailMetallicGlossMap_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float lerpResult30 = lerp( ( tex2DNode7.r * triplanar152.x ) , triplanar65.x , BlendAlpha85);
 				float Metallic120 = ( lerpResult30 + _MetallicPower );
 				
@@ -2080,15 +2082,17 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_MainTex = input.ase_texcoord3.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				float2 appendResult146 = (float2(_Tiling2 , _Tiling2));
 				float2 LayerUVs147 = appendResult146;
+				// Anchor the projection to the moving mesh while retaining world-scale tiling.
+				float3 projectionPosition = PositionWS - TransformObjectToWorld(float3(0, 0, 0));
 				float3 ase_normalWS = input.ase_texcoord4.xyz;
-				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, PositionWS, ase_normalWS, 1.0, LayerUVs147, 1.0, 0 );
+				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, projectionPosition, ase_normalWS, 1.0, LayerUVs147, 1.0, 0 );
 				float2 appendResult71 = (float2(_Tiling , _Tiling));
 				float2 DetailUVs48 = appendResult71;
-				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, PositionWS, ase_normalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, projectionPosition, ase_normalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float3 ase_tangentWS = input.ase_texcoord5.xyz;
 				float3 ase_bitangentWS = input.ase_texcoord6.xyz;
 				float3x3 ase_worldToTangent = float3x3( ase_tangentWS, ase_bitangentWS, ase_normalWS );
-				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, PositionWS, ase_normalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
+				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, projectionPosition, ase_normalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
 				float3 tanTriplanarNormal63 = mul( ase_worldToTangent, triplanar63 );
 				float3 tanToWorld0 = float3( ase_tangentWS.x, ase_bitangentWS.x, ase_normalWS.x );
 				float3 tanToWorld1 = float3( ase_tangentWS.y, ase_bitangentWS.y, ase_normalWS.y );
@@ -2496,15 +2500,17 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_MainTex = input.ase_texcoord1.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				float2 appendResult146 = (float2(_Tiling2 , _Tiling2));
 				float2 LayerUVs147 = appendResult146;
+				// Anchor the projection to the moving mesh while retaining world-scale tiling.
+				float3 projectionPosition = PositionWS - TransformObjectToWorld(float3(0, 0, 0));
 				float3 ase_normalWS = input.ase_texcoord2.xyz;
-				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, PositionWS, ase_normalWS, 1.0, LayerUVs147, 1.0, 0 );
+				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, projectionPosition, ase_normalWS, 1.0, LayerUVs147, 1.0, 0 );
 				float2 appendResult71 = (float2(_Tiling , _Tiling));
 				float2 DetailUVs48 = appendResult71;
-				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, PositionWS, ase_normalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, projectionPosition, ase_normalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float3 ase_tangentWS = input.ase_texcoord3.xyz;
 				float3 ase_bitangentWS = input.ase_texcoord4.xyz;
 				float3x3 ase_worldToTangent = float3x3( ase_tangentWS, ase_bitangentWS, ase_normalWS );
-				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, PositionWS, ase_normalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
+				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, projectionPosition, ase_normalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
 				float3 tanTriplanarNormal63 = mul( ase_worldToTangent, triplanar63 );
 				float3 tanToWorld0 = float3( ase_tangentWS.x, ase_bitangentWS.x, ase_normalWS.x );
 				float3 tanToWorld1 = float3( ase_tangentWS.y, ase_bitangentWS.y, ase_normalWS.y );
@@ -2957,13 +2963,15 @@ Shader "BK/Standard Layered Masked"
 				unpack3.z = lerp( 1, unpack3.z, saturate(_NormalPower) );
 				float2 appendResult146 = (float2(_Tiling2 , _Tiling2));
 				float2 LayerUVs147 = appendResult146;
+				// Anchor the projection to the moving mesh while retaining world-scale tiling.
+				float3 projectionPosition = PositionWS - TransformObjectToWorld(float3(0, 0, 0));
 				float3x3 ase_worldToTangent = float3x3( TangentWS, BitangentWS, NormalWS );
-				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, PositionWS, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
+				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
 				float3 tanTriplanarNormal150 = mul( ase_worldToTangent, triplanar150 );
 				float3 temp_output_138_0 = BlendNormal( unpack3 , tanTriplanarNormal150 );
 				float2 appendResult71 = (float2(_Tiling , _Tiling));
 				float2 DetailUVs48 = appendResult71;
-				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, PositionWS, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
+				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
 				float3 tanTriplanarNormal63 = mul( ase_worldToTangent, triplanar63 );
 				float3 tanToWorld0 = float3( TangentWS.x, BitangentWS.x, NormalWS.x );
 				float3 tanToWorld1 = float3( TangentWS.y, BitangentWS.y, NormalWS.y );
@@ -3586,12 +3594,14 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_MainTex = input.ase_texcoord6.xy * _MainTex_ST.xy + _MainTex_ST.zw;
 				float2 appendResult146 = (float2(_Tiling2 , _Tiling2));
 				float2 LayerUVs147 = appendResult146;
-				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, PositionWS, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
+				// Anchor the projection to the moving mesh while retaining world-scale tiling.
+				float3 projectionPosition = PositionWS - TransformObjectToWorld(float3(0, 0, 0));
+				float4 triplanar148 = TriplanarSampling148( _LayerAlbedo, _LayerAlbedo_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
 				float2 appendResult71 = (float2(_Tiling , _Tiling));
 				float2 DetailUVs48 = appendResult71;
-				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, PositionWS, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar60 = TriplanarSampling60( _DetailAlbedo, _DetailAlbedo_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float3x3 ase_worldToTangent = float3x3( TangentWS, BitangentWS, NormalWS );
-				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, PositionWS, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
+				float3 triplanar63 = TriplanarSampling63( _DetailNormalMap, _DetailNormalMap_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, _2ndNormalPower, 0 );
 				float3 tanTriplanarNormal63 = mul( ase_worldToTangent, triplanar63 );
 				float3 tanToWorld0 = float3( TangentWS.x, BitangentWS.x, NormalWS.x );
 				float3 tanToWorld1 = float3( TangentWS.y, BitangentWS.y, NormalWS.y );
@@ -3631,7 +3641,7 @@ Shader "BK/Standard Layered Masked"
 				float2 uv_BumpMap = input.ase_texcoord6.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
 				float3 unpack3 = UnpackNormalScale( tex2D( _BumpMap, uv_BumpMap ), _NormalPower );
 				unpack3.z = lerp( 1, unpack3.z, saturate(_NormalPower) );
-				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, PositionWS, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
+				float3 triplanar150 = TriplanarSampling150( _LayerNormalMap, _LayerNormalMap_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, _SecondNormalPower, 0 );
 				float3 tanTriplanarNormal150 = mul( ase_worldToTangent, triplanar150 );
 				float3 temp_output_138_0 = BlendNormal( unpack3 , tanTriplanarNormal150 );
 				float3 lerpResult13 = lerp( temp_output_138_0 , tanTriplanarNormal63 , BlendAlpha85);
@@ -3640,8 +3650,8 @@ Shader "BK/Standard Layered Masked"
 				float3 lerpResult185 = lerp( lerpResult13 , BlendNormal( temp_output_138_0 , lerpResult78 ) , _BlendPower);
 				float3 Normal118 = lerpResult185;
 				
-				float4 triplanar152 = TriplanarSampling152( _LayerMetallicGlossMap, _LayerMetallicGlossMap_ST, PositionWS, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
-				float4 triplanar65 = TriplanarSampling65( _DetailMetallicGlossMap, _DetailMetallicGlossMap_ST, PositionWS, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
+				float4 triplanar152 = TriplanarSampling152( _LayerMetallicGlossMap, _LayerMetallicGlossMap_ST, projectionPosition, NormalWS, 1.0, LayerUVs147, 1.0, 0 );
+				float4 triplanar65 = TriplanarSampling65( _DetailMetallicGlossMap, _DetailMetallicGlossMap_ST, projectionPosition, NormalWS, 1.0, DetailUVs48, 1.0, 0 );
 				float lerpResult30 = lerp( ( tex2DNode7.r * triplanar152.x ) , triplanar65.x , BlendAlpha85);
 				float Metallic120 = ( lerpResult30 + _MetallicPower );
 				
