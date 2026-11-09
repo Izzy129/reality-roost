@@ -50,7 +50,32 @@ namespace RealityRoost.WorldRail
         public Transform roostRails;
         public bool autoStart=true;
         [Min(0)] public float departureDelay=1;
-        [Min(.1f)] public float speed=6;
+        [SerializeField, Min(0), InspectorName("Speed")]
+        [UnityEngine.Serialization.FormerlySerializedAs("speed")]
+        private float trainSpeed = 6;
+        public event Action<float> SpeedChanged;
+        private float lastReportedSpeed = float.NaN;
+        private bool speedEditedInInspector;
+
+        public float speed
+        {
+            get => trainSpeed;
+            set
+            {
+                trainSpeed = float.IsNaN(value) || float.IsInfinity(value) ? 0 : Mathf.Max(0, value);
+                NotifySpeedChanged();
+            }
+        }
+
+        private void NotifySpeedChanged()
+        {
+            if (trainSpeed == lastReportedSpeed) return;
+            lastReportedSpeed = trainSpeed;
+            SpeedChanged?.Invoke(trainSpeed);
+        }
+
+        // Inspector edits bypass the property. Deliver them on the main thread in Update.
+        private void OnValidate() { speedEditedInInspector = true; }
         [Min(1)] public float tunnelLength=36;
         [Min(1)] public float tunnelEntrySeconds=6;
         [Min(1)] public float tunnelExitSeconds=6;
@@ -62,6 +87,23 @@ namespace RealityRoost.WorldRail
         public double RideCompletedAt { get; private set; }
         public JourneyState RenderedState { get; private set; }
         public double RenderedAt { get; private set; }
+        /// <summary>Configured speed while moving; zero while stationary. Does not sample acceleration curves.</summary>
+        public float MovementSpeed
+        {
+            get
+            {
+                if (!isActiveAndEnabled || (NetworkManager.Singleton != null && !IsSpawned)) return 0;
+                switch (RenderedState.phase)
+                {
+                    case Phase.Travel:
+                    case Phase.EnterTunnel:
+                    case Phase.ExitTunnel:
+                    case Phase.Arriving:
+                        return float.IsNaN(speed) || float.IsInfinity(speed) ? 0 : speed;
+                    default: return 0;
+                }
+            }
+        }
         [Min(10)] public float loadTimeoutSeconds=180;
         [Tooltip("GPU upload budget during preparation. Lower values trade loading speed for VR frame time.")]
         [Range(1,4)] public int asyncUploadMilliseconds=1;
@@ -416,7 +458,13 @@ namespace RealityRoost.WorldRail
         }
         void Update()
         {
-            if ((networkSession && !IsSpawned) || destinations == null || destinations.Length == 0) return;
+            if (speedEditedInInspector)
+            {
+                speedEditedInInspector = false;
+                speed = trainSpeed;
+            }
+            if ((networkSession && !IsSpawned) || destinations == null || destinations.Length == 0)
+                return;
             double now=Now;var s=PresentationState(now);float elapsed=Mathf.Max(0,(float)(now-s.since));int stage=Mathf.Clamp(s.stage,0,ReturnStage);
             RenderedState=s;RenderedAt=now;
             if(s.phase==Phase.Loading){ApplyLoadingBudget();UpdateLoading(stage);}

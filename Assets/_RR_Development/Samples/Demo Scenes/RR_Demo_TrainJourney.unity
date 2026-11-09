@@ -819,7 +819,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  departureTravelSeconds: 14
   destinations:
   - scene: {fileID: 102900000, guid: 8f3c56a215bdab548a2bc917273e7400, type: 3}
     scenePath: Assets/_RR_Development/Samples/Demo Scenes/RR_WorldRail_Winter.unity
@@ -830,13 +829,14 @@ MonoBehaviour:
   - scene: {fileID: 102900000, guid: 3f3686d9d7e3405468f969a39cac7e43, type: 3}
     scenePath: Assets/_RR_Development/Samples/Demo Scenes/RR_WorldRail_Alien.unity
     travelSeconds: 24
+  departureTravelSeconds: 14
   stationScenery: {fileID: 18737414}
   tunnel: {fileID: 318737777}
   previousTunnel: {fileID: 2013668645}
   roostRails: {fileID: 1953103875}
   autoStart: 1
   departureDelay: 1
-  speed: 6
+  trainSpeed: 6
   tunnelLength: 36
   tunnelEntrySeconds: 6
   tunnelExitSeconds: 6
@@ -7604,6 +7604,79 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171784152}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &179114516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 179114517}
+  - component: {fileID: 179114518}
+  - component: {fileID: 179114519}
+  m_Layer: 0
+  m_Name: Train Rumble
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &179114517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179114516}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415396382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &179114518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179114516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b6b75ccf1247f5a0bbc4def4453844, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  floorService: {fileID: 0}
+  source: 1
+  audioClip: {fileID: 8300000, guid: 17647bed4990ba947a49eb9df5f70f13, type: 3}
+  preset: {fileID: 11400000, guid: 7521ac2a7ad3451a97626709cda097e0, type: 2}
+  tiles: 63
+  intensity: 0.25
+  loop: 0
+  playOnStart: 0
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onStop:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &179114519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 179114516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ec89523dc4c4d94ba0ef327f21cb7eb, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  train: {fileID: 15620925}
+  floorPlayer: {fileID: 179114518}
 --- !u!1 &180512710
 GameObject:
   m_ObjectHideFlags: 0
@@ -17337,6 +17410,39 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 395527335}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &415396381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 415396382}
+  m_Layer: 0
+  m_Name: Tile Sound Effects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &415396382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 415396381}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.4316216, y: 3.5694413, z: -5.9023314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 179114517}
+  - {fileID: 1514158309}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &416826335
 GameObject:
   m_ObjectHideFlags: 0
@@ -62580,6 +62686,64 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508776413}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1514158306
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1514158309}
+  - component: {fileID: 1514158307}
+  m_Layer: 0
+  m_Name: Train Horn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1514158307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514158306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80b6b75ccf1247f5a0bbc4def4453844, type: 3}
+  m_Name:
+  m_EditorClassIdentifier:
+  floorService: {fileID: 0}
+  source: 0
+  audioClip: {fileID: 8300000, guid: 17647bed4990ba947a49eb9df5f70f13, type: 3}
+  preset: {fileID: 11400000, guid: 7521ac2a7ad3451a97626709cda097e0, type: 2}
+  tiles: 63
+  intensity: 0.25
+  loop: 0
+  playOnStart: 0
+  onPlay:
+    m_PersistentCalls:
+      m_Calls: []
+  onStop:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &1514158309
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514158306}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 415396382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514166513
 GameObject:
   m_ObjectHideFlags: 0
@@ -87206,17 +87370,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2143120720}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1660057539 &9223372036854775807
-SceneRoots:
-  m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 18737414}
-  - {fileID: 1953103874}
-  - {fileID: 504279805}
-  - {fileID: 318737777}
-  - {fileID: 15620924}
-  - {fileID: 2013668645}
-  - {fileID: 944497723}
 --- !u!43 &6000000000000000000
 Mesh:
   m_ObjectHideFlags: 0
@@ -94007,3 +94160,15 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 18737414}
+  - {fileID: 1953103874}
+  - {fileID: 504279805}
+  - {fileID: 318737777}
+  - {fileID: 15620924}
+  - {fileID: 2013668645}
+  - {fileID: 944497723}
+  - {fileID: 415396382}
