@@ -1,5 +1,7 @@
 fileFormatVersion: 2
 guid: 11f1dd7d2cbfc2c4f8a5f17a1a891872
+labels:
+- WorldRailBuildPipeline
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
