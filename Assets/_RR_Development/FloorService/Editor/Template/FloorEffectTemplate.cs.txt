@@ -1,0 +1,26 @@
+using UnityEngine;
+using RealityRoost.Shared.HapticFloor;
+
+/// <summary>
+/// Connects scene events to Floor Player so they can start or stop this effect.
+/// </summary>
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    [SerializeField] private RRFloorPlayer floorPlayer;
+
+    // Add your experience's conditions here, or call these methods from UnityEvents.
+    // Call BeginEffect once when the effect should start, not every Update.
+    public void BeginEffect()
+    {
+        if (!Application.isPlaying || !isActiveAndEnabled) return;
+        if (floorPlayer != null) floorPlayer.BeginPlay();
+        else Debug.LogWarning("Assign a Floor Player.", this);
+    }
+
+    public void EndEffect()
+    {
+        if (!Application.isPlaying) return;
+        if (floorPlayer != null) floorPlayer.EndPlay();
+        else Debug.LogWarning("Assign a Floor Player.", this);
+    }
+}

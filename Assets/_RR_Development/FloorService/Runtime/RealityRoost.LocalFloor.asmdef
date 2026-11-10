@@ -1,0 +1,6 @@
+{
+    "name": "RealityRoost.LocalFloor",
+    "rootNamespace": "RealityRoost.Shared.HapticFloor",
+    "references": ["Unity.Netcode.Runtime"],
+    "autoReferenced": true
+}

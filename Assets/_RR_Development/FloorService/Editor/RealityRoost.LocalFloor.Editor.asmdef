@@ -1,0 +1,6 @@
+{
+    "name": "RealityRoost.LocalFloor.Editor",
+    "references": ["RealityRoost.LocalFloor", "Unity.Netcode.Runtime"],
+    "includePlatforms": ["Editor"],
+    "autoReferenced": false
+}
